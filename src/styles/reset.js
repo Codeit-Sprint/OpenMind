@@ -1,5 +1,7 @@
+import { createGlobalStyle } from 'styled-components';
 /* user agent stylesheet 초기화 */
 
+const GlobalStyles = createGlobalStyle`
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,3 +40,6 @@ button {
   background-color: unset;
   cursor: pointer;
 }
+`;
+
+export default GlobalStyles;
