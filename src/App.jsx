@@ -7,21 +7,20 @@ import theme from './styles/theme';
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact={true} element={<HomePage />} />
-            <Route path="list" element={<QuestionListPage />} />
-            <Route path="post">
-              <Route index element={<FeedPage />} />
-              <Route path=":userId" element={<FeedPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact={true} element={<HomePage />} />
+          <Route path="list" element={<QuestionListPage />} />
+          <Route path="post">
+            <Route index element={<FeedPage />} />
+            <Route path=":userId" element={<FeedPage />} />
+            <Route path=":userId/answer" element={<FeedPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

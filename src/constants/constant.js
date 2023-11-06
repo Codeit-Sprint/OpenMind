@@ -1,0 +1,3 @@
+const DEFAULT_TEAM_PATH = '1-11';
+
+export { DEFAULT_TEAM_PATH };
