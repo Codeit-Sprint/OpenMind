@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const common = css`
-  color: var(--grayscale-60);
   font-feature-settings: 'clig' off, 'liga' off;
   font-style: normal;
 `;
@@ -30,7 +29,7 @@ const H3 = styled.h3`
   line-height: 3rem;
 `;
 
-const BodyRegular1 = styled.p`
+const BodyRegular1 = `
   ${common}
   font-family: Pretendard;
   font-size: 2rem;
@@ -38,7 +37,7 @@ const BodyRegular1 = styled.p`
   line-height: 2.5rem;
 `;
 
-const BodyBold1 = styled.p`
+const BodyBold1 = `
   ${common}
   font-family: Actor;
   font-size: 2rem;
@@ -46,7 +45,7 @@ const BodyBold1 = styled.p`
   line-height: 2.5rem;
 `;
 
-const BodyRegular2 = styled.p`
+const BodyRegular2 = `
   ${common}
   font-family: Pretendard;
   font-size: 188rem;
@@ -54,7 +53,7 @@ const BodyRegular2 = styled.p`
   line-height: 2.4rem;
 `;
 
-const BodyBold2 = styled.p`
+const BodyBold2 = `
   ${common}
   font-family: Actor;
   font-size: 1.8rem;
@@ -62,7 +61,7 @@ const BodyBold2 = styled.p`
   line-height: 2.4rem;
 `;
 
-const BodyRegular3 = styled.p`
+const BodyRegular3 = `
   ${common}
   font-family: Pretendard;
   font-size: 1.6rem;
@@ -70,7 +69,7 @@ const BodyRegular3 = styled.p`
   line-height: 2.2rem;
 `;
 
-const BodyBold3 = styled.p`
+const BodyBold3 = `
   ${common}
   font-family: Actor;
   font-size: 1.6rem;
@@ -78,7 +77,7 @@ const BodyBold3 = styled.p`
   line-height: 2.2rem;
 `;
 
-const CaptionRegular1 = styled.p`
+const CaptionRegular1 = `
   ${common}
   font-family: Pretendard;
   font-size: 1.4rem;
@@ -86,7 +85,7 @@ const CaptionRegular1 = styled.p`
   line-height: 1.8rem;
 `;
 
-const CaptionMedium1 = styled.p`
+const CaptionMedium1 = `
   ${common}
   font-family: Pretendard;
   font-size: 1.4rem;
@@ -94,7 +93,7 @@ const CaptionMedium1 = styled.p`
   line-height: 1.8rem;
 `;
 
-const CaptionBold1 = styled.p`
+const CaptionBold1 = `
   ${common}
   font-family: Actor;
   font-size: 1.4rem;
