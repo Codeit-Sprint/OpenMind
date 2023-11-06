@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const common = css`
   color: var(--grayscale-60);
@@ -6,84 +6,96 @@ const common = css`
   font-style: normal;
 `;
 
-const styledH1 = css(common)`
+const H1 = styled.h1`
+  ${common}
   font-family: Actor;
   font-size: 4rem;
   font-weight: 400;
   line-height: normal;
 `;
 
-const styledH2 = css(common)`
+const H2 = styled.h2`
+  ${common}
   font-family: Actor;
   font-size: 3.2rem;
   font-weight: 400;
   line-height: 4rem;
 `;
 
-const styledH3 = css(common)`
+const H3 = styled.h3`
+  ${common}
   font-family: Actor;
   font-size: 2.4rem;
   font-weight: 400;
   line-height: 3rem;
 `;
 
-const styledBodyRegular1 = css(common)`
+const BodyRegular1 = styled.p`
+  ${common}
   font-family: Pretendard;
   font-size: 2rem;
   font-weight: 400;
   line-height: 2.5rem;
 `;
 
-const styledBodyBold1 = css(common)`
+const BodyBold1 = styled.p`
+  ${common}
   font-family: Actor;
   font-size: 2rem;
   font-weight: 400;
   line-height: 2.5rem;
 `;
 
-const styledBodyRegular2 = css(common)`
+const BodyRegular2 = styled.p`
+  ${common}
   font-family: Pretendard;
   font-size: 188rem;
   font-weight: 400;
   line-height: 2.4rem;
 `;
 
-const styledBodyBold2 = css(common)`
+const BodyBold2 = styled.p`
+  ${common}
   font-family: Actor;
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 2.4rem;
 `;
 
-const styledBodyRegular3 = css(common)`
+const BodyRegular3 = styled.p`
+  ${common}
   font-family: Pretendard;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 2.2rem;
 `;
 
-const styledBodyBold3 = css(common)`
+const BodyBold3 = styled.p`
+  ${common}
   font-family: Actor;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 2.2rem;
 `;
 
-const styledCaptionRegular1 = css(common)`
+const CaptionRegular1 = styled.p`
+  ${common}
   font-family: Pretendard;
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.8rem;
 `;
 
-const styledCaptionMedium1 = css(common)`
+const CaptionMedium1 = styled.p`
+  ${common}
   font-family: Pretendard;
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.8rem;
 `;
 
-const stlyedCaptionBold1 = css(common)`
+const CaptionBold1 = styled.p`
+  ${common}
   font-family: Actor;
   font-size: 1.4rem;
   font-weight: 400;
@@ -91,16 +103,16 @@ const stlyedCaptionBold1 = css(common)`
 `;
 
 export {
-  styledH1,
-  styledH2,
-  styledH3,
-  styledBodyRegular1,
-  styledBodyBold1,
-  styledBodyRegular2,
-  styledBodyBold2,
-  styledBodyRegular3,
-  styledBodyBold3,
-  styledCaptionRegular1,
-  styledCaptionMedium1,
-  stlyedCaptionBold1,
+  H1,
+  H2,
+  H3,
+  BodyRegular1,
+  BodyBold1,
+  BodyRegular2,
+  BodyBold2,
+  BodyRegular3,
+  BodyBold3,
+  CaptionRegular1,
+  CaptionMedium1,
+  CaptionBold1,
 };
