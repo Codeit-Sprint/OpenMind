@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { fetchPost } from '../apis/api';
 import { DEFAULT_TEAM_PATH } from '../constants/constant';
 
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [name, setName] = useState(null);
@@ -18,6 +19,7 @@ const HomePage = () => {
   };
 
   return (
+
     <S.HomePageBox>
       <Link to="/link">
         <S.HomePageQuestionButton>질문하러 가기</S.HomePageQuestionButton>
@@ -41,6 +43,7 @@ const HomePage = () => {
         </S.HomePageFrame>
       </S.HomePageOuterFrame>
     </S.HomePageBox>
+
   );
 };
 
