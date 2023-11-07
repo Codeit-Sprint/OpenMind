@@ -1,19 +1,49 @@
-import Button from '../components/common/Button/Button';
-import FloatingButton from '../components/common/Button/FloatingButton';
-import FacebookButton from '../components/common/Button/FacebookButton';
-import LinkButton from '../components/common/Button/LinkButton';
-import KakaoButton from '../components/common/Button/KakaoButton';
+import { Link, useNavigate } from 'react-router-dom';
+import IMAGES from '../assets';
+import * as S from './styles';
+import { useState } from 'react';
+import { fetchPost } from '../apis/api';
+import { DEFAULT_TEAM_PATH } from '../constants/constant';
+
+
 const HomePage = () => {
+  const navigate = useNavigate();
+  const [name, setName] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await fetchPost('/subjects/', {
+      name: name,
+      team: DEFAULT_TEAM_PATH,
+    });
+    navigate(`/post/${result.id}/answer`);
+  };
+
   return (
-    <>
-      <Button type="question" text="질문 받기" />
-      <div>hi</div>
-      <Button type="answer" text="답변하러 가기" />
-      <FloatingButton />
-      <FacebookButton />
-      <LinkButton />
-      <KakaoButton />
-    </>
+
+    <S.HomePageBox>
+      <Link to="/link">
+        <S.HomePageQuestionButton>질문하러 가기</S.HomePageQuestionButton>
+      </Link>
+      <Link to="/">
+        <S.HomePageLogoImage src={IMAGES.logo} alt="로고" />
+      </Link>
+      <S.HomePageOuterFrame>
+        <S.HomePageFrame>
+          <S.HomePageInputBox>
+            <img src={IMAGES.person} alt="이름 입력" autoFocus />
+            <input
+              type="text"
+              placeholder="이름을 입력하세요"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </S.HomePageInputBox>
+          <S.HomePageButton onClick={handleSubmit}>
+            <p>질문 받기</p>
+          </S.HomePageButton>
+        </S.HomePageFrame>
+      </S.HomePageOuterFrame>
+    </S.HomePageBox>
+
   );
 };
 
