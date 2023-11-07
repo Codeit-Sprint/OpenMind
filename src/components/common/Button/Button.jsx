@@ -2,11 +2,8 @@
 import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import theme from '../../../styles/theme';
-//import { device } from '../../../styles/mediaQuery';
+import { device } from '../../../styles/mediaQuery';
 import * as S from '../../../styles/typography';
-/* TODO
-1. 미디어 쿼리 적용
-*/
 
 const Icon = styled.img`
   width: 18px;
@@ -16,7 +13,6 @@ const Icon = styled.img`
 const StyledButton = styled.button`
   background-color: ${(props) =>
     props.type === 'answer' ? theme['brown-10'] : theme['brown-40']};
-
   display: flex;
   width: ${(props) => (props.type === 'answer' ? '192px' : '160px')};
   height: 46px;
@@ -54,6 +50,12 @@ const StyledButton = styled.button`
   border-width: ${(props) => (props.type === 'answer' ? '2px' : '0px')};
   border-color: theme[ 'brown-30'];
   ${S.BodyRegular3};
+
+  @media ${device.mobile} {
+    weight: min-width;
+    height: 34px;
+    ${S.CaptionRegular1};
+  }
 `;
 
 function Button(props) {
@@ -66,7 +68,6 @@ function Button(props) {
 
   return (
     <StyledButton type={props.type}>
-      <Icon src={iconName} alt="arrow icon" />
       {props.text}
       <Icon src={iconName} alt="arrow icon" />
     </StyledButton>
