@@ -23,7 +23,7 @@ const HomePage = () => {
         <S.HomePageQuestionButton>질문하러 가기</S.HomePageQuestionButton>
       </Link>
       <Link to="/">
-        <img src={IMAGES.logo} alt="로고" />
+        <S.HomePageLogoImage src={IMAGES.logo} alt="로고" />
       </Link>
       <S.HomePageOuterFrame>
         <S.HomePageFrame>

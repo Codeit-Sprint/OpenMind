@@ -4,6 +4,7 @@ import IMAGES from '../assets';
 import { device } from '../styles/mediaQuery';
 
 const HomePageBox = styled.div`
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -11,7 +12,8 @@ const HomePageBox = styled.div`
   flex-direction: column;
   align-items: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: contain; */
+  background-position: center bottom;
   background-image: url(${IMAGES.indexBackground});
   background-color: ${(props) => props.theme['grayscale-20']};
 
@@ -22,17 +24,23 @@ const HomePageBox = styled.div`
   @media ${device.mobile} {
     background-size: contain;
   }
+`;
 
-  img {
-    @media ${device.mobile} {
-      display: flex;
-      width: 24.8rem;
-      height: 9.8rem;
-      padding-right: 0px;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-    }
+const HomePageLogoImage = styled.img`
+  display: flex;
+  width: 45.6rem;
+  height: 18rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 2.4rem;
+  margin-top: -17rem;
+
+  @media ${device.mobile} {
+    width: 24.8rem;
+    height: 9.8rem;
+    margin-top: -10rem;
+    padding-right: 0px;
   }
 `;
 
@@ -47,6 +55,13 @@ const HomePageOuterFrame = styled.div`
   border-radius: 16px;
 
   background-color: ${(props) => props.theme['grayscale-10']};
+
+  @media ${device.mobile} {
+    width: 30.5rem;
+    margin-top: 10rem;
+    gap: 1.6rem;
+    padding: 2.4rem;
+  }
 `;
 
 const HomePageFrame = styled.div`
@@ -54,11 +69,12 @@ const HomePageFrame = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  width: 100%;
 `;
 
 const HomePageInputBox = styled.div`
   display: flex;
-  width: 33.6rem;
+  width: 100%;
   padding: 1.2rem 1.6rem;
   justify-content: center;
   align-items: center;
@@ -101,9 +117,8 @@ const HomePageButton = styled.button`
 `;
 
 const HomePageQuestionButton = styled.button`
-  position: fixed;
-  top: 4.5rem;
-  right: 12.5rem;
+  position: absolute;
+
   display: inline-flex;
   padding: 1.2rem 2.4rem;
   justify-content: center;
@@ -113,14 +128,21 @@ const HomePageQuestionButton = styled.button`
   border: 1px solid ${(props) => props.theme['brown-40']};
   background-color: ${(props) => props.theme['brown-10']};
 
+  @media ${device.pc} {
+    top: 4.5rem;
+    right: 12.5rem;
+  }
+
   @media ${device.tablet} {
     top: 4.4rem;
     right: 4.5rem;
   }
 
   @media ${device.mobile} {
-    top: 40%;
-    right: 41.5%;
+    /* top: 25.2rem; */
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -131,4 +153,5 @@ export {
   HomePageBox,
   HomePageButton,
   HomePageQuestionButton,
+  HomePageLogoImage,
 };
