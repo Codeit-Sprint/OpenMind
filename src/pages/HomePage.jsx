@@ -1,4 +1,5 @@
 import Badge from '../components/common/Badge/Badge';
+import DropDown from '../components/common/DropDown/DropDown';
 import InputField from '../components/common/InputField/InputField';
 import InputTextArea from '../components/common/InputTextArea/InputTextArea';
 import { Dislike, Like } from '../components/common/Reaction/Reaction';
@@ -13,6 +14,7 @@ const HomePage = () => {
       <InputField />
       <InputTextArea />
       <Badge />
+      <DropDown />
       <UserCard />
       <Like />
       <Dislike />
