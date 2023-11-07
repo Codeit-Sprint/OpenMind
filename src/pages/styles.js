@@ -12,8 +12,6 @@ const HomePageBox = styled.div`
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
-  background-position: bottom;
   background-image: url(${IMAGES.indexBackground});
   background-color: ${(props) => props.theme['grayscale-20']};
 
