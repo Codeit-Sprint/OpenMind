@@ -1,23 +1,14 @@
 import styled from 'styled-components';
-import person from '../../../assets/Person.svg';
-import PropTypes from 'prop-types';
+import IMAGES from '../../../assets';
 import { BodyRegular3 } from '../../../styles/typography';
 
-function InputField({ placeholder }) {
+const InputField = ({ placeholder = '이름을 입력하세요' }) => {
   return (
     <Container>
-      <img src={person} alt="person" />
+      <img src={IMAGES.person} alt="person" />
       <Input type="text" placeholder={placeholder} />
     </Container>
   );
-}
-
-InputField.defaultProps = {
-  placeholder: '이름을 입력하세요',
-};
-
-InputField.propTypes = {
-  placeholder: PropTypes.string.isRequired,
 };
 
 const Container = styled.div`

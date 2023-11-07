@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import { CaptionMedium1 } from '../../../styles/typography';
@@ -18,7 +17,7 @@ const Like = () => {
   );
 };
 
-const Dislike = ({ clicked }) => {
+const Dislike = ({ clicked = false }) => {
   const handleClick = () => {
     clicked = !clicked;
     return clicked;
@@ -32,14 +31,6 @@ const Dislike = ({ clicked }) => {
       <p>싫어요</p>
     </Container>
   );
-};
-
-Dislike.defaultProps = {
-  clicked: false,
-};
-
-Dislike.propTypes = {
-  clicked: PropTypes.boolean,
 };
 
 const Container = styled.button`

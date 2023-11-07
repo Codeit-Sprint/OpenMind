@@ -1,19 +1,10 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+
 import { CaptionMedium1 } from '../../../styles/typography';
 
-function Badge({ status }) {
+const Badge = ({ status = true }) => {
   const coments = status ? '답변 완료' : '미답변';
   return <Container status={status}>{coments}</Container>;
-}
-
-Badge.defaultProps = {
-  status: true,
-  //   status: false,
-};
-
-Badge.propTypes = {
-  status: PropTypes.Boolean,
 };
 
 const Container = styled.div`

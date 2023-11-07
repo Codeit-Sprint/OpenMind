@@ -1,8 +1,7 @@
 import * as S from './UserCard.style';
 import IMAGES from '../../../assets';
-import PropTypes from 'prop-types';
 
-function UserCard({ nickname, num }) {
+function UserCard({ nickname = '야초는고양이', num = 9 }) {
   const style = {
     display: 'flex',
     flexDirection: 'row',
@@ -26,15 +25,5 @@ function UserCard({ nickname, num }) {
     </S.Container>
   );
 }
-
-UserCard.defaultProps = {
-  nickname: '야초는고양이',
-  num: 9,
-};
-
-UserCard.propTypes = {
-  nickname: PropTypes.string.isRequired,
-  num: PropTypes.number.isRequired,
-};
 
 export default UserCard;
