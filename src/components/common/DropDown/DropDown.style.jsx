@@ -24,8 +24,8 @@ const DropDownBtn = styled.div`
   color: ${(props) => props.theme['grayscale-40']};
   ${CaptionMedium1};
 
-  ${({ isDropped }) =>
-    isDropped &&
+  ${({ $isDropped }) =>
+    $isDropped &&
     `
       color: black;
       border: 1px solid black;
@@ -65,8 +65,8 @@ const Menu = styled.div`
     border: 12px solid transparent;
   }
 
-  ${({ isDropped }) =>
-    isDropped &&
+  ${({ $isDropped }) =>
+    $isDropped &&
     `
       opacity: 1;
       visibility: visible;
@@ -90,7 +90,7 @@ const Li = styled.div`
 
   ${CaptionMedium1}
   color: ${(props) =>
-    props.active ? props.theme['blue-50'] : props.theme['grayscale-50']};
+    props.$active ? props.theme['blue-50'] : props.theme['grayscale-50']};
 `;
 
 export { Container, DropDownBtn, Menu, Ul, Li };

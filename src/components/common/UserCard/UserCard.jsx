@@ -1,25 +1,18 @@
 import * as S from './UserCard.style';
 import IMAGES from '../../../assets';
 
-function UserCard({ nickname = '야초는고양이', num = 9 }) {
-  const style = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    columnGap: '4px',
-  };
+function UserCard({ imgSrc, nickname = '야초는고양이', num = 9 }) {
   return (
     <S.Container>
       <S.Profile>
-        <S.ProfileImage src={IMAGES.profile} alt="profile" />
+        <S.ProfileImage src={imgSrc} alt="profile" />
         <p>{nickname}</p>
       </S.Profile>
       <S.Question>
-        <div style={style}>
+        <S.QuestionInnerBox>
           <img src={IMAGES.messages} alt="messages" />
           <p>받은 질문</p>
-        </div>
+        </S.QuestionInnerBox>
         <p>{num}개</p>
       </S.Question>
     </S.Container>

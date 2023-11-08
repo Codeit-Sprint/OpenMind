@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import { device } from '../../../styles/mediaQuery';
