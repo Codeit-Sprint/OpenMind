@@ -11,7 +11,10 @@ const HomePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await postSubjects(name);
-    if (data) navigate(`/post/${data.id}/answer`);
+    if (data) {
+      localStorage.setItem('userId', data.id);
+      navigate(`/post/${data.id}/answer`);
+    }
   };
   return (
     <S.HomePageBox>

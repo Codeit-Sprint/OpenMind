@@ -40,6 +40,7 @@ const QuestionListPage = () => {
   const [sort, setSort] = useState('time');
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState([]);
+  let userId = localStorage.getItem('userId');
 
   console.log('쓸데 없는 것들', setLimit);
 
@@ -59,7 +60,6 @@ const QuestionListPage = () => {
   const firstFetch = async () => {
     const data = await getSubjects({ limit, sort, offset: 0 });
     setCount(Math.floor(data.count / limit));
-    console.log(data.count);
     setCards(() => data.results);
   };
 
@@ -73,7 +73,7 @@ const QuestionListPage = () => {
         <Link to="/">
           <S.LogoImage src={IMAGES.logo} />
         </Link>
-        <Link to="/">
+        <Link to={userId ? `/post/${userId}/answer` : '/'}>
           <S.AnswerButton>답변하러 가기</S.AnswerButton>
         </Link>
         <S.QuestionBarBox>
