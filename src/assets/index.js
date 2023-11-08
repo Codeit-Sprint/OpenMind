@@ -1,4 +1,3 @@
-import person from './Person.svg';
 import messages from './messages.svg';
 import profile from './profile-photo.png';
 import like from './like.svg';
@@ -7,10 +6,24 @@ import dislike from './dislike.svg';
 import dislike_clicked from './dislike-clicked.svg';
 import arrow_up from './arrow-up.svg';
 import arrow_down from './arrow-down.svg';
+import arrowImg from '../assets/arrow-right.svg';
+import brownArrowImg from '../assets/arrow-right-brown.svg';
+import facebookImg from '../assets/Facebook.svg';
+import kakaoImg from '../assets/Kakao.svg';
+import linkImg from '../assets/Link.svg';
+import logo from './logo.svg';
+import indexBackground from './index-background.png';
+import person from './person.svg';
 
 const IMAGES = {
-  messages,
+  logo,
+  indexBackground,
   person,
+  arrowImg,
+  brownArrowImg,
+  facebookImg, 
+  linkImg, 
+  kakaoImg,
   profile,
   like,
   like_clicked,
@@ -18,6 +31,8 @@ const IMAGES = {
   dislike_clicked,
   arrow_up,
   arrow_down,
+  messages,
 };
+
 
 export default IMAGES;
