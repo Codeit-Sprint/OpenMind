@@ -1,4 +1,4 @@
-const BASE_URL = 'https://openmind-api.vercel.app/1-11';
+const BASE_URL = 'https://openmind-api.vercel.app/1-11/';
 
 const commonFetchFunction = async (url, method, headers, body) => {
   let options = {
@@ -12,6 +12,7 @@ const commonFetchFunction = async (url, method, headers, body) => {
 
   const res = await fetch(BASE_URL + url, options);
   const data = await res.json();
+
   if (res.ok) {
     return data;
   } else {
