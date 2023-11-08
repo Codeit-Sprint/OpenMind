@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { CaptionMedium1 } from '../../../styles/typography';
 
-const Badge = ({ status = true }) => {
-  const coments = status ? '답변 완료' : '미답변';
-  return <Container status={status}>{coments}</Container>;
+const Badge = ({ status = 'true' }) => {
+  const comments = status ? '답변 완료' : '미답변';
+  return <Container status={status}>{comments}</Container>;
 };
 
 const Container = styled.div`

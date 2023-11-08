@@ -14,15 +14,15 @@ import linkImg from '../assets/Link.svg';
 import logo from './logo.svg';
 import indexBackground from './index-background.png';
 import person from './person.svg';
-
+import kebabImg from './kebabImg.svg';
 const IMAGES = {
   logo,
   indexBackground,
   person,
   arrowImg,
   brownArrowImg,
-  facebookImg, 
-  linkImg, 
+  facebookImg,
+  linkImg,
   kakaoImg,
   profile,
   like,
@@ -32,7 +32,7 @@ const IMAGES = {
   arrow_up,
   arrow_down,
   messages,
+  kebabImg,
 };
-
 
 export default IMAGES;
