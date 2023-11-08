@@ -24,8 +24,8 @@ const StyledButton = styled.button`
   }
 `;
 
-function FloatingButton() {
-  return <StyledButton>질문 작성하기</StyledButton>;
+function FloatingButton(props) {
+  return <StyledButton>{props.text}</StyledButton>;
 }
 
 export default FloatingButton;
