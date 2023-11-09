@@ -1,8 +1,8 @@
 import { createPagination } from '../../utils/utils';
 import * as S from './styles';
 
-const Pagination = ({ count, changeOffset, currentNum, limit }) => {
-  const numbers = createPagination({ count, limit, currentNum });
+const Pagination = ({ count, changeOffset, currentNum, limit, width }) => {
+  const numbers = createPagination({ count, limit, currentNum, width });
 
   return (
     <S.PaginationBox>

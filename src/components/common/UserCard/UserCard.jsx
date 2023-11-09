@@ -1,19 +1,23 @@
-import * as S from './UserCard.style';
 import IMAGES from '../../../assets';
+import * as S from './UserCard.style';
+import { useNavigate } from 'react-router-dom';
 
-function UserCard({ imgSrc, nickname = '야초는고양이', num = 9 }) {
+function UserCard({ item }) {
+  const navigate = useNavigate();
+  const { imageSource: imgSrc, name, questionCount, id } = item;
+
   return (
-    <S.Container>
+    <S.Container onClick={() => navigate(`/post/${id}`)}>
       <S.Profile>
         <S.ProfileImage src={imgSrc} alt="profile" />
-        <p>{nickname}</p>
+        <p>{name}</p>
       </S.Profile>
       <S.Question>
         <S.QuestionInnerBox>
           <img src={IMAGES.messages} alt="messages" />
           <p>받은 질문</p>
         </S.QuestionInnerBox>
-        <p>{num}개</p>
+        <p>{questionCount}개</p>
       </S.Question>
     </S.Container>
   );

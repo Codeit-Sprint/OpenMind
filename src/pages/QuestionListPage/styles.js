@@ -11,7 +11,7 @@ const NavbarBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4.5rem;
+  margin-top: 4rem;
   width: 100%;
   max-width: 95.5rem;
   @media ${device.mobile} {
@@ -52,7 +52,7 @@ const AnswerButton = styled.button`
 `;
 
 const QuestionBarBox = styled.div`
-  margin-top: 3.3rem;
+  margin-top: 4rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -101,7 +101,6 @@ const QuestionMainBox = styled.div`
   }
   @media ${device.mobile} {
   }
-  /* padding:  */
 `;
 
 const PaginationBox = styled.div`
@@ -114,17 +113,16 @@ const CardList = styled.div`
   gap: 2rem;
   max-width: 94rem;
   width: 100%;
-  padding: 0 3.2rem;
   place-items: center;
   grid-template-columns: repeat(4, 1fr);
   transition: 1s;
 
-  ${(props) => props.$width && { gridTemplateColumns: 'repeat(3, 1fr);' }}
+  ${(props) => props.$width < 936 && { gridTemplateColumns: 'repeat(3, 1fr);' }}
 
   @media ${device.mobile} {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
-    margin: 0 2.4rem;
+    padding: 0 2.4rem;
   }
 `;
 

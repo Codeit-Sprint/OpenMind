@@ -14,19 +14,31 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
-  width: 100%;
   border: 0.1rem solid ${(props) => props.theme['grayscale-40']};
   border-radius: 16px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+    border: 0.2rem solid ${(props) => props.theme['grayscale-60']};
+  }
+  transition: 0.2s;
+  background: ${(props) => props.theme['grayscale-10']};
+
+  width: 100%;
   @media ${device.pc} {
     min-width: 18.6rem;
+    max-width: 22rem;
   }
+
   @media ${device.tablet} {
     min-width: 18.6rem;
   }
 
   @media ${device.mobile} {
+    min-width: 15.55rem;
+    /* max-width: 22rem; */
     padding: 1.6rem;
-    max-width: 22rem;
   }
 `;
 

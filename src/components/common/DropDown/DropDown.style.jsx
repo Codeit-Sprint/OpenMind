@@ -7,6 +7,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
+  cursor: pointer;
 `;
 
 const DropDownBtn = styled.div`
@@ -33,6 +34,7 @@ const DropDownBtn = styled.div`
 `;
 
 const Menu = styled.div`
+  z-index: 1;
   position: absolute;
   left: 50%;
 
@@ -73,6 +75,10 @@ const Menu = styled.div`
       transform: translate(-50%, 0);
       left: 50%;
     `};
+
+  &:hover {
+    border: 1px solid ${(props) => props.theme['grayscale-80']};
+  }
 `;
 
 const Ul = styled.div`
@@ -91,6 +97,10 @@ const Li = styled.div`
   ${CaptionMedium1}
   color: ${(props) =>
     props.$active ? props.theme['blue-50'] : props.theme['grayscale-50']};
+
+  &:hover {
+    font-weight: 600;
+  }
 `;
 
 export { Container, DropDownBtn, Menu, Ul, Li };

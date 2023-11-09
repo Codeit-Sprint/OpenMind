@@ -9,8 +9,7 @@ import Navbar from './Navbar';
 import useCheckCardSize from '../../hooks/useCheckCardSize';
 
 const Card = ({ item }) => {
-  const { imageSource: imgSrc, name, questionCount } = item;
-  return <UserCard imgSrc={imgSrc} nickname={name} num={questionCount} />;
+  return <UserCard item={item} />;
 };
 
 const CardList = ({ cards }) => {
@@ -25,12 +24,13 @@ const QuestionListPage = () => {
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
+  console.log(loading);
   const [curPageNum, setCurPageNum] = useState(1);
   let userId = localStorage.getItem('userId');
   const width = useCheckCardSize();
 
   const checkCardWidth = async () => {
-    if (width) {
+    if (width < 936) {
       if (limit === 6) return;
       setLoading(true);
       const data = await getSubjects({
@@ -41,7 +41,7 @@ const QuestionListPage = () => {
       setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
-      setCurPageNum(curPageNum);
+      setCurPageNum(Math.round((curPageNum * 8) / 6));
       setLimit(6);
     } else {
       if (limit === 8) return;
@@ -54,20 +54,16 @@ const QuestionListPage = () => {
       setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
-      setCurPageNum(curPageNum);
+      setCurPageNum(Math.round((curPageNum * 6) / 8));
       setLimit(8);
     }
   };
-
-  console.log('위드', width);
 
   // Pagination 접근
   const changeOffset = async (num) => {
     if (num === curPageNum || num === '...') return; // 현재 페이지 번호 똑같이 눌렀을때
 
-    setLoading(true);
     const data = await getSubjects({ limit, offset: (num - 1) * limit, sort });
-    setLoading(false);
     setCount(data.count);
     setCards(() => data.results);
     setCurPageNum(num);
@@ -75,26 +71,20 @@ const QuestionListPage = () => {
 
   // DropDown 접근
   const handleFetchBy = async (item) => {
-    if (item === sort) return; // 현재 sorting방식으로 다시 들어갔을 때
-
     setSort(item);
     setCurPageNum(1);
-    setLoading(true);
     const data = await getSubjects({
       limit,
       sort: item,
       offset: 0,
     });
-    setLoading(false);
     setCount(data.count);
     setCards(() => data.results);
   };
 
   // 처음 방문
   const firstFetch = async () => {
-    setLoading(true);
     const data = await getSubjects({ limit, sort, offset: 0 });
-    setLoading(false);
     setCount(data.count);
     setCards(() => data.results);
   };
@@ -107,7 +97,7 @@ const QuestionListPage = () => {
     checkCardWidth();
   }, [width]);
 
-  if (cards && !loading) {
+  if (cards) {
     return (
       <>
         <Navbar userId={userId} />
@@ -125,6 +115,7 @@ const QuestionListPage = () => {
             changeOffset={changeOffset}
             currentNum={Number(curPageNum)}
             limit={Number(limit)}
+            width={width}
           />
         </S.QuestionMainBox>
       </>

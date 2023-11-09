@@ -14,7 +14,7 @@ const StyledButton = styled.button`
       ? props.theme['brown-10']
       : props.theme['brown-40']};
   display: flex;
-  width: ${(props) => (props.type === 'answer' ? '192px' : '160px')};
+  width: ${(props) => (props.type === 'answer' ? '16.6rem' : '12.7rem')};
   height: 46px;
   border: 1px solid ${(props) => props.theme['brown-40']};
   border-width: ${(props) => (props.type === 'answer' ? '1px' : '0px')};
