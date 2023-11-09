@@ -1,21 +1,37 @@
 import styled from 'styled-components';
 import { device } from '../../styles/mediaQuery';
 
-const LogoImage = styled.img`
-  position: absolute;
-  left: 13rem;
-  top: 4rem;
+const NavbarOuterBox = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const NavbarBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 95.5rem;
+  @media ${device.mobile} {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr;
+  }
+  @media ${device.tablet} {
+    max-width: 95.5rem;
+    padding: 0 max(5rem);
+  }
+`;
+
+const LogoImage = styled.img`
   width: 14.6rem;
   height: 5.7rem;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
 `;
 
 const AnswerButton = styled.button`
-  position: absolute;
-
   display: inline-flex;
   padding: 1.2rem 2.4rem;
   justify-content: center;
@@ -26,39 +42,65 @@ const AnswerButton = styled.button`
   background-color: ${(props) => props.theme['brown-10']};
 
   @media ${device.pc} {
-    top: 4.5rem;
-    right: 12.5rem;
   }
 
   @media ${device.tablet} {
-    top: 4.4rem;
-    right: 4.5rem;
   }
 
   @media ${device.mobile} {
-    /* top: 25.2rem; */
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 `;
 
 const QuestionBarBox = styled.div`
-  margin-top: 13.7rem;
+  margin-top: 4rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  @media ${device.mobile} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.4rem;
+  }
+`;
+
+const QuestionBarHeader = styled.h2`
+  color: ${(props) => props.theme['grayscale-60']};
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Actor;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 1.2rem;
+
+  @media ${device.mobile} {
+    font-size: 24px;
+    line-height: 30px; /* 125% */
+  }
 `;
 
 const QuestionMainBox = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 94rem;
-  margin: auto 3.2rem;
+  margin: 3rem auto 0;
+
+  @media ${device.pc} {
+    width: 100%;
+  }
+
+  @media ${device.tablet} {
+    margin: 3rem 3.2rem 0;
+  }
+  @media ${device.mobile} {
+  }
 `;
 
 const PaginationBox = styled.div`
@@ -68,77 +110,30 @@ const PaginationBox = styled.div`
 
 const CardList = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 2rem;
+  max-width: 94rem;
   width: 100%;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  transition: 1s;
 
-  @media ${device.tablet} {
-  }
+  ${(props) => props.$width < 936 && { gridTemplateColumns: 'repeat(3, 1fr);' }}
+
   @media ${device.mobile} {
     grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const CardBox = styled.div`
-  display: flex;
-  width: 100%;
-  height: 187px;
-  padding: 20px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  border-radius: 16px;
-  border: 1px solid var(--grayscale-40, #818181);
-  background: var(--grayscale-10, #fff);
-`;
-
-const CardTopBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  align-self: stretch;
-`;
-
-const CardBottomBox = styled.div`
-  display: flex;
-  height: 22px;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
-  align-self: stretch;
-`;
-
-const CardProfileBox = styled.div`
-  display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CardImgBox = styled.div`
-  img {
-    display: flex;
-    border-radius: 60px;
-    width: 60px;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
+    gap: 1.6rem;
+    padding: 0 2.4rem;
   }
 `;
 
 export {
+  NavbarOuterBox,
+  NavbarBox,
   LogoImage,
   QuestionBarBox,
   QuestionMainBox,
   PaginationBox,
-  CardBox,
   AnswerButton,
-  CardTopBox,
-  CardBottomBox,
-  CardImgBox,
-  CardProfileBox,
   CardList,
+  QuestionBarHeader,
 };
