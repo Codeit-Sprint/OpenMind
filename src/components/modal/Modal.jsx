@@ -2,10 +2,24 @@ import styled from 'styled-components';
 import IMAGES from '../../assets';
 import { BodyBold2, BodyRegular3, H3 } from '../../styles/typography';
 import InputTextArea from '../common/InputTextArea/InputTextArea';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import postQuestions from '../../apis/postQuestions';
+import { useParams } from 'react-router-dom';
 
 const Modal = ({ nikcName = '아초는 고양이', status }) => {
+  const { subjectId } = useParams();
+
   const outside = useRef();
+  const [content, setContent] = useState('무슨 강아지를 가장 좋아하시나요?');
+
+  const handleSubmit = async (e) => {
+    console.log(content);
+    e.preventDefault();
+    const data = await postQuestions(subjectId, content);
+    if (data) {
+      alert('데이터 저장 완료');
+    }
+  };
 
   return (
     <>
@@ -27,14 +41,16 @@ const Modal = ({ nikcName = '아초는 고양이', status }) => {
             onClick={() => status((prev) => !prev)}
           />
         </Title>
-
         <To>
           To.
           <Profile src={IMAGES.profile} alt="profile" />
           {nikcName}
         </To>
-        <InputTextArea placeholder="질문을 입력해주세요" />
-        <Send>질문 보내기</Send>
+        <InputTextArea
+          placeholder="질문을 입력해주세요"
+          setContent={setContent}
+        />
+        <Send onClick={handleSubmit}>질문 보내기</Send>
       </Container>
     </>
   );
