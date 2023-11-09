@@ -1,32 +1,15 @@
 import * as S from './styles';
-import * as MainS from '../styles';
 import getSubjects from '../../apis/getSubjects';
 
-import IMAGES from '../../assets';
-import { Link } from 'react-router-dom';
-import { H1 } from '../../styles/typography';
 import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
+import UserCard from '../../components/common/UserCard/UserCard';
+import DropDown from '../../components/common/DropDown/DropDown';
+import Navbar from './Navbar';
+import useCheckCardSize from '../../hooks/useCheckCardSize';
 
 const Card = ({ item }) => {
-  const { imageSource: imgSrc, name, questionCount } = item;
-  if (item) {
-    return (
-      <S.CardBox>
-        <S.CardTopBox>
-          <S.CardProfileBox>
-            <S.CardImgBox>
-              <img src={imgSrc} />
-            </S.CardImgBox>
-          </S.CardProfileBox>
-          <p>{name}</p>
-        </S.CardTopBox>
-        <S.CardBottomBox>
-          <p>{questionCount}</p>
-        </S.CardBottomBox>
-      </S.CardBox>
-    );
-  }
+  return <UserCard item={item} />;
 };
 
 const CardList = ({ cards }) => {
@@ -40,26 +23,68 @@ const QuestionListPage = () => {
   const [sort, setSort] = useState('time');
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState([]);
+
+  const [curPageNum, setCurPageNum] = useState(1);
   let userId = localStorage.getItem('userId');
 
-  console.log('쓸데 없는 것들', setLimit);
+  const width = useCheckCardSize(); // window resizing
 
-  const changeOffset = async (num) => {
-    const data = await getSubjects({ limit, offset: (num - 1) * limit, sort });
-    setCount(Math.floor(data.count / limit));
-    setCards(() => data.results);
+  // 카드의 너비가 186px 이하로 내려갈 경우 -> 카드 6개, 아닐 시 8개 보여주기
+  const checkCardWidth = async () => {
+    if (width < 936) {
+      if (limit === 6) return;
+
+      const data = await getSubjects({
+        limit: 6,
+        offset: (curPageNum - 1) * limit,
+        sort,
+      });
+      setCount(data.count);
+      setCards(() => data.results);
+      setCurPageNum(Math.round((curPageNum * 8) / 6));
+      setLimit(6);
+    } else {
+      if (limit === 8) return;
+
+      const data = await getSubjects({
+        limit: 8,
+        offset: (curPageNum - 1) * limit,
+        sort,
+      });
+      setCount(data.count);
+      setCards(() => data.results);
+      setCurPageNum(Math.round((curPageNum * 6) / 8));
+      setLimit(8);
+    }
   };
 
+  // Pagination 접근
+  const changeOffset = async (num) => {
+    if (num === curPageNum || num === '...') return; // 현재 페이지 번호 똑같이 눌렀을때
+
+    const data = await getSubjects({ limit, offset: (num - 1) * limit, sort });
+    setCount(data.count);
+    setCards(() => data.results);
+    setCurPageNum(num);
+  };
+
+  // DropDown 접근
   const handleFetchBy = async (item) => {
     setSort(item);
-    const data = await getSubjects({ limit, sort: item });
-    setCount(Math.floor(data.count / limit));
+    setCurPageNum(1);
+    const data = await getSubjects({
+      limit,
+      sort: item,
+      offset: 0,
+    });
+    setCount(data.count);
     setCards(() => data.results);
   };
 
+  // 처음 방문
   const firstFetch = async () => {
     const data = await getSubjects({ limit, sort, offset: 0 });
-    setCount(Math.floor(data.count / limit));
+    setCount(data.count);
     setCards(() => data.results);
   };
 
@@ -67,27 +92,33 @@ const QuestionListPage = () => {
     firstFetch();
   }, []);
 
+  useEffect(() => {
+    checkCardWidth();
+  }, [width]);
+
   if (cards) {
     return (
-      <MainS.PageBox>
-        <Link to="/">
-          <S.LogoImage src={IMAGES.logo} />
-        </Link>
-        <Link to={userId ? `/post/${userId}/answer` : '/'}>
-          <S.AnswerButton>답변하러 가기</S.AnswerButton>
-        </Link>
+      <>
+        <Navbar userId={userId} />
         <S.QuestionBarBox>
-          <H1>누구에게 질문할까요?</H1>
-          <button onClick={() => handleFetchBy('name')}>이름순</button>
-          <button onClick={() => handleFetchBy('time')}>최신순</button>
+          <S.QuestionBarHeader>누구에게 질문할까요?</S.QuestionBarHeader>
+          <DropDown handleClick={handleFetchBy} />
         </S.QuestionBarBox>
+
         <S.QuestionMainBox>
-          <S.CardList>
+          <S.CardList $limit={limit} $width={width}>
             <CardList cards={cards} />
           </S.CardList>
-          <Pagination count={count} changeOffset={changeOffset} />
+
+          <Pagination
+            count={Number(count)}
+            changeOffset={changeOffset}
+            currentNum={Number(curPageNum)}
+            limit={Number(limit)}
+            width={width}
+          />
         </S.QuestionMainBox>
-      </MainS.PageBox>
+      </>
     );
   }
 };
