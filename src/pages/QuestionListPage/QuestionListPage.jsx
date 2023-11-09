@@ -23,35 +23,34 @@ const QuestionListPage = () => {
   const [sort, setSort] = useState('time');
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(false);
-  console.log(loading);
+
   const [curPageNum, setCurPageNum] = useState(1);
   let userId = localStorage.getItem('userId');
-  const width = useCheckCardSize();
 
+  const width = useCheckCardSize(); // window resizing
+
+  // 카드의 너비가 186px 이하로 내려갈 경우 -> 카드 6개, 아닐 시 8개 보여주기
   const checkCardWidth = async () => {
     if (width < 936) {
       if (limit === 6) return;
-      setLoading(true);
+
       const data = await getSubjects({
         limit: 6,
         offset: (curPageNum - 1) * limit,
         sort,
       });
-      setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
       setCurPageNum(Math.round((curPageNum * 8) / 6));
       setLimit(6);
     } else {
       if (limit === 8) return;
-      setLoading(true);
+
       const data = await getSubjects({
         limit: 8,
         offset: (curPageNum - 1) * limit,
         sort,
       });
-      setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
       setCurPageNum(Math.round((curPageNum * 6) / 8));
@@ -110,6 +109,7 @@ const QuestionListPage = () => {
           <S.CardList $limit={limit} $width={width}>
             <CardList cards={cards} />
           </S.CardList>
+
           <Pagination
             count={Number(count)}
             changeOffset={changeOffset}
