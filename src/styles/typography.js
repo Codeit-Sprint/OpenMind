@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 const common = css`
   font-feature-settings: 'clig' off, 'liga' off;
   font-style: normal;
 `;
 
-const H1 = styled.h1`
+const H1 = `
   ${common}
   font-family: Actor;
   font-size: 4rem;
@@ -13,7 +13,7 @@ const H1 = styled.h1`
   line-height: normal;
 `;
 
-const H2 = styled.h2`
+const H2 = `
   ${common}
   font-family: Actor;
   font-size: 3.2rem;
@@ -21,7 +21,7 @@ const H2 = styled.h2`
   line-height: 4rem;
 `;
 
-const H3 = styled.h3`
+const H3 = `
   ${common}
   font-family: Actor;
   font-size: 2.4rem;

@@ -15,7 +15,7 @@ const Background = styled.div`
 const Container = styled.div`
   position: relative;
 
-  width: 17rem;
+  width: 20rem;
   height: 40rem;
   margin: 0 auto;
 
@@ -46,7 +46,8 @@ const NickName = styled.div`
 
   top: 27.7rem;
   left: 2rem;
-  ${H2};
+
+  ${H2}
 `;
 
 const ButtonWrapper = styled.div`
