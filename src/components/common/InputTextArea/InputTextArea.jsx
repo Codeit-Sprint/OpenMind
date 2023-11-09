@@ -26,7 +26,7 @@ const InputTextArea = ({ placeholder = '이름을 입력하세요' }) => {
 
 // 모달로 답변을 입력할 때와 구분하기 위함, 미디어쿼리 적용
 const Input = styled.textarea`
-  width: 560px;
+  width: 100%;
   height: 186px;
   padding: 16px;
   @media ${device.tablet} {
