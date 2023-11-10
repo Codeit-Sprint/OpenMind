@@ -6,9 +6,9 @@ const Icon = styled.img`
 `;
 const Button = styled.button``;
 
-function KakaoButton() {
+function KakaoButton({ handleKakaoButton }) {
   return (
-    <Button>
+    <Button onClick={handleKakaoButton}>
       <Icon src={IMAGES.kakaoImg} />
     </Button>
   );

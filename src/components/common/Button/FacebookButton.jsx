@@ -4,7 +4,7 @@ const Icon = styled.img`
   width: 40px;
   height: 40px;
 `;
-const Button = styled.button``;
+const Button = styled.p``;
 
 function FacebookButton() {
   return (
