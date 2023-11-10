@@ -23,8 +23,9 @@ const QuestionListPage = () => {
   const [sort, setSort] = useState('time');
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const [curPageNum, setCurPageNum] = useState(1);
+
   let userId = localStorage.getItem('userId');
 
   const width = useCheckCardSize(); // window resizing
@@ -32,25 +33,29 @@ const QuestionListPage = () => {
   // 카드의 너비가 186px 이하로 내려갈 경우 -> 카드 6개, 아닐 시 8개 보여주기
   const checkCardWidth = async () => {
     if (width < 936) {
-      if (limit === 6) return;
+      if (limit === 6 || loading) return;
 
+      setLoading(true);
       const data = await getSubjects({
         limit: 6,
         offset: (curPageNum - 1) * limit,
         sort,
       });
+      setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
       setCurPageNum(Math.round((curPageNum * 8) / 6));
       setLimit(6);
     } else {
-      if (limit === 8) return;
+      if (limit === 8 || loading) return;
 
+      setLoading(true);
       const data = await getSubjects({
         limit: 8,
         offset: (curPageNum - 1) * limit,
         sort,
       });
+      setLoading(false);
       setCount(data.count);
       setCards(() => data.results);
       setCurPageNum(Math.round((curPageNum * 6) / 8));
@@ -60,7 +65,7 @@ const QuestionListPage = () => {
 
   // Pagination 접근
   const changeOffset = async (num) => {
-    if (num === curPageNum || num === '...') return; // 현재 페이지 번호 똑같이 눌렀을때
+    if (num === curPageNum) return; // 현재 페이지 번호 똑같이 눌렀을때
 
     const data = await getSubjects({ limit, offset: (num - 1) * limit, sort });
     setCount(data.count);
