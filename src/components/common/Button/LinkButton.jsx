@@ -6,9 +6,9 @@ const Icon = styled.img`
 `;
 const Button = styled.button``;
 
-function LinkButton() {
+function LinkButton({ onClick }) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <Icon src={IMAGES.linkImg} />
     </Button>
   );

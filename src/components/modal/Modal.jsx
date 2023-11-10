@@ -4,20 +4,27 @@ import { BodyBold2, BodyRegular3, H3 } from '../../styles/typography';
 import InputTextArea from '../common/InputTextArea/InputTextArea';
 import { useRef, useState } from 'react';
 import postQuestions from '../../apis/postQuestions';
-import { useParams } from 'react-router-dom';
 
-const Modal = ({ nikcName = '아초는 고양이', status }) => {
-  const { subjectId } = useParams();
-
+const Modal = ({ setActive, setToastText, setShowToast, item }) => {
   const outside = useRef();
-  const [content, setContent] = useState('무슨 강아지를 가장 좋아하시나요?');
+  const [content, setContent] = useState('');
 
   const handleSubmit = async (e) => {
-    console.log(content);
     e.preventDefault();
-    const data = await postQuestions(subjectId, content);
-    if (data) {
-      alert('데이터 저장 완료');
+
+    if (content !== '') {
+      setToastText('저장이 완료되었습니다.');
+      const data = await postQuestions(item.id, content);
+      if (data) {
+        setActive(false);
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+      }
+    } else {
+      setToastText('비밀번호를 입력해주세요.');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+
     }
   };
 
@@ -26,7 +33,7 @@ const Modal = ({ nikcName = '아초는 고양이', status }) => {
       <Background
         ref={outside}
         onClick={(e) => {
-          if (e.target == outside.current) status(false);
+          if (e.target == outside.current) setActive(false);
         }}
       ></Background>
       <Container>
@@ -38,26 +45,28 @@ const Modal = ({ nikcName = '아초는 고양이', status }) => {
           <Close
             src={IMAGES.close}
             alt="close"
-            onClick={() => status((prev) => !prev)}
+            onClick={() => setActive((prev) => !prev)}
           />
         </Title>
         <To>
           To.
-          <Profile src={IMAGES.profile} alt="profile" />
-          {nikcName}
+          <Profile src={item.imageSource} alt="profile" />
+          {item.name}
         </To>
         <InputTextArea
           placeholder="질문을 입력해주세요"
           setContent={setContent}
         />
-        <Send onClick={handleSubmit}>질문 보내기</Send>
+        <Send $hasContent={!!content} onClick={handleSubmit}>
+          질문 보내기
+        </Send>
       </Container>
     </>
   );
 };
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
 
   width: 100%;
@@ -66,7 +75,7 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 17.2rem;
   left: 50%;
   transform: translate(-50%, 0%);
@@ -103,6 +112,11 @@ const Info = styled.div`
 const Close = styled.img`
   width: 28px;
   height: 28px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+
 `;
 
 const To = styled.div`
@@ -114,21 +128,31 @@ const To = styled.div`
 `;
 
 const Profile = styled.img`
-  width: 28px;
-  height: 28px;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 2.8rem;
 `;
 
 const Send = styled.div`
   display: flex;
+  width: 100%;
+  margin-top: 0.8rem;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   align-self: stretch;
   border-radius: 8px;
-  background: var(--brown-30, #c7bbb5);
-  color: var(--grayscale-10, #fff);
+  cursor: pointer;
+  background-color: ${(props) =>
+    props.$hasContent ? props.theme['brown-40'] : props.theme['brown-30']};
+  color: ${(props) => props.theme['grayscale-10']};
   ${BodyRegular3};
+
+  &:hover {
+    text-decoration: underline;
+    background-color: ${(props) => props.theme['brown-50']};
+  }
 `;
 
 export default Modal;
