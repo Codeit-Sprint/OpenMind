@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { CaptionMedium1 } from '../../../styles/typography';
 import { device } from '../../../styles/mediaQuery';
 
-const Toast = () => {
+const Toast = ({ text }) => {
   return (
     <Container>
-      <p>URL이 복사되었습니다.</p>
+      <p>{text}</p>
     </Container>
   );
 };
