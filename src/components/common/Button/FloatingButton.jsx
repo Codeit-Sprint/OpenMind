@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
 import * as S from '../../../styles/typography';

@@ -28,7 +28,6 @@ const QuestionItem = ({ item }) => {
 };
 
 const List = ({ questions }) => {
-  console.log(questions);
   return (
     <S.Container>
       <S.Info>
