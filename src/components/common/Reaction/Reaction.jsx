@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import { CaptionMedium1 } from '../../../styles/typography';
 import { useState } from 'react';
-
 const Like = () => {
   const [clicked, setClicked] = useState(false);
   const handleClick = () => {
@@ -10,22 +9,23 @@ const Like = () => {
     return clicked;
   };
   return (
-    <Container onClick={handleClick} status={clicked}>
+    <Container onClick={handleClick} status={clicked} react="like">
       <img src={clicked ? IMAGES.like_clicked : IMAGES.like} alt="like" />
       <p>좋아요</p>
     </Container>
   );
 };
 
-const Dislike = ({ clicked = false }) => {
+const Dislike = () => {
+  const [dislikeClicked, setDislikeClicked] = useState(false);
   const handleClick = () => {
-    clicked = !clicked;
-    return clicked;
+    setDislikeClicked(!dislikeClicked);
+    return dislikeClicked;
   };
   return (
-    <Container onClick={handleClick}>
+    <Container onClick={handleClick} status={dislikeClicked} react="dislike">
       <img
-        src={clicked ? IMAGES.dislike_clicked : IMAGES.dislike}
+        src={dislikeClicked ? IMAGES.dislike_clicked : IMAGES.dislike}
         alt="dislike"
       />
       <p>싫어요</p>
@@ -40,7 +40,11 @@ const Container = styled.button`
   gap: 6px;
 
   color: ${(props) =>
-    props.status ? props.theme['blue-50'] : props.theme['grayscale-40']};
+    props.status && props.react === 'like'
+      ? props.theme['blue-50']
+      : props.status && props.react === 'dislike'
+      ? props.theme['grayscale-60']
+      : props.theme['grayscale-40']};
   ${CaptionMedium1};
 `;
 

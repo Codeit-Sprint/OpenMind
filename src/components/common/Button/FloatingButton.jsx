@@ -2,12 +2,17 @@
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
 import * as S from '../../../styles/typography';
+import { device } from '../../../styles/mediaQuery';
 
 const StyledButton = styled.button`
+  position: fixed;
+  bottom: 2.4rem;
+  right: 2.4rem;
+
   background-color: ${theme['brown-40']};
   color: white;
   display: flex;
-  width: 208px;
+  width: min-content;
   height: 54px;
   gap: 10px;
   padding: 12px 24px 12px 24px;
@@ -22,13 +27,27 @@ const StyledButton = styled.button`
   &:active {
     background-color: ${theme['brown-50']};
   }
+  @media ${device.pc} {
+    &::before {
+      content: '질문 작성하기';
+    }
+  }
+
+  @media ${device.tablet} {
+    &::before {
+      content: '질문 작성하기';
+    }
+  }
+  @media ${device.mobile} {
+    &::before {
+      content: '질문 작성';
+    }
+  }
 `;
 
 function FloatingButton({ setActive }) {
   return (
-    <StyledButton onClick={() => setActive((prev) => !prev)}>
-      질문 작성하기
-    </StyledButton>
+    <StyledButton onClick={() => setActive((prev) => !prev)}></StyledButton>
   );
 }
 

@@ -15,8 +15,16 @@ const Empty = () => {
 };
 
 const QuestionItem = ({ item }) => {
-  console.log(item);
-  return <FeedCard />;
+  const { name, content, isRejected, createdAt } = item;
+
+  return (
+    <FeedCard
+      name={name}
+      content={content}
+      isRejected={isRejected}
+      createdAt={createdAt}
+    />
+  );
 };
 
 const List = ({ questions }) => {

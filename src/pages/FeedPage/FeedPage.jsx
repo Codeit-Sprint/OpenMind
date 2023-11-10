@@ -32,7 +32,7 @@ const FeedPage = ({ questionList = 0 }) => {
   useEffect(() => {
     checkQuestions();
   }, []);
-  console.log(questions);
+  console.log('질문들', questions);
 
   // const handleModalClick = () => {
   //   setActive(!active);

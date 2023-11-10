@@ -1,13 +1,17 @@
 import styled from 'styled-components';
-
 import { CaptionMedium1 } from '../../../styles/typography';
 
-const Badge = ({ status = 'true' }) => {
-  const comments = status ? '답변 완료' : '미답변';
-  return <Container status={status}>{comments}</Container>;
+const Badge = ({ props }) => {
+  let comments = '';
+  if (props.answer?.content || props.answer?.isRejected === true) {
+    comments = '답변 완료';
+  } else {
+    comments = '미답변';
+  }
+  return <StyledContainer props={props}>{comments}</StyledContainer>;
 };
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   display: inline-flex;
   padding: 4px 12px;
   justify-content: center;
@@ -16,13 +20,13 @@ const Container = styled.div`
 
   border: 1px solid
     ${(props) =>
-      props.status ? props.theme['brown-40'] : props.theme['grayscale-40']};
+      props ? props.theme['brown-40'] : props.theme['grayscale-40']};
   border-radius: 8px;
   background: ${(props) => props.theme['grayscale-10']};
 
   ${CaptionMedium1};
   color: ${(props) =>
-    props.status ? props.theme['brown-40'] : props.theme['grayscale-40']};
+    props ? props.theme['brown-40'] : props.theme['grayscale-40']};
 `;
 
 export default Badge;
