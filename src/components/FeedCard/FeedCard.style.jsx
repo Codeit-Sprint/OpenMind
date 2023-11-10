@@ -96,16 +96,16 @@ const Line = styled.hr`
   height: 1px;
   border: 1px solid;
 `;
-// 좋아요 싫어요 버튼용도 삭제 예정
-const Image = styled.img`
-  width: 16px;
-  height: 16px;
-`;
 
 //질문 컨테이너
+const QuestionContainer = styled.div`
+  gap: 12px;
+`;
+
 const QuestionDiv = styled.div`
   ${S.BodyRegular3};
 `;
+
 // 프로필과 텍스트를 구분하기 위한 텍스트 전용
 const AnswerDiv = styled.div``;
 
@@ -125,8 +125,8 @@ export {
   Date,
   Post,
   Line,
-  Image,
   QuestionDiv,
   AnswerDiv,
   ReactionDiv,
+  QuestionContainer,
 };

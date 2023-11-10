@@ -1,26 +1,27 @@
 /* eslint-disable react/prop-types */
 import IMAGES from '../../assets';
-import InputTextArea from '../common/InputTextArea/InputTextArea';
 import * as S from './Answer.style';
-import { Profile, UserName } from './FeedCard.style';
-/*
-TODO
-1. input default 값 적용
-*/
+import { getElapsedTime } from '../../utils/getElapsedTime';
+
 function Answer(props) {
+  let profileImg = props.props?.imageSource
+    ? props.props?.imageSource
+    : IMAGES.profile;
   return (
-    <S.CardContainer>
-      <S.MainSection>
-        <Profile src={IMAGES.profile} />
-        <S.AnswerDiv>
-          <UserName>{props.userName}</UserName>
-          <S.InputSection>
-            <InputTextArea placeholder="답변을 입력해주세요." />
-            <S.AnswerButton> 답변 완료 </S.AnswerButton>
-          </S.InputSection>
-        </S.AnswerDiv>
-      </S.MainSection>
-    </S.CardContainer>
+    <S.MainSection>
+      <S.Profile src={profileImg} />
+      <S.AnswerDiv>
+        <S.ProfileSection>
+          <S.UserName>{props.props.name}</S.UserName>
+          <S.Date>{getElapsedTime(props.props.createdAt)}</S.Date>
+        </S.ProfileSection>
+        {!props.props.isRejected ? (
+          <S.Post>{props.props.content}</S.Post>
+        ) : (
+          <S.Post status="답변거절">답변거절</S.Post>
+        )}
+      </S.AnswerDiv>
+    </S.MainSection>
   );
 }
 
