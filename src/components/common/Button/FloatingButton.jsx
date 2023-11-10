@@ -7,7 +7,7 @@ const StyledButton = styled.button`
   background-color: ${theme['brown-40']};
   color: white;
   display: flex;
-  width: 208px;
+  width: min-content;
   height: 54px;
   gap: 10px;
   padding: 12px 24px 12px 24px;
