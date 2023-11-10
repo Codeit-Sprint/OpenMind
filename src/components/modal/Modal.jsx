@@ -24,6 +24,7 @@ const Modal = ({ setActive, setToastText, setShowToast, item }) => {
       setToastText('비밀번호를 입력해주세요.');
       setShowToast(true);
       setTimeout(() => setShowToast(false), 2000);
+
     }
   };
 
@@ -115,6 +116,7 @@ const Close = styled.img`
   &:hover {
     transform: scale(1.05);
   }
+
 `;
 
 const To = styled.div`

@@ -22,7 +22,6 @@ const HomePage = () => {
       navigate('/list');
     }
   }, []);
-
   return (
     <S.HomePageBox>
       <Link to="/list">
