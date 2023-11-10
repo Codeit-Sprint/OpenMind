@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import IMAGES from '../../assets';
 import * as S from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import postSubjects from '../../apis/postSubjects';
 
 const HomePage = () => {
@@ -16,7 +16,13 @@ const HomePage = () => {
       navigate(`/post/${data.id}/answer`);
     }
   };
-  console.log(name);
+
+  useEffect(() => {
+    if (localStorage.getItem('userId')) {
+      navigate('/list');
+    }
+  }, []);
+
   return (
     <S.HomePageBox>
       <Link to="/list">
