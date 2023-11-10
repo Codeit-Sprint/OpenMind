@@ -16,6 +16,7 @@ const HomePage = () => {
       navigate(`/post/${data.id}/answer`);
     }
   };
+  console.log(name);
   return (
     <S.HomePageBox>
       <Link to="/list">
