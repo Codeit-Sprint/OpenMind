@@ -16,6 +16,7 @@ import indexBackground from './index-background.png';
 import person from './person.svg';
 import kebabImg from './kebabImg.svg';
 import container from './container.png';
+import close from './close.svg';
 
 const IMAGES = {
   logo,
@@ -36,6 +37,7 @@ const IMAGES = {
   messages,
   kebabImg,
   container,
+  close,
 };
 
 export default IMAGES;

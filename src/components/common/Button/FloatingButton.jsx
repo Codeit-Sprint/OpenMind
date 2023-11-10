@@ -24,8 +24,12 @@ const StyledButton = styled.button`
   }
 `;
 
-function FloatingButton(props) {
-  return <StyledButton>{props.text}</StyledButton>;
+function FloatingButton({ setActive }) {
+  return (
+    <StyledButton onClick={() => setActive((prev) => !prev)}>
+      질문 작성하기
+    </StyledButton>
+  );
 }
 
 export default FloatingButton;
