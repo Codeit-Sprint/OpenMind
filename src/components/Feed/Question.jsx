@@ -1,4 +1,5 @@
 import IMAGES from '../../assets';
+import FeedCard from '../FeedCard/FeedCard';
 import * as S from './Question.style';
 
 const Empty = () => {
@@ -13,18 +14,23 @@ const Empty = () => {
   );
 };
 
-const List = ({ num }) => {
+const QuestionItem = ({ item }) => {
+  console.log(item);
+  return <FeedCard />;
+};
+
+const List = ({ questions }) => {
+  console.log(questions);
   return (
     <S.Container>
       <S.Info>
         <img src={IMAGES.messages} alt="messages" />
-        <S.Text>{num}개의 질문이 있습니다</S.Text>
+        <S.Text>{questions.length}개의 질문이 있습니다</S.Text>
       </S.Info>
-      <img src={IMAGES.container} alt="container" />
-      <img src={IMAGES.container} alt="container" />
-      <img src={IMAGES.container} alt="container" />
-      <img src={IMAGES.container} alt="container" />
-      <img src={IMAGES.container} alt="container" />
+
+      {questions.map((question) => (
+        <QuestionItem key={question.id} item={question} />
+      ))}
     </S.Container>
   );
 };

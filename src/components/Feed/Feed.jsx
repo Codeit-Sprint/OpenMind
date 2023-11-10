@@ -5,7 +5,7 @@ import LinkButton from '../common/Button/LinkButton';
 import KakaoButton from '../common/Button/KakaoButton';
 import FacebookButton from '../common/Button/FacebookButton';
 
-const FeedWrapper = ({ nickName = '아초는 고양이' }) => {
+const FeedWrapper = ({ nickName = '아초는 고양이', copyLink }) => {
   return (
     <>
       <S.Background></S.Background>
@@ -16,7 +16,7 @@ const FeedWrapper = ({ nickName = '아초는 고양이' }) => {
         <S.ProfileImage src={IMAGES.profile} />
         <S.NickName>{nickName}</S.NickName>
         <S.ButtonWrapper>
-          <LinkButton />
+          <LinkButton onClick={copyLink} />
           <KakaoButton />
           <FacebookButton />
         </S.ButtonWrapper>
