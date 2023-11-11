@@ -8,14 +8,15 @@ import { Like, Dislike } from '../common/Reaction/Reaction';
 import { getElapsedTime } from '../../utils/getElapsedTime';
 import Answer from './Answer';
 
-function FeedCard(props) {
+function FeedCard({ item, answer, subjectData, answerItem }) {
+  const { content, createdAt, like, dislike, id: questionId } = item;
   const [showKebab, setShowKebab] = useState(false);
   const { pathname } = useLocation();
   const [reactionClicked, setReactionClicked] = useState(false);
 
   const reactionArr = JSON.parse(localStorage.getItem('reactionArray'));
   const foundReaction = reactionArr.find(
-    (reaction) => reaction.questionId === props.id,
+    (reaction) => reaction.questionId === questionId,
   );
 
   // Feed Page 확인 함수
@@ -33,29 +34,31 @@ function FeedCard(props) {
   return (
     <S.CardContainer>
       <S.Header>
-        <Badge props={props} />
+        <Badge answer={answer} />
         {!!showKebab && <S.Icon src={IMAGES.kebabImg} />}
       </S.Header>
       <S.QuestionContainer>
-        <S.Date>질문 · {getElapsedTime(props.createdAt)}</S.Date>
-        <S.QuestionDiv>{props.content}</S.QuestionDiv>
+        <S.Date>질문 · {getElapsedTime(createdAt)}</S.Date>
+        <S.QuestionDiv>{content}</S.QuestionDiv>
       </S.QuestionContainer>
-      {props.answer ? <Answer props={props?.answer} /> : ''}
+      {answerItem && subjectData && (
+        <Answer item={answerItem} subjectData={subjectData} />
+      )}
       <S.Line />
       <S.ReactionDiv>
         <Like
           checkedReaction={foundReaction?.like || foundReaction?.dislike}
           likeChecked={foundReaction?.like}
-          questionId={props.id}
-          like={props.like}
+          questionId={questionId}
+          like={like}
           setReactionClicked={setReactionClicked}
           reactionClicked={reactionClicked}
         />
         <Dislike
           checkedReaction={foundReaction?.like || foundReaction?.dislike}
           dislikeChecked={foundReaction?.dislike}
-          questionId={props.id}
-          dislike={props.dislike}
+          questionId={questionId}
+          dislike={dislike}
           setReactionClicked={setReactionClicked}
           reactionClicked={reactionClicked}
         />

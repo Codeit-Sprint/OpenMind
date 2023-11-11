@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { CaptionMedium1 } from '../../../styles/typography';
 
-const Badge = ({ props }) => {
+const Badge = ({ answer }) => {
   let comments = '';
-  if (props.answer?.content || props.answer?.isRejected === true) {
+  const { content, isRejected } = answer;
+  if (content || isRejected === true) {
     comments = '답변 완료';
   } else {
     comments = '미답변';
   }
-  return <StyledContainer props={props}>{comments}</StyledContainer>;
+  return <StyledContainer props={content}>{comments}</StyledContainer>;
 };
 
 const StyledContainer = styled.div`

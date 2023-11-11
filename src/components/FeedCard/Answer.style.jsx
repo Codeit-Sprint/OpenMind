@@ -23,9 +23,11 @@ const ProfileSection = styled.section`
 const Profile = styled.img`
   width: 48px;
   height: 48px;
+  border-radius: 48px;
   @media ${device.mobile} {
     width: 32px;
     height: 32px;
+    border-radius: 32px;
   }
 `;
 // 사용자 이름

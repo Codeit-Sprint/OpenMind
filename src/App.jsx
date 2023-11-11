@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyles from './styles/reset';
-import { FeedPage, HomePage, QuestionListPage } from './pages';
+import { AnswerPage, FeedPage, HomePage, QuestionListPage } from './pages';
 import theme from './styles/theme';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route path="post">
             <Route index element={<FeedPage />} />
             <Route path=":subjectId" element={<FeedPage />} />
-            <Route path=":subjectId/answer" element={<FeedPage />} />
+            <Route path=":subjectId/answer" element={<AnswerPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
