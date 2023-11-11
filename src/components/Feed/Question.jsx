@@ -15,7 +15,7 @@ const Empty = () => {
 };
 
 const QuestionItem = ({ item }) => {
-  const { name, content, isRejected, createdAt } = item;
+  const { name, content, isRejected, createdAt, like, dislike } = item;
 
   return (
     <FeedCard
@@ -23,6 +23,8 @@ const QuestionItem = ({ item }) => {
       content={content}
       isRejected={isRejected}
       createdAt={createdAt}
+      like={like}
+      dislike={dislike}
     />
   );
 };

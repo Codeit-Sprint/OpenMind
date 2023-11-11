@@ -56,7 +56,7 @@ const FeedPage = () => {
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   return (
-    <>
+    <FeedPageWrapper>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
       {questions.length === 0 ? <Empty /> : <List questions={questions} />}
       <ButtonWrapper>
@@ -67,13 +67,21 @@ const FeedPage = () => {
           setActive={setActive}
           setShowToast={setShowToast}
           setToastText={setToastText}
+          setQuestions={setQuestions}
           item={subjectData}
         />
       ) : null}
       {showToast ? <Toast text={toastText} /> : null}
-    </>
+    </FeedPageWrapper>
   );
 };
+
+const FeedPageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;

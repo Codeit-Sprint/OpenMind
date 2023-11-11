@@ -3,7 +3,7 @@ import IMAGES from '../../../assets';
 import { CaptionMedium1 } from '../../../styles/typography';
 import { useState } from 'react';
 
-const Like = () => {
+const Like = ({ like }) => {
   const [clicked, setClicked] = useState(false);
   const handleClick = () => {
     setClicked(!clicked);
@@ -13,11 +13,12 @@ const Like = () => {
     <Container onClick={handleClick} $status={clicked} $react="like">
       <img src={clicked ? IMAGES.like_clicked : IMAGES.like} alt="like" />
       <p>좋아요</p>
+      {like}
     </Container>
   );
 };
 
-const Dislike = () => {
+const Dislike = ({ dislike }) => {
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const handleClick = () => {
     setDislikeClicked(!dislikeClicked);
@@ -30,6 +31,7 @@ const Dislike = () => {
         alt="dislike"
       />
       <p>싫어요</p>
+      {dislike}
     </Container>
   );
 };
