@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BodyBold1 } from '../../styles/typography';
+import { device } from '../../styles/mediaQuery';
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +18,11 @@ const Container = styled.div`
   border-radius: 16px;
   border: 1px solid var(--brown-20, #e4d5c9);
   background: var(--brown-10, #f5f1ee);
+  @media ${device.mobile} {
+    margin: 0 2.4rem;
+    width: 32.7rem;
+    /* width: 100%; */
+  }
 `;
 
 const Info = styled.div`

@@ -34,6 +34,7 @@ const CardContainer = styled.div`
     width: 672px;
   }
   @media ${device.mobile} {
+    width: 100%;
     width: 295px;
   }
 `;
@@ -48,6 +49,7 @@ const Header = styled.section`
 const Icon = styled.img`
   width: 26px;
   height: 26px;
+  cursor: pointer;
 `;
 
 // 프로필과 텍스트를 담는 섹션
@@ -104,6 +106,8 @@ const QuestionContainer = styled.div`
 
 const QuestionDiv = styled.div`
   ${S.BodyRegular3};
+
+  word-break: break-all;
 `;
 
 // 프로필과 텍스트를 구분하기 위한 텍스트 전용
