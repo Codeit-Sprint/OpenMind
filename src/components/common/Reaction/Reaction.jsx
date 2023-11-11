@@ -1,29 +1,85 @@
 import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import { CaptionMedium1 } from '../../../styles/typography';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { setLocalStorageReaction } from '../../../utils/setLocalStorageReaction';
+import postReaction from '../../../apis/postReaction';
 
-const Like = ({ like }) => {
+const Like = ({
+  like,
+  questionId,
+  checkedReaction,
+  setReactionClicked,
+  reactionClicked,
+  likeChecked,
+}) => {
   const [clicked, setClicked] = useState(false);
-  const handleClick = () => {
-    setClicked(!clicked);
-    return clicked;
+  const [likeNum, setLikeNum] = useState(like);
+
+  const checkVisited = () => {
+    if (checkedReaction && likeChecked) {
+      setClicked(true);
+    }
   };
+
+  const handleClick = () => {
+    if (clicked || checkedReaction || reactionClicked) return;
+
+    setLocalStorageReaction({ questionId, like: true, dislike: false }); // LocalStorage에 저장
+    postReaction({ questionId, type: 'like' });
+    setLikeNum((prev) => prev + 1);
+    setClicked(!clicked);
+    setReactionClicked(true);
+  };
+  console.log(checkedReaction);
+
+  useEffect(() => {
+    checkVisited();
+    setLikeNum(like);
+  }, [like]);
+
   return (
     <Container onClick={handleClick} $status={clicked} $react="like">
       <img src={clicked ? IMAGES.like_clicked : IMAGES.like} alt="like" />
       <p>좋아요</p>
-      {like}
+      {likeNum === 0 ? '' : likeNum}
     </Container>
   );
 };
 
-const Dislike = ({ dislike }) => {
+const Dislike = ({
+  dislike,
+  dislikeChecked,
+  questionId,
+  checkedReaction,
+  setReactionClicked,
+  reactionClicked,
+}) => {
   const [dislikeClicked, setDislikeClicked] = useState(false);
-  const handleClick = () => {
-    setDislikeClicked(!dislikeClicked);
-    return dislikeClicked;
+  const [dislikeNum, setDislikeNum] = useState(dislike);
+
+  console.log(checkedReaction);
+  const checkVisited = () => {
+    if (checkedReaction && dislikeChecked) {
+      setDislikeClicked(true);
+    }
   };
+
+  const handleClick = () => {
+    if (dislikeClicked || checkedReaction || reactionClicked) return;
+
+    setLocalStorageReaction({ questionId, like: false, dislike: true }); // LocalStorage에 저장
+    postReaction({ questionId, type: 'dislike' });
+    setDislikeNum((prev) => prev + 1);
+    setDislikeClicked((prev) => !prev);
+    setReactionClicked(true);
+  };
+
+  useEffect(() => {
+    checkVisited();
+    setDislikeNum(dislike);
+  }, [dislike]);
+
   return (
     <Container onClick={handleClick} $status={dislikeClicked} $react="dislike">
       <img
@@ -31,7 +87,7 @@ const Dislike = ({ dislike }) => {
         alt="dislike"
       />
       <p>싫어요</p>
-      {dislike}
+      {dislikeNum === 0 ? '' : dislikeNum}
     </Container>
   );
 };

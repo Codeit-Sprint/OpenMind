@@ -30,8 +30,8 @@ const Modal = ({
       if (data) {
         setActive(false);
         setShowToast(true);
+        setQuestions((prev) => [data, ...prev]);
         setTimeout(() => setShowToast(false), 2000);
-        setQuestions((prev) => [...prev, data]);
       }
     } else {
       setToastText('질문을 입력해주세요.');

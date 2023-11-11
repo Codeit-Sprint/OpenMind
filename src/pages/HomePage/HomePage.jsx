@@ -18,6 +18,7 @@ const HomePage = () => {
     const data = await postSubjects(name);
     if (data) {
       localStorage.setItem('userId', data.id);
+      localStorage.setItem('reactionArray', JSON.stringify([]));
       navigate(`/post/${data.id}/answer`);
     }
   };

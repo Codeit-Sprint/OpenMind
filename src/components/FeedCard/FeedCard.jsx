@@ -11,6 +11,12 @@ import Answer from './Answer';
 function FeedCard(props) {
   const [showKebab, setShowKebab] = useState(false);
   const { pathname } = useLocation();
+  const [reactionClicked, setReactionClicked] = useState(false);
+
+  const reactionArr = JSON.parse(localStorage.getItem('reactionArray'));
+  const foundReaction = reactionArr.find(
+    (reaction) => reaction.questionId === props.id,
+  );
 
   // Feed Page 확인 함수
   const checkIsFeedPage = () => {
@@ -37,8 +43,22 @@ function FeedCard(props) {
       {props.answer ? <Answer props={props?.answer} /> : ''}
       <S.Line />
       <S.ReactionDiv>
-        <Like like={props.like} />
-        <Dislike dislike={props.dislike} />
+        <Like
+          checkedReaction={foundReaction?.like || foundReaction?.dislike}
+          likeChecked={foundReaction?.like}
+          questionId={props.id}
+          like={props.like}
+          setReactionClicked={setReactionClicked}
+          reactionClicked={reactionClicked}
+        />
+        <Dislike
+          checkedReaction={foundReaction?.like || foundReaction?.dislike}
+          dislikeChecked={foundReaction?.dislike}
+          questionId={props.id}
+          dislike={props.dislike}
+          setReactionClicked={setReactionClicked}
+          reactionClicked={reactionClicked}
+        />
       </S.ReactionDiv>
     </S.CardContainer>
   );

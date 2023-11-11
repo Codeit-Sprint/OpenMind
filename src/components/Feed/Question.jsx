@@ -15,7 +15,7 @@ const Empty = () => {
 };
 
 const QuestionItem = ({ item }) => {
-  const { name, content, isRejected, createdAt, like, dislike } = item;
+  const { name, content, isRejected, createdAt, like, dislike, id } = item;
 
   return (
     <FeedCard
@@ -25,16 +25,17 @@ const QuestionItem = ({ item }) => {
       createdAt={createdAt}
       like={like}
       dislike={dislike}
+      id={id}
     />
   );
 };
 
-const List = ({ questions }) => {
+const List = ({ count, questions }) => {
   return (
     <S.Container>
       <S.Info>
         <img src={IMAGES.messages} alt="messages" />
-        <S.Text>{questions.length}개의 질문이 있습니다</S.Text>
+        <S.Text>{count}개의 질문이 있습니다</S.Text>
       </S.Info>
 
       {questions.map((question) => (
