@@ -14,6 +14,7 @@ const FeedPage = () => {
   const [active, setActive] = useState(false);
   const { subjectId } = useParams();
 
+  const [count, setCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState('URL이 복사되었습니다.');
@@ -30,6 +31,7 @@ const FeedPage = () => {
   // 전체 질문 받는 함수
   const fetchQuestions = async () => {
     const result = await getQuestions({ subjectId, offset: questions.length });
+    setCount(result.count);
     setHasNext(result.next);
     setQuestions((prev) => [...prev, ...result.results]);
     setIsFetching(false);
@@ -58,7 +60,11 @@ const FeedPage = () => {
   return (
     <FeedPageWrapper>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
-      {questions.length === 0 ? <Empty /> : <List questions={questions} />}
+      {questions.length === 0 ? (
+        <Empty />
+      ) : (
+        <List count={count} questions={questions} />
+      )}
       <ButtonWrapper>
         <FloatingButton setActive={setActive} />
       </ButtonWrapper>
