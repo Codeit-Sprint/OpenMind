@@ -13,17 +13,23 @@ const InputTextArea = ({ placeholder = '이름을 입력하세요', setContent }
 
 const Input = styled.textarea`
   width: 100%;
-  height: 186px;
-  padding: 16px;
-  @media ${device.tablet} {
-    width: 548px;
-  }
+  height: 18.6rem;
+  padding: 1.6rem;
+  resize: none;
+
   @media ${device.mobile} {
-    width: 203px;
+    width: 24.7rem;
+    height: 22rem;
+    display: flex;
+    padding: 1.6rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
   }
 
   background-color: ${(props) => props.theme['grayscale-20']};
-  border: 1px solid ${(props) => props.theme['grayscale-20']};
+  border: 0.1rem solid ${(props) => props.theme['grayscale-20']};
   border-radius: 8px;
 
   ${BodyRegular3};

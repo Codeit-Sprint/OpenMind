@@ -10,17 +10,28 @@ const HomePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name) {
+      alert('이름을 입력해주세요!');
+      return;
+    }
+
     const data = await postSubjects(name);
     if (data) {
       localStorage.setItem('userId', data.id);
+      localStorage.setItem('reactionArray', JSON.stringify([]));
       navigate(`/post/${data.id}/answer`);
     }
   };
 
-  useEffect(() => {
+  // 로그인 되어 있는지 확인하는 함수
+  const checkIsLoggedIn = () => {
     if (localStorage.getItem('userId')) {
       navigate('/list');
     }
+  };
+
+  useEffect(() => {
+    checkIsLoggedIn();
   }, []);
   return (
     <S.HomePageBox>
@@ -40,6 +51,7 @@ const HomePage = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </S.HomePageInputBox>
+          {/* <p>이름을 입력해주세요!</p> */}
           <S.HomePageButton onClick={handleSubmit}>
             <p>질문 받기</p>
           </S.HomePageButton>

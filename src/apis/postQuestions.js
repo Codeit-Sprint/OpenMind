@@ -11,14 +11,13 @@ let DEFAULT_VALUE = {
 };
 
 const postQuestions = async (subjectId, content) => {
-  console.log(subjectId, 'content', content);
   const body = {
     team: DEFAULT_TEAM_PATH,
     subjectId,
     content,
     ...DEFAULT_VALUE,
   };
-  console.log('body:', body);
+
   const result = await fetchPost(`subjects/${subjectId}/questions/`, body);
   return result;
 };
