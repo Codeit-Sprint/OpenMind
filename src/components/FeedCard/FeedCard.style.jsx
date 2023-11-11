@@ -49,6 +49,7 @@ const Header = styled.section`
 const Icon = styled.img`
   width: 26px;
   height: 26px;
+  cursor: pointer;
 `;
 
 // 프로필과 텍스트를 담는 섹션
