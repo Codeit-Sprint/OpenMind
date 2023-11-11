@@ -33,7 +33,6 @@ const HomePage = () => {
   useEffect(() => {
     checkIsLoggedIn();
   }, []);
-
   return (
     <S.HomePageBox>
       <Link to="/list">
