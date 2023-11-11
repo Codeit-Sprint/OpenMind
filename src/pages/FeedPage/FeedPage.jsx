@@ -9,9 +9,14 @@ import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 
 const FeedPage = () => {
   const [active, setActive] = useState(false);
+  const { lockScroll, openScroll } = useBodyScrollLock(); // Modal Open시 Scroll Stop
+  if (active) lockScroll();
+  else openScroll();
+
   const { subjectId } = useParams();
 
   const [count, setCount] = useState(0);
@@ -87,6 +92,8 @@ const FeedPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  overflow: hidden;
 `;
 
 const ButtonWrapper = styled.div`
