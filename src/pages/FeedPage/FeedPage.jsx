@@ -69,11 +69,7 @@ const FeedPage = () => {
       {questions.length === 0 ? (
         <Empty />
       ) : (
-        <List
-          count={count}
-          questions={questions}
-          subjectData={{ subjectData }}
-        />
+        <List count={count} questions={questions} subjectData={subjectData} />
       )}
       {/* {USER_ID !== subjectId && ( */}
       <ButtonWrapper>

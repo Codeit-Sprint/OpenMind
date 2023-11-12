@@ -6,9 +6,7 @@ import { getElapsedTime } from '../../utils/getElapsedTime';
 function Answer({ item, subjectData }) {
   const { createdAt, content } = item;
   const imageSource = subjectData?.imageSource;
-  const name = subjectData.name
-    ? subjectData.name
-    : subjectData?.subjectData.name;
+  const name = subjectData?.name;
 
   let profileImg = imageSource ? imageSource : IMAGES.profile;
 
