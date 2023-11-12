@@ -58,12 +58,15 @@ const MainSection = styled.section`
   gap: 12px;
 `;
 // 프로필 이미지
-const Profile = styled.img`
+const StyledProfile = styled.img`
   width: 48px;
   height: 48px;
+  border-radius: 48px;
+
   @media ${device.mobile} {
     width: 32px;
     height: 32px;
+    border-radius: 32px;
   }
 `;
 
@@ -123,7 +126,7 @@ export {
   Header,
   Icon,
   MainSection,
-  Profile,
+  StyledProfile,
   ProfileSection,
   UserName,
   Date,

@@ -31,7 +31,6 @@ const Like = ({
     setClicked(!clicked);
     setReactionClicked(true);
   };
-  console.log(checkedReaction);
 
   useEffect(() => {
     checkVisited();
@@ -58,7 +57,6 @@ const Dislike = ({
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const [dislikeNum, setDislikeNum] = useState(dislike);
 
-  console.log(checkedReaction);
   const checkVisited = () => {
     if (checkedReaction && dislikeChecked) {
       setDislikeClicked(true);
