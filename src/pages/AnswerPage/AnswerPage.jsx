@@ -50,9 +50,7 @@ const AnswerPage = () => {
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
-    if (!subjectData) {
-      getSubjectInfo();
-    }
+    if (!subjectData) getSubjectInfo();
 
     if (!isFetching) return; // 페이지 들어오는 중
     if (hasNext === null) return; // 다음 페이지가 없을 시
@@ -62,14 +60,13 @@ const AnswerPage = () => {
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
-      {questions.length === 0 ? (
+      {!subjectData && questions.length === 0 ? (
         <Empty />
       ) : (
-        <List questions={questions} subjectData={subjectData} />
+        subjectData && <List questions={questions} subjectData={subjectData} />
       )}
 
       {showToast ? <Toast text={toastText} /> : null}
-      {/* {active ? 'hi' : ''} */}
     </>
   );
 };

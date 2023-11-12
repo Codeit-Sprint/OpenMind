@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { CaptionMedium1 } from '../../../styles/typography';
 
-const Badge = ({ item }) => {
+const Badge = ({ answer }) => {
   let comments = '';
-  const answer = item?.answer;
-  console.log('badge answer item', answer);
-  if (answer?.content || (answer?.content && answer?.isRejected === true)) {
+
+  if (answer?.content && answer?.isRejected) {
+    comments = '답변 거절';
+  } else if (answer?.content || (answer?.content && answer?.isRejected)) {
     comments = '답변 완료';
   } else {
     comments = '미답변';

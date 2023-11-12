@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const SelectMenuBox = styled.div`
+  position: absolute;
+  top: 2rem;
+  right: 0rem;
   display: flex;
   width: 10.1rem;
   padding: 0.4rem 0;

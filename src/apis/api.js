@@ -16,7 +16,7 @@ const commonFetchFunction = async (url, method, headers, body) => {
   if (res.ok) {
     return data;
   } else {
-    throw new Error(res.status + data.error.message);
+    throw new Error(res.status + data.error);
   }
 };
 

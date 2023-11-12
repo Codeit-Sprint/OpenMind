@@ -85,8 +85,7 @@ const Send = styled.div`
   ${S.BodyRegular3};
 
   &:hover {
-    text-decoration: underline;
-    background-color: ${(props) => props.theme['brown-50']};
+    background-color: ${(props) => props.theme['brown-40']};
   }
 `;
 
