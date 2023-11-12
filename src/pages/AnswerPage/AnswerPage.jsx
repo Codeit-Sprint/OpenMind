@@ -59,7 +59,6 @@ const AnswerPage = () => {
     fetchQuestions();
   }, [isFetching]);
 
-  console.log('item', subjectData);
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
