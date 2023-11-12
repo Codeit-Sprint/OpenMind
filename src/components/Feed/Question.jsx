@@ -22,7 +22,7 @@ const QuestionItem = ({ item, subjectData }) => {
   // const { name, content, isRejected, createdAt, like, dislike, id } = item;
   const [answer, setAnswer] = useState(''); // item.answer
   const userId = window.localStorage.getItem('userId');
-  console.log('item', item);
+  console.log('question item', item);
   return (
     <>
       <FeedCard

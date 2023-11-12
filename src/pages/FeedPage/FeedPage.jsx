@@ -10,7 +10,7 @@ import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
-import { USER_ID } from '../../constants/constant';
+//import { USER_ID } from '../../constants/constant';
 
 const FeedPage = () => {
   const [active, setActive] = useState(false);
@@ -69,13 +69,17 @@ const FeedPage = () => {
       {questions.length === 0 ? (
         <Empty />
       ) : (
-        <List count={count} questions={questions} />
+        <List
+          count={count}
+          questions={questions}
+          subjectData={{ subjectData }}
+        />
       )}
-      {USER_ID !== subjectId && (
-        <ButtonWrapper>
-          <FloatingButton setActive={setActive} />
-        </ButtonWrapper>
-      )}
+      {/* {USER_ID !== subjectId && ( */}
+      <ButtonWrapper>
+        <FloatingButton setActive={setActive} />
+      </ButtonWrapper>
+      {/* )} */}
       {active ? (
         <Modal
           setActive={setActive}

@@ -8,7 +8,7 @@ import { Like, Dislike } from '../common/Reaction/Reaction';
 import { getElapsedTime } from '../../utils/getElapsedTime';
 import Answer from './Answer';
 
-function FeedCard({ item, answer, subjectData, answerItem }) {
+function FeedCard({ item, subjectData: subjectData, answerItem }) {
   const { content, createdAt, like, dislike, id: questionId } = item;
   const [showKebab, setShowKebab] = useState(false);
   const { pathname } = useLocation();
@@ -31,19 +31,24 @@ function FeedCard({ item, answer, subjectData, answerItem }) {
     checkIsFeedPage();
   }, []);
 
+  // console.log('feedcard answerItem', answerItem);
   return (
     <S.CardContainer>
       <S.Header>
-        <Badge answer={answer} />
+        <Badge item={item} />
         {!!showKebab && <S.Icon src={IMAGES.kebabImg} />}
       </S.Header>
       <S.QuestionContainer>
         <S.Date>질문 · {getElapsedTime(createdAt)}</S.Date>
         <S.QuestionDiv>{content}</S.QuestionDiv>
       </S.QuestionContainer>
+
       {answerItem && subjectData && (
         <Answer item={answerItem} subjectData={subjectData} />
       )}
+      {/* {answer && subjectData && (
+        <Answer item={answer} subjectData={subjectData} />
+      )} */}
       <S.Line />
       <S.ReactionDiv>
         <Like
