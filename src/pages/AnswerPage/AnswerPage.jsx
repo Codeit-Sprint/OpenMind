@@ -1,20 +1,16 @@
-// import styled from 'styled-components';
-import { FeedWrapper } from '../../components/Feed/Feed';
-import { Empty, List } from '../../components/Feed/Question';
-// import FloatingButton from '../../components/common/Button/FloatingButton';
-//import Modal from '../../components/modal/Modal';
 import react from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { FeedWrapper } from '../../components/Feed/Feed';
+import { Empty, List } from '../../components/Feed/Question';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 
 const AnswerPage = () => {
-  //const [active, setActive] = useState(false);
   const { subjectId } = useParams();
-  // const [active, setActive] = react.useState(false);
   const [questions, setQuestions] = react.useState([]);
   const [showToast, setShowToast] = react.useState(false);
   const [toastText, setToastText] = react.useState('URL이 복사되었습니다.');
@@ -60,6 +56,7 @@ const AnswerPage = () => {
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
+
       {!subjectData && questions.length === 0 ? (
         <Empty />
       ) : (
