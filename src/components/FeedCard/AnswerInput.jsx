@@ -40,6 +40,7 @@ function AnswerInput({
         await putAnswer({ answerId: answerItem?.id, content });
         setIsCorrecting(false);
       }
+
       handleAnswerInputClicked();
       setShowAnswerInput(() => true);
     }
