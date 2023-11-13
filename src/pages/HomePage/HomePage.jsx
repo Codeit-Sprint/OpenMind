@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import IMAGES from '../../assets';
-import * as S from './styles';
+import * as S from './HomePage.styles';
 import { useEffect, useState } from 'react';
 import postSubjects from '../../apis/postSubjects';
 
