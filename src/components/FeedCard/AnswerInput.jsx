@@ -40,18 +40,20 @@ function AnswerInput({
         await putAnswer({ answerId: answerItem?.id, content });
         setIsCorrecting(false);
       }
+
       handleAnswerInputClicked();
       setShowAnswerInput(() => true);
     }
   };
   const userName = localStorage.getItem('userName');
+  const profileImg = localStorage.getItem('imageSource');
 
   return (
     <>
       {!showAnswerInput && (
         <S.CardContainer>
           <S.MainSection>
-            {/* <StyledProfile src={IMAGES.profile} /> */}
+            <S.Profile src={profileImg} />
             <S.AnswerDiv>
               <UserName>{userName}</UserName>
               <S.InputSection>
