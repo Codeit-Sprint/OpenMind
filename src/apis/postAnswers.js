@@ -14,6 +14,7 @@ const postAnswers = async (
     createdAt: createdAt,
     content: content,
   };
+  console.log('postAnswers', body);
 
   const result = await fetchPost(`questions/${questionId}/answers/`, body);
   return result;
