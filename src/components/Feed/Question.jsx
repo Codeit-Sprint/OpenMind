@@ -1,10 +1,9 @@
-import deleteSubject from '../../apis/deleteSubject';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+
 import IMAGES from '../../assets';
-import { checkUser } from '../../utils/checkUser';
 import FeedCard from '../FeedCard/FeedCard';
 import * as S from './Question.style';
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
 
 const Empty = () => {
   return (
@@ -23,19 +22,9 @@ const QuestionItem = ({ item, subjectData }) => {
 };
 
 const List = ({ questions, subjectData }) => {
-  const navigate = useNavigate();
-  const { id: subjectId } = subjectData;
   const [isFeedPage, setIsFeedPage] = useState(false);
   const { questionCount } = subjectData;
   const { pathname } = useLocation();
-
-  const handleAllDelete = async () => {
-    if (window.confirm('정말 피드를 삭제하시겠습니까?')) {
-      await deleteSubject({ subjectId });
-      localStorage.clear();
-      navigate('/');
-    }
-  };
 
   useEffect(() => {
     const splitedPathName = pathname.split('/');
@@ -46,12 +35,6 @@ const List = ({ questions, subjectData }) => {
 
   return (
     <S.Container>
-      {checkUser(subjectId) && (
-        <S.FloatingDeleteButton onClick={handleAllDelete}>
-          <p>삭제하기</p>
-        </S.FloatingDeleteButton>
-      )}
-
       <S.Info>
         <img src={IMAGES.messages} alt="messages" />
         <S.Text>{questionCount}개의 질문이 있습니다</S.Text>

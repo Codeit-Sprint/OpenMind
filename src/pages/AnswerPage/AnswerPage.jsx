@@ -1,15 +1,19 @@
 import react from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import * as S from './AnswerPage.style';
 import { FeedWrapper } from '../../components/Feed/Feed';
 import { Empty, List } from '../../components/Feed/Question';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
+import { checkUser } from '../../utils/checkUser';
+import deleteSubject from '../../apis/deleteSubject';
 
 const AnswerPage = () => {
+  const navigate = useNavigate();
   const { subjectId } = useParams();
   const [questions, setQuestions] = react.useState([]);
   const [showToast, setShowToast] = react.useState(false);
@@ -43,6 +47,14 @@ const AnswerPage = () => {
     setTimeout(() => setShowToast(false), 5000);
   };
 
+  const handleAllDelete = async () => {
+    if (window.confirm('정말 피드를 삭제하시겠습니까?')) {
+      await deleteSubject({ subjectId });
+      localStorage.clear();
+      navigate('/');
+    }
+  };
+
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
@@ -56,6 +68,12 @@ const AnswerPage = () => {
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
+
+      {checkUser(subjectId) && (
+        <S.FloatingDeleteButton onClick={handleAllDelete}>
+          <p>삭제하기</p>
+        </S.FloatingDeleteButton>
+      )}
 
       {!subjectData && questions.length === 0 ? (
         <Empty />
