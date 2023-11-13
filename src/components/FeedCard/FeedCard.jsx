@@ -150,7 +150,7 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
       </S.LineUnderDiv>
       {showToast && (
         <Toast
-          text="질문 받기를 완료한 후 사용 가능한 기능입니다!"
+          text="이름 입력을 완료 한 후 사용 가능한 기능입니다!"
           bgColor="#B93333"
         />
       )}
