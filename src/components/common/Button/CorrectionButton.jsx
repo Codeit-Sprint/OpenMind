@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import IMAGES from '../../../assets';
 
 const ButtonBox = styled.div`
+  position: relative;
   display: flex;
   width: 10.3rem;
   height: 3.8rem;
@@ -30,12 +31,30 @@ const ButtonBox = styled.div`
   &:hover p {
     color: ${(props) => props.theme['blue-50']};
   }
+
+  img:nth-child(odd) {
+    position: relative;
+  }
+  img:nth-child(even) {
+    position: absolute;
+    top: 1.12rem;
+    left: 1.52rem;
+    visibility: hidden;
+  }
+
+  &:hover img:nth-child(odd) {
+    visibility: hidden;
+  }
+  &:hover img:nth-child(even) {
+    visibility: visible;
+  }
 `;
 
 const CorrectionButton = ({ handleEditButton }) => {
   return (
     <ButtonBox onClick={handleEditButton}>
       <img src={IMAGES.editGray} alt="수정하기" />
+      <img src={IMAGES.editBlue} alt="수정하기" />
       <p>수정하기</p>
     </ButtonBox>
   );
