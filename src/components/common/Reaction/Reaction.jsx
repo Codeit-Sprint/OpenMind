@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 import IMAGES from '../../../assets';
 import { CaptionMedium1 } from '../../../styles/typography';
-import { useEffect, useState } from 'react';
 import { setLocalStorageReaction } from '../../../utils/setLocalStorageReaction';
 import postReaction from '../../../apis/postReaction';
+import checkIsLoggedIn from '../../../utils/checkIsLoggedIn';
 
 const Like = ({
   like,
@@ -12,6 +14,8 @@ const Like = ({
   setReactionClicked,
   reactionClicked,
   likeChecked,
+  setShowToast,
+  showToast,
 }) => {
   const [clicked, setClicked] = useState(false);
   const [likeNum, setLikeNum] = useState(like);
@@ -23,6 +27,13 @@ const Like = ({
   };
 
   const handleClick = () => {
+    if (!checkIsLoggedIn()) {
+      if (!showToast) {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2500);
+      }
+      return;
+    }
     if (clicked || checkedReaction || reactionClicked) return;
 
     setLocalStorageReaction({ questionId, like: true, dislike: false }); // LocalStorage에 저장
@@ -53,6 +64,8 @@ const Dislike = ({
   checkedReaction,
   setReactionClicked,
   reactionClicked,
+  setShowToast,
+  showToast,
 }) => {
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const [dislikeNum, setDislikeNum] = useState(dislike);
@@ -64,6 +77,14 @@ const Dislike = ({
   };
 
   const handleClick = () => {
+    if (!checkIsLoggedIn()) {
+      if (!showToast) {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2500);
+      }
+      return;
+    }
+
     if (dislikeClicked || checkedReaction || reactionClicked) return;
 
     setLocalStorageReaction({ questionId, like: false, dislike: true }); // LocalStorage에 저장

@@ -12,13 +12,13 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 import AnswerInput from './AnswerInput';
 import getQuestionById from '../../apis/getQuestionById';
 import CorrectionButton from '../common/Button/CorrectionButton';
+import Toast from '../common/Toast/Toast';
 
 function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
   const { content, createdAt, like, dislike, id: questionId, answer } = item;
   const { pathname } = useLocation();
 
   const [reactionClicked, setReactionClicked] = useState(false);
-
   const [isCorrecting, setIsCorrecting] = useState(false); // 수정하기 상태
 
   // Select Menu
@@ -26,13 +26,15 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
   const [showSelectMenu, setShowSelectMenu] = useState(false);
   useOnClickOutside(selectMenuRef, () => setShowSelectMenu(false));
 
-  const reactionArr = JSON.parse(localStorage.getItem('reactionArray'));
+  const reactionArr = JSON.parse(localStorage.getItem('reactionArray')) ?? [];
   const foundReaction = reactionArr.find(
     (reaction) => reaction.questionId === questionId,
   );
 
   const [foundAnswer, setFoundAnswer] = useState(false);
   const [answerInfo, setAnswerInfo] = useState(answer);
+
+  const [showToast, setShowToast] = useState(false);
 
   const handleAnswerInputClicked = async () => {
     const result = await getQuestionById({ questionId });
@@ -43,7 +45,7 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
   const isUserWrittenAnswer = () => {
     if (!answer) return;
 
-    const answerArr = JSON.parse(localStorage.getItem('answerArray'));
+    const answerArr = JSON.parse(localStorage.getItem('answerArray')) ?? [];
     const result = answerArr.find((arr) => {
       if (arr.questionId === questionId && arr.answerId === answer.id)
         return true;
@@ -126,6 +128,8 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
             like={like}
             setReactionClicked={setReactionClicked}
             reactionClicked={reactionClicked}
+            setShowToast={setShowToast}
+            showToast={showToast}
           />
           <Dislike
             checkedReaction={foundReaction?.like || foundReaction?.dislike}
@@ -134,6 +138,8 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
             dislike={dislike}
             setReactionClicked={setReactionClicked}
             reactionClicked={reactionClicked}
+            setShowToast={setShowToast}
+            showToast={showToast}
           />
         </S.ReactionDiv>
 
@@ -142,6 +148,12 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
           <CorrectionButton handleEditButton={handleEditButton} />
         )}
       </S.LineUnderDiv>
+      {showToast && (
+        <Toast
+          text="질문 받기를 완료한 후 사용 가능한 기능입니다!"
+          bgColor="#B93333"
+        />
+      )}
     </S.CardContainer>
   );
 }
