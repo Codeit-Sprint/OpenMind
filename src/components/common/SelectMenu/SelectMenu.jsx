@@ -15,10 +15,6 @@ const SelectMenu = ({
   setAnswerInfo,
   removeQuestionById,
 }) => {
-  //const [refused, setRefused] = answer?.isRejected ? answer.isRejected : false;
-  //답변 거절 보이기
-  //const setShowRefuse = () => setRefused(!refused);
-
   // 질문 삭제
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
@@ -38,39 +34,50 @@ const SelectMenu = ({
 
   // 답변 거절
   const handleRefuseAnswer = async () => {
-    //setRefused(true);
     refused = true;
     setShowSelectMenu(false);
-    // console.log('content', answer.content);
     if (answer?.content) {
-      await patchAnswer({
+      const result = await patchAnswer({
         answerId: answer?.id,
         isRejected: refused,
         content: answer?.content,
       });
+
+      setAnswerInfo({
+        content: result.content,
+        createdAt: result.createdAt,
+        id: result.id,
+        isRejected: result.isRejected,
+        questionId: result.questionId,
+      });
     } else {
       let createdAt = new Date().toLocaleString();
-      console.log('createdAt', createdAt);
       const result = await postAnswers(
         questionId,
         '답변을 입력해주세요.',
         createdAt,
         true,
       );
-      console.log('res', result);
       setLocalStorageAnswer({
         questionId,
         answerId: result.id,
         isRejected: true,
       });
+
+      setAnswerInfo(() => ({
+        content: result.content,
+        createdAt: result.createdAt,
+        id: result.id,
+        isRejected: result.isRejected,
+        questionId: result.questionId,
+      }));
     }
   };
   // 답변 거절 취소
   const handleCancelRefuseAnswer = async () => {
     setShowSelectMenu(false);
     refused = false;
-    //setRefused(false);
-    await patchAnswer({
+    const result = await patchAnswer({
       answerId: answer?.id,
       isRejected: refused,
       content: answer?.content,
@@ -80,6 +87,14 @@ const SelectMenu = ({
       questionId,
       answerId: answer.id,
       isRejected: true,
+    });
+
+    setAnswerInfo({
+      content: result.content,
+      createdAt: result.createdAt,
+      id: result.id,
+      isRejected: result.isRejected,
+      questionId: result.questionId,
     });
   };
 
@@ -92,8 +107,6 @@ const SelectMenu = ({
         <p>답변 삭제</p>
       </S.SelectMenuInnerBox>
 
-      {/* {answer && ( */}
-      {/* <> */}
       {answer?.isRejected ? (
         <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>
           <p>답변 거절 취소</p>
@@ -103,8 +116,6 @@ const SelectMenu = ({
           <p>답변 거절</p>
         </S.SelectMenuInnerBox>
       )}
-      {/* </> */}
-      {/* )} */}
     </S.SelectMenuBox>
   );
 };
