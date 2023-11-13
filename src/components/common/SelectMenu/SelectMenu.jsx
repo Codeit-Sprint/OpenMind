@@ -1,6 +1,9 @@
 import deleteAnswer from '../../../apis/deleteAnswer';
 import deleteQuestion from '../../../apis/deleteQuestion';
 import patchAnswer from '../../../apis/patchAnswer';
+import { deleteLocalStorageAnswer } from '../../../utils/deleteLocalStorageAnswer';
+import { deleteLocalStorageReaction } from '../../../utils/deleteLocalStorageReaction';
+import { setLocalStorageAnswer } from '../../../utils/setLocalStorageAnswer';
 import * as S from './SelectMenu.styles';
 let refused = false;
 const SelectMenu = ({
