@@ -5,6 +5,7 @@ import { deleteLocalStorageAnswer } from '../../../utils/deleteLocalStorageAnswe
 import { deleteLocalStorageReaction } from '../../../utils/deleteLocalStorageReaction';
 import { setLocalStorageAnswer } from '../../../utils/setLocalStorageAnswer';
 import * as S from './SelectMenu.styles';
+import postAnswers from '../../../apis/postAnswers';
 let refused = false;
 const SelectMenu = ({
   answer,
@@ -38,28 +39,41 @@ const SelectMenu = ({
   // 답변 거절
   const handleRefuseAnswer = async () => {
     //setRefused(true);
-    refused = false;
+    refused = true;
     setShowSelectMenu(false);
-    await patchAnswer({
-      answerId: answer.id,
-      isRejected: refused,
-      content: answer.content,
-    });
-    setLocalStorageAnswer({
-      questionId,
-      answerId: answer.id,
-      isRejected: true,
-    });
+    // console.log('content', answer.content);
+    if (answer?.content) {
+      await patchAnswer({
+        answerId: answer?.id,
+        isRejected: refused,
+        content: answer?.content,
+      });
+    } else {
+      let createdAt = new Date().toLocaleString();
+      console.log('createdAt', createdAt);
+      const result = await postAnswers(
+        questionId,
+        '답변을 입력해주세요.',
+        createdAt,
+        true,
+      );
+      console.log('res', result);
+      setLocalStorageAnswer({
+        questionId,
+        answerId: result.id,
+        isRejected: true,
+      });
+    }
   };
   // 답변 거절 취소
   const handleCancelRefuseAnswer = async () => {
     setShowSelectMenu(false);
-    refused = true;
+    refused = false;
     //setRefused(false);
     await patchAnswer({
-      answerId: answer.id,
+      answerId: answer?.id,
       isRejected: refused,
-      content: answer.content,
+      content: answer?.content,
     });
 
     setLocalStorageAnswer({
@@ -77,19 +91,20 @@ const SelectMenu = ({
       <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
         <p>답변 삭제</p>
       </S.SelectMenuInnerBox>
-      {answer && (
-        <>
-          {answer?.isRejected ? (
-            <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
-              <p>답변 거절 취소</p>
-            </S.SelectMenuInnerBox>
-          ) : (
-            <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>
-              <p>답변 거절</p>
-            </S.SelectMenuInnerBox>
-          )}
-        </>
+
+      {/* {answer && ( */}
+      {/* <> */}
+      {answer?.isRejected ? (
+        <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>
+          <p>답변 거절 취소</p>
+        </S.SelectMenuInnerBox>
+      ) : (
+        <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
+          <p>답변 거절</p>
+        </S.SelectMenuInnerBox>
       )}
+      {/* </> */}
+      {/* )} */}
     </S.SelectMenuBox>
   );
 };
