@@ -55,6 +55,11 @@ const AnswerPage = () => {
     }
   };
 
+  const reRenderQuestionList = (questionId) => {
+    const result = questions.map((question) => question.id !== questionId);
+    setQuestions(...result);
+  };
+
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
@@ -75,10 +80,16 @@ const AnswerPage = () => {
         </S.FloatingDeleteButton>
       )}
 
-      {!subjectData && questions.length === 0 ? (
+      {(!subjectData && questions.length === 0) || !questions ? (
         <Empty />
       ) : (
-        subjectData && <List questions={questions} subjectData={subjectData} />
+        subjectData && (
+          <List
+            questions={questions}
+            subjectData={subjectData}
+            reRenderQuestionList={reRenderQuestionList}
+          />
+        )
       )}
 
       {showToast ? <Toast text={toastText} /> : null}

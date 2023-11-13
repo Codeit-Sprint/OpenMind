@@ -11,6 +11,8 @@ const SelectMenu = ({
   questionId,
   selectMenuRef,
   setShowSelectMenu,
+  setAnswerInfo,
+  reRenderQuestionList,
 }) => {
   // 질문 삭제
   const handleDeleteQuestion = async () => {
@@ -18,6 +20,7 @@ const SelectMenu = ({
     await deleteQuestion(questionId);
     deleteLocalStorageAnswer(questionId);
     deleteLocalStorageReaction(questionId);
+    reRenderQuestionList(questionId);
   };
 
   // 답변 삭제
@@ -25,6 +28,7 @@ const SelectMenu = ({
     setShowSelectMenu(false);
     await deleteAnswer({ answerId: answer.id });
     deleteLocalStorageAnswer(questionId);
+    setAnswerInfo(null);
   };
 
   // 답변 거절

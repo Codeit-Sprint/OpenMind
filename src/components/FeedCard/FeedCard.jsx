@@ -13,7 +13,7 @@ import AnswerInput from './AnswerInput';
 import getQuestionById from '../../apis/getQuestionById';
 import CorrectionButton from '../common/Button/CorrectionButton';
 
-function FeedCard({ item, subjectData: subjectData }) {
+function FeedCard({ item, subjectData: subjectData, reRenderQuestionList }) {
   const { content, createdAt, like, dislike, id: questionId, answer } = item;
   const { pathname } = useLocation();
   const [isAnswerPage, setIsAnswerPage] = useState(false);
@@ -95,6 +95,8 @@ function FeedCard({ item, subjectData: subjectData }) {
             questionId={questionId}
             selectMenuRef={selectMenuRef}
             setShowSelectMenu={setShowSelectMenu}
+            setAnswerInfo={setAnswerInfo}
+            reRenderQuestionList={reRenderQuestionList}
           />
         )}
       </S.Header>
