@@ -30,9 +30,10 @@ const List = ({ questions, subjectData }) => {
   const { pathname } = useLocation();
 
   const handleAllDelete = async () => {
-    console.log(subjectId);
-    await deleteSubject({ subjectId });
-    navigate('/list');
+    if (window.confirm('정말 피드를 삭제하시겠습니까?')) {
+      await deleteSubject({ subjectId });
+      navigate('/list');
+    }
   };
 
   useEffect(() => {
