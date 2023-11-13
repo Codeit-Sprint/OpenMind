@@ -18,6 +18,7 @@ const HomePage = () => {
     const data = await postSubjects(name);
     if (data) {
       localStorage.setItem('userName', data.name);
+      localStorage.setItem('imageSource', data.imageSource);
       localStorage.setItem('userId', data.id);
       localStorage.setItem('answerArray', JSON.stringify([]));
       localStorage.setItem('reactionArray', JSON.stringify([]));

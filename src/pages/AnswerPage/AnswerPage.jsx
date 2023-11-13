@@ -55,6 +55,20 @@ const AnswerPage = () => {
     }
   };
 
+  // 케밥
+
+  // 함수 명 고치기
+
+  const removeQuestionById = (deletingQuestionId) => {
+    const result = questions.filter(
+      (question) => question.id !== deletingQuestionId,
+    );
+    setQuestions(result);
+    // setState => 변경점 감지 기준 새로운 객체일때
+    // filter에 생성된 배열과 questions는 다른 값이다
+    // Closure -->
+  };
+
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
@@ -75,10 +89,16 @@ const AnswerPage = () => {
         </S.FloatingDeleteButton>
       )}
 
-      {!subjectData && questions.length === 0 ? (
+      {(!subjectData && questions.length === 0) || !questions ? (
         <Empty />
       ) : (
-        subjectData && <List questions={questions} subjectData={subjectData} />
+        subjectData && (
+          <List
+            questions={questions}
+            subjectData={subjectData}
+            removeQuestionById={removeQuestionById}
+          />
+        )
       )}
 
       {showToast ? <Toast text={toastText} /> : null}

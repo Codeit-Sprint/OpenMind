@@ -13,10 +13,10 @@ import AnswerInput from './AnswerInput';
 import getQuestionById from '../../apis/getQuestionById';
 import CorrectionButton from '../common/Button/CorrectionButton';
 
-function FeedCard({ item, subjectData: subjectData }) {
+function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
   const { content, createdAt, like, dislike, id: questionId, answer } = item;
   const { pathname } = useLocation();
-  const [isAnswerPage, setIsAnswerPage] = useState(false);
+
   const [reactionClicked, setReactionClicked] = useState(false);
 
   const [isCorrecting, setIsCorrecting] = useState(false); // 수정하기 상태
@@ -59,10 +59,9 @@ function FeedCard({ item, subjectData: subjectData }) {
   // Feed Page 확인 함수
   const checkIsFeedPage = () => {
     const splitedPath = pathname.split('/');
-    if (splitedPath[splitedPath.length - 1] === 'answer') {
-      setIsAnswerPage(true);
-    }
+    return splitedPath[splitedPath.length - 1] === 'answer';
   };
+  const isAnswerPage = checkIsFeedPage();
 
   // 수정하기 버튼 클릭 시 작용
   const handleEditButton = () => {
@@ -72,10 +71,6 @@ function FeedCard({ item, subjectData: subjectData }) {
   const showAnswerInput =
     (isAnswerPage && !answerInfo && !isCorrecting) ||
     (isAnswerPage && answerInfo && isCorrecting);
-
-  useEffect(() => {
-    checkIsFeedPage();
-  }, []);
 
   useEffect(() => {
     isUserWrittenAnswer();
@@ -95,6 +90,8 @@ function FeedCard({ item, subjectData: subjectData }) {
             questionId={questionId}
             selectMenuRef={selectMenuRef}
             setShowSelectMenu={setShowSelectMenu}
+            setAnswerInfo={setAnswerInfo}
+            removeQuestionById={removeQuestionById}
           />
         )}
       </S.Header>
