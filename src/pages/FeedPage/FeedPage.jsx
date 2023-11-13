@@ -66,34 +66,36 @@ const FeedPage = () => {
 
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
-  return (
-    <S.FeedPageWrapper>
-      <FeedWrapper item={subjectData} copyLink={copyLink} />
-      {questions.length === 0 ? (
-        <Empty />
-      ) : (
-        <List questions={questions} subjectData={subjectData} />
-      )}
+  if (subjectData) {
+    return (
+      <S.FeedPageWrapper>
+        <FeedWrapper item={subjectData} copyLink={copyLink} />
+        {questions.length === 0 ? (
+          <Empty />
+        ) : (
+          <List questions={questions} subjectData={subjectData} />
+        )}
 
-      {/* Subject를 작성한 것이 User인지 확인하는 함수: User일 시 질문 작성하기 버튼 안보이게 해야 함  checkUser(subjectId) 여야 함 */}
-      {!checkUser(subjectId) && (
-        <S.ButtonWrapper>
-          <FloatingButton setActive={setActive} />
-        </S.ButtonWrapper>
-      )}
-      {active ? (
-        <Modal
-          setActive={setActive}
-          setShowToast={setShowToast}
-          setToastText={setToastText}
-          setQuestions={setQuestions}
-          getSubjectInfo={getSubjectInfo}
-          subjectData={subjectData}
-        />
-      ) : null}
-      {showToast ? <Toast text={toastText} /> : null}
-    </S.FeedPageWrapper>
-  );
+        {/* Subject를 작성한 것이 User인지 확인하는 함수: User일 시 질문 작성하기 버튼 안보이게 해야 함  checkUser(subjectId) 여야 함 */}
+        {!checkUser(subjectId) && (
+          <S.ButtonWrapper>
+            <FloatingButton setActive={setActive} />
+          </S.ButtonWrapper>
+        )}
+        {active ? (
+          <Modal
+            setActive={setActive}
+            setShowToast={setShowToast}
+            setToastText={setToastText}
+            setQuestions={setQuestions}
+            getSubjectInfo={getSubjectInfo}
+            subjectData={subjectData}
+          />
+        ) : null}
+        {showToast ? <Toast text={toastText} /> : null}
+      </S.FeedPageWrapper>
+    );
+  }
 };
 
 export default FeedPage;
