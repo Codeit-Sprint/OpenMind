@@ -1,6 +1,7 @@
 import deleteAnswer from '../../../apis/deleteAnswer';
 import deleteQuestion from '../../../apis/deleteQuestion';
-import putAnswer from '../../../apis/putAnswer';
+//import postAnswers from '../../../apis/postAnswers';
+import patchAnswer from '../../../apis/patchAnswer';
 import * as S from './SelectMenu.styles';
 
 const SelectMenu = ({
@@ -25,11 +26,17 @@ const SelectMenu = ({
   // 답변 거절
   const handleRefuseAnswer = async () => {
     setShowSelectMenu(false);
-    await putAnswer({
+    // answer?
+    await patchAnswer({
       answerId: answer.id,
-      content: answer.content,
       isRejected: true,
+      content: answer.content,
     });
+    // : await postAnswers({
+    //     answerId: answer.id,
+    //     content: '',
+    //     isRejected: true,
+    //   });
   };
 
   return (
@@ -37,6 +44,7 @@ const SelectMenu = ({
       <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
         <p>질문 삭제</p>
       </S.SelectMenuInnerBox>
+
       {answer && (
         <>
           <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
