@@ -1,4 +1,4 @@
-const BASE_URL = 'https://openmind-api.vercel.app/';
+const BASE_URL = 'https://openmind-api.vercel.app/1-11/';
 
 const commonFetchFunction = async (url, method, headers, body) => {
   let options = {
@@ -11,11 +11,14 @@ const commonFetchFunction = async (url, method, headers, body) => {
   };
 
   const res = await fetch(BASE_URL + url, options);
+
+  if (res.status === 204) return; // 삭제 명령어
   const data = await res.json();
+
   if (res.ok) {
     return data;
   } else {
-    throw new Error(res.status + data.error.message);
+    throw new Error(res.status + data.error);
   }
 };
 
@@ -39,4 +42,9 @@ const fetchDelete = async (url, headers = {}) => {
   return await commonFetchFunction(url, 'DELETE', headers);
 };
 
-export { fetchPost, fetchGet, fetchPut, fetchDelete };
+// PATCH
+const fetchPatch = async (url, body, headers = {}) => {
+  return await commonFetchFunction(url, 'PATCH', headers, body);
+};
+
+export { fetchPost, fetchGet, fetchPut, fetchDelete, fetchPatch };
