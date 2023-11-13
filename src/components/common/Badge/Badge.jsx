@@ -4,9 +4,6 @@ import { CaptionMedium1 } from '../../../styles/typography';
 const Badge = ({ answer }) => {
   let comments = '';
 
-  if (answer) {
-    console.log('answer', answer);
-  }
   if (answer?.isRejected) {
     comments = '답변 거절';
   } else if (answer?.content || (answer?.content && answer?.isRejected)) {
