@@ -17,6 +17,8 @@ import person from './person.svg';
 import kebabImg from './kebabImg.svg';
 import container from './container.png';
 import close from './close.svg';
+import editGray from './edit-gray.svg';
+import editBlue from './edit-blue.svg';
 
 const IMAGES = {
   logo,
@@ -38,6 +40,8 @@ const IMAGES = {
   kebabImg,
   container,
   close,
+  editGray,
+  editBlue,
 };
 
 export default IMAGES;

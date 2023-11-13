@@ -1,20 +1,16 @@
-// import styled from 'styled-components';
-import { FeedWrapper } from '../../components/Feed/Feed';
-import { Empty, List } from '../../components/Feed/Question';
-// import FloatingButton from '../../components/common/Button/FloatingButton';
-//import Modal from '../../components/modal/Modal';
 import react from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { FeedWrapper } from '../../components/Feed/Feed';
+import { Empty, List } from '../../components/Feed/Question';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 
 const AnswerPage = () => {
-  //const [active, setActive] = useState(false);
   const { subjectId } = useParams();
-  // const [active, setActive] = react.useState(false);
   const [questions, setQuestions] = react.useState([]);
   const [showToast, setShowToast] = react.useState(false);
   const [toastText, setToastText] = react.useState('URL이 복사되었습니다.');
@@ -50,9 +46,7 @@ const AnswerPage = () => {
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
-    if (!subjectData) {
-      getSubjectInfo();
-    }
+    if (!subjectData) getSubjectInfo();
 
     if (!isFetching) return; // 페이지 들어오는 중
     if (hasNext === null) return; // 다음 페이지가 없을 시
@@ -62,14 +56,14 @@ const AnswerPage = () => {
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
-      {questions.length === 0 ? (
+
+      {!subjectData && questions.length === 0 ? (
         <Empty />
       ) : (
-        <List questions={questions} subjectData={subjectData} />
+        subjectData && <List questions={questions} subjectData={subjectData} />
       )}
 
       {showToast ? <Toast text={toastText} /> : null}
-      {/* {active ? 'hi' : ''} */}
     </>
   );
 };

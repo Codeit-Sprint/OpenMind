@@ -11,12 +11,14 @@ const commonFetchFunction = async (url, method, headers, body) => {
   };
 
   const res = await fetch(BASE_URL + url, options);
+
+  if (res.status === 204) return; // 삭제 명령어
   const data = await res.json();
 
   if (res.ok) {
     return data;
   } else {
-    throw new Error(res.status + data.error.message);
+    throw new Error(res.status + data.error);
   }
 };
 

@@ -1,31 +1,52 @@
 import deleteAnswer from '../../../apis/deleteAnswer';
 import deleteQuestion from '../../../apis/deleteQuestion';
+import putAnswer from '../../../apis/putAnswer';
 import * as S from './SelectMenu.styles';
 
-const SelectMenuItem = ({ text, questionId, answerId }) => {
-  const handleClick = async () => {
-    if (text === '답변 거절') {
-      console.log('답변 거절 클릭');
-    } else if (text === '질문 삭제') {
-      await deleteQuestion({ questionId });
-    } else if (text === '답변 삭제') {
-      await deleteAnswer({ answerId });
-    }
+const SelectMenu = ({
+  answer,
+  questionId,
+  selectMenuRef,
+  setShowSelectMenu,
+}) => {
+  // 질문 삭제
+  const handleDeleteQuestion = async () => {
+    setShowSelectMenu(false);
+    const result = await deleteQuestion(questionId);
+    console.log('RESSS', result);
+  };
+
+  // 답변 삭제
+  const handleDeleteAnswer = async () => {
+    setShowSelectMenu(false);
+    await deleteAnswer({ answerId: answer.id });
+  };
+
+  // 답변 거절
+  const handleRefuseAnswer = async () => {
+    setShowSelectMenu(false);
+    await putAnswer({
+      answerId: answer.id,
+      content: answer.content,
+      isRejected: true,
+    });
   };
 
   return (
-    <S.SelectMenuInnerBox onClick={handleClick}>
-      <p>{text}</p>
-    </S.SelectMenuInnerBox>
-  );
-};
-
-const SelectMenu = ({ answerId, questionId }) => {
-  return (
-    <S.SelectMenuBox>
-      <SelectMenuItem text="질문 삭제" questionId={questionId} />
-      <SelectMenuItem text="답변 거절" />
-      <SelectMenuItem text="답변 삭제" answerId={answerId} />
+    <S.SelectMenuBox ref={selectMenuRef}>
+      <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
+        <p>질문 삭제</p>
+      </S.SelectMenuInnerBox>
+      {answer && (
+        <>
+          <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
+            <p>답변 거절</p>
+          </S.SelectMenuInnerBox>
+          <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
+            <p>답변 삭제</p>
+          </S.SelectMenuInnerBox>
+        </>
+      )}
     </S.SelectMenuBox>
   );
 };

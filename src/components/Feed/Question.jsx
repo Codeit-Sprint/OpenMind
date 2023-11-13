@@ -1,8 +1,10 @@
+import deleteSubject from '../../apis/deleteSubject';
 import IMAGES from '../../assets';
+import { checkUser } from '../../utils/checkUser';
 import FeedCard from '../FeedCard/FeedCard';
 import * as S from './Question.style';
-import AnswerInput from '../FeedCard/AnswerInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 const Empty = () => {
   return (
@@ -17,42 +19,49 @@ const Empty = () => {
 };
 
 const QuestionItem = ({ item, subjectData }) => {
-  console.log('question pg item', item);
-  const { answer: answerItem } = item;
-  // const { name, content, isRejected, createdAt, like, dislike, id } = item;
-  const [answer, setAnswer] = useState(''); // item.answer
-  const userId = window.localStorage.getItem('userId');
-  console.log('question item', item);
-  return (
-    <>
-      <FeedCard
-        item={item}
-        subjectData={subjectData}
-        answer={answer}
-        answerItem={answerItem}
-      />
-      {item.subjectId === Number(userId) && !item.answer ? (
-        <AnswerInput item={item} setAnswer={setAnswer} />
-      ) : (
-        ''
-      )}
-    </>
-  );
+  return <FeedCard item={item} subjectData={subjectData} />;
 };
 
-const List = ({ count, questions, subjectData }) => {
-  console.log('list', questions);
+const List = ({ questions, subjectData }) => {
+  const navigate = useNavigate();
+  const { id: subjectId } = subjectData;
+  const [isFeedPage, setIsFeedPage] = useState(false);
+  const { questionCount } = subjectData;
+  const { pathname } = useLocation();
+
+  const handleAllDelete = async () => {
+    if (window.confirm('정말 피드를 삭제하시겠습니까?')) {
+      await deleteSubject({ subjectId });
+      localStorage.setItem('answerArray', JSON.stringify([]));
+      navigate('/list');
+    }
+  };
+
+  useEffect(() => {
+    const splitedPathName = pathname.split('/');
+    if (splitedPathName[splitedPathName.length - 1] !== 'answer') {
+      setIsFeedPage(true);
+    }
+  }, []);
+
   return (
     <S.Container>
+      {checkUser(subjectId) && (
+        <S.FloatingDeleteButton onClick={handleAllDelete}>
+          <p>삭제하기</p>
+        </S.FloatingDeleteButton>
+      )}
+
       <S.Info>
         <img src={IMAGES.messages} alt="messages" />
-        <S.Text>{count}개의 질문이 있습니다</S.Text>
+        <S.Text>{questionCount}개의 질문이 있습니다</S.Text>
       </S.Info>
       {questions.map((question) => (
         <QuestionItem
           key={question.id}
           item={question}
           subjectData={subjectData}
+          isFeedPage={isFeedPage}
         />
       ))}
     </S.Container>

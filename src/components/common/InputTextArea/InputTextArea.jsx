@@ -2,17 +2,22 @@ import styled from 'styled-components';
 import { BodyRegular3 } from '../../../styles/typography';
 import { device } from '../../../styles/mediaQuery';
 
-const InputTextArea = ({ placeholder = '이름을 입력하세요', setContent }) => {
+const InputTextArea = ({
+  placeholder = '이름을 입력하세요',
+  setContent,
+  content,
+}) => {
   return (
     <Input
       placeholder={placeholder}
       onChange={(e) => setContent(e.target.value)}
+      value={content}
     />
   );
 };
 
 const Input = styled.textarea`
-  width: 100%;
+  width: 56rem;
   height: 18.6rem;
   padding: 1.6rem;
   resize: none;

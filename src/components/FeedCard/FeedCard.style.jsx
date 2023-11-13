@@ -40,6 +40,7 @@ const CardContainer = styled.div`
 `;
 // 답변완료 여부와 케밥 아이콘을 담는 섹션
 const Header = styled.section`
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -121,6 +122,12 @@ const ReactionDiv = styled.div`
   display: flex;
   gap: 32px;
 `;
+
+const LineUnderDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 export {
   CardContainer,
   Header,
@@ -136,4 +143,5 @@ export {
   AnswerDiv,
   ReactionDiv,
   QuestionContainer,
+  LineUnderDiv,
 };

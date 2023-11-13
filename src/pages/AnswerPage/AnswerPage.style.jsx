@@ -103,6 +103,7 @@ const DeleteButtonDiv = styled.div`
 `;
 // 몇 개의 질문이 있습니다 div
 const QuestionDiv = styled.div``;
+
 export {
   HeaderImage,
   HeaderDiv,

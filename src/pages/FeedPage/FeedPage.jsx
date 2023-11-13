@@ -1,26 +1,25 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { FeedWrapper } from '../../components/Feed/Feed';
 import { Empty, List } from '../../components/Feed/Question';
 import FloatingButton from '../../components/common/Button/FloatingButton';
-import Modal from '../../components/modal/Modal';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import getQuestions from '../../apis/getQuestions';
+import Modal from '../../components/Modal/Modal';
 import Toast from '../../components/common/Toast/Toast';
-import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
+
+import getQuestions from '../../apis/getQuestions';
 import getSubjectById from '../../apis/getSubjectById';
+import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
-import { USER_ID } from '../../constants/constant';
+import { checkUser } from '../../utils/checkUser';
+
+import * as S from './FeedPage.styles';
 
 const FeedPage = () => {
   const [active, setActive] = useState(false);
   const { lockScroll, openScroll } = useBodyScrollLock(); // Modal Open시 Scroll Stop
-  if (active) lockScroll();
-  else openScroll();
-
   const { subjectId } = useParams();
 
-  const [count, setCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState('URL이 복사되었습니다.');
@@ -31,25 +30,24 @@ const FeedPage = () => {
   // Subject 정보 받기 함수
   const getSubjectInfo = async () => {
     const result = await getSubjectById({ subjectId });
-    setSubjectData(result);
+    setSubjectData(() => result);
   };
 
   // 전체 질문 받는 함수
   const fetchQuestions = async () => {
     const result = await getQuestions({ subjectId, offset: questions.length });
-    setCount(result.count);
     setHasNext(result.next);
     setQuestions((prev) => [...prev, ...result.results]);
     setIsFetching(false);
   };
 
   // 링크 복사 클릭 시 발생하는 함수
-  const copyLink = async () => {
+  const copyLink = () => {
     if (showToast) return;
 
     const currentUrl = window.location.href;
     setToastText('URL이 복사되었습니다.');
-    await navigator.clipboard.writeText(currentUrl);
+    navigator.clipboard.writeText(currentUrl);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 5000);
   };
@@ -61,20 +59,27 @@ const FeedPage = () => {
     fetchQuestions();
   }, [isFetching]);
 
+  useEffect(() => {
+    if (active) lockScroll();
+    else openScroll();
+  }, [active]);
+
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   return (
-    <FeedPageWrapper>
+    <S.FeedPageWrapper>
       <FeedWrapper item={subjectData} copyLink={copyLink} />
       {questions.length === 0 ? (
         <Empty />
       ) : (
-        <List count={count} questions={questions} subjectData={subjectData} />
+        <List questions={questions} subjectData={subjectData} />
       )}
-      {USER_ID !== subjectId && (
-        <ButtonWrapper>
+
+      {/* Subject를 작성한 것이 User인지 확인하는 함수: User일 시 질문 작성하기 버튼 안보이게 해야 함  checkUser(subjectId) 여야 함 */}
+      {!checkUser(subjectId) && (
+        <S.ButtonWrapper>
           <FloatingButton setActive={setActive} />
-        </ButtonWrapper>
+        </S.ButtonWrapper>
       )}
       {active ? (
         <Modal
@@ -82,28 +87,13 @@ const FeedPage = () => {
           setShowToast={setShowToast}
           setToastText={setToastText}
           setQuestions={setQuestions}
-          item={subjectData}
+          getSubjectInfo={getSubjectInfo}
+          subjectData={subjectData}
         />
       ) : null}
       {showToast ? <Toast text={toastText} /> : null}
-    </FeedPageWrapper>
+    </S.FeedPageWrapper>
   );
 };
-
-const FeedPageWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  overflow: hidden;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 5.8rem;
-  margin-right: 2.4rem;
-`;
 
 export default FeedPage;
