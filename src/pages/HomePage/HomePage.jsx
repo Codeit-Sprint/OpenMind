@@ -1,49 +1,60 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useLayoutEffect, useState } from 'react';
+
+import postSubjects from '../../apis/postSubjects';
+import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
+
+import Toast from '../../components/common/Toast/Toast';
 import IMAGES from '../../assets';
 import * as S from './HomePage.styles';
-import { useEffect, useState } from 'react';
-import postSubjects from '../../apis/postSubjects';
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [name, setName] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [toastText, setToastText] = useState('이름을 입력해주세요!');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name) {
-      alert('이름을 입력해주세요!');
+      if (!showToast) {
+        setToastText('이름을 입력해주세요!');
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2500);
+      }
       return;
     }
-
-    const data = await postSubjects(name);
-    if (data) {
+    try {
+      const data = await postSubjects(name);
       localStorage.setItem('userName', data.name);
       localStorage.setItem('imageSource', data.imageSource);
       localStorage.setItem('userId', data.id);
       localStorage.setItem('answerArray', JSON.stringify([]));
       localStorage.setItem('reactionArray', JSON.stringify([]));
+      setShowToast(false);
       navigate(`/post/${data.id}/answer`);
+    } catch {
+      setToastText('질문 받기에 실패하셨습니다.');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
     }
   };
 
-  // 로그인 되어 있는지 확인하는 함수
-  const checkIsLoggedIn = () => {
-    if (localStorage.getItem('userId')) {
-      navigate('/list');
-    }
-  };
-
-  useEffect(() => {
-    checkIsLoggedIn();
+  useLayoutEffect(() => {
+    if (checkIsLoggedIn()) navigate('/list');
   }, []);
+
   return (
     <S.HomePageBox>
-      <Link to="/list">
-        <S.HomePageQuestionButton>질문하러 가기</S.HomePageQuestionButton>
-      </Link>
-      <Link to="/">
-        <S.HomePageLogoImage src={IMAGES.logo} alt="로고" />
-      </Link>
+      <S.HomePageLogoImage
+        src={IMAGES.logo}
+        alt="로고"
+        onClick={() => navigate('/')}
+      />
+      <S.HomePageQuestionButton onClick={() => navigate('/list')}>
+        <p>질문하러 가기</p>
+        <img src={IMAGES.brownArrowImg} />
+      </S.HomePageQuestionButton>
       <S.HomePageOuterFrame>
         <S.HomePageFrame>
           <S.HomePageInputBox>
@@ -54,12 +65,12 @@ const HomePage = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </S.HomePageInputBox>
-          {/* <p>이름을 입력해주세요!</p> */}
           <S.HomePageButton onClick={handleSubmit}>
             <p>질문 받기</p>
           </S.HomePageButton>
         </S.HomePageFrame>
       </S.HomePageOuterFrame>
+      {showToast && <Toast text={toastText} bgColor="#B93333" />}
     </S.HomePageBox>
   );
 };

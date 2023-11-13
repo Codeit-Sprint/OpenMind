@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { CaptionMedium1 } from '../../../styles/typography';
 import { device } from '../../../styles/mediaQuery';
 
-const Toast = ({ text }) => {
+const Toast = ({ text, bgColor = '#000', textColor = '#FFF' }) => {
   return (
-    <Container>
+    <Container $bgColor={bgColor} $textColor={textColor}>
       <p>{text}</p>
     </Container>
   );
@@ -21,9 +21,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: ${(props) => props.theme['grayscale-10']};
+  color: ${(props) => props.$textColor};
   border-radius: 8px;
-  background-color: ${(props) => props.theme['grayscale-60']};
+  background-color: ${(props) => props.$bgColor};
   box-shadow: ${(props) => props.theme['shadow-2pt']};
 
   ${CaptionMedium1};
