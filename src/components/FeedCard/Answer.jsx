@@ -19,7 +19,9 @@ function Answer({ item, subjectData }) {
           <S.Date>{getElapsedTime(createdAt)}</S.Date>
         </S.ProfileSection>
 
-        <S.Post>{isRejected ? '답변 거절' : content}</S.Post>
+        <S.Post text={isRejected ? '답변 거절' : ''}>
+          {isRejected ? '답변 거절' : content}
+        </S.Post>
       </S.AnswerDiv>
     </S.MainSection>
   );

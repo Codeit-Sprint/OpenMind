@@ -3,13 +3,17 @@ import deleteQuestion from '../../../apis/deleteQuestion';
 //import postAnswers from '../../../apis/postAnswers';
 import patchAnswer from '../../../apis/patchAnswer';
 import * as S from './SelectMenu.styles';
-
+let refused = false;
 const SelectMenu = ({
   answer,
   questionId,
   selectMenuRef,
   setShowSelectMenu,
 }) => {
+  //const [refused, setRefused] = answer?.isRejected ? answer.isRejected : false;
+  //답변 거절 보이기
+  //const setShowRefuse = () => setRefused(!refused);
+
   // 질문 삭제
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
@@ -25,31 +29,44 @@ const SelectMenu = ({
 
   // 답변 거절
   const handleRefuseAnswer = async () => {
+    //setRefused(true);
+    refused = false;
     setShowSelectMenu(false);
-    // answer?
     await patchAnswer({
       answerId: answer.id,
-      isRejected: true,
+      isRejected: refused,
       content: answer.content,
     });
-    // : await postAnswers({
-    //     answerId: answer.id,
-    //     content: '',
-    //     isRejected: true,
-    //   });
   };
+  // 답변 거절 취소
+  const handleCancelRefuseAnswer = async () => {
+    setShowSelectMenu(false);
+    refused = true;
+    //setRefused(false);
+    await patchAnswer({
+      answerId: answer.id,
+      isRejected: refused,
+      content: answer.content,
+    });
+  };
+  console.log('answer', answer);
 
   return (
     <S.SelectMenuBox ref={selectMenuRef}>
       <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
         <p>질문 삭제</p>
       </S.SelectMenuInnerBox>
-
       {answer && (
         <>
-          <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
-            <p>답변 거절</p>
-          </S.SelectMenuInnerBox>
+          {answer?.isRejected ? (
+            <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
+              <p>답변 거절 취소</p>
+            </S.SelectMenuInnerBox>
+          ) : (
+            <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>
+              <p>답변 거절</p>
+            </S.SelectMenuInnerBox>
+          )}
           <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
             <p>답변 삭제</p>
           </S.SelectMenuInnerBox>
@@ -58,5 +75,4 @@ const SelectMenu = ({
     </S.SelectMenuBox>
   );
 };
-
 export default SelectMenu;
