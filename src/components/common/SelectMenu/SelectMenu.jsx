@@ -74,6 +74,9 @@ const SelectMenu = ({
       <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
         <p>질문 삭제</p>
       </S.SelectMenuInnerBox>
+      <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
+        <p>답변 삭제</p>
+      </S.SelectMenuInnerBox>
       {answer && (
         <>
           {answer?.isRejected ? (
@@ -85,9 +88,6 @@ const SelectMenu = ({
               <p>답변 거절</p>
             </S.SelectMenuInnerBox>
           )}
-          <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
-            <p>답변 삭제</p>
-          </S.SelectMenuInnerBox>
         </>
       )}
     </S.SelectMenuBox>
