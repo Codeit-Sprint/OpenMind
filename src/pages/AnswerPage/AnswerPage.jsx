@@ -55,9 +55,18 @@ const AnswerPage = () => {
     }
   };
 
-  const reRenderQuestionList = (questionId) => {
-    const result = questions.map((question) => question.id !== questionId);
-    setQuestions(...result);
+  // 케밥
+
+  // 함수 명 고치기
+
+  const removeQuestionById = (deletingQuestionId) => {
+    const result = questions.filter(
+      (question) => question.id !== deletingQuestionId,
+    );
+    setQuestions(result);
+    // setState => 변경점 감지 기준 새로운 객체일때
+    // filter에 생성된 배열과 questions는 다른 값이다
+    // Closure -->
   };
 
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
@@ -87,7 +96,7 @@ const AnswerPage = () => {
           <List
             questions={questions}
             subjectData={subjectData}
-            reRenderQuestionList={reRenderQuestionList}
+            removeQuestionById={removeQuestionById}
           />
         )
       )}

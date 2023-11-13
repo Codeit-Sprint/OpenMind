@@ -12,7 +12,7 @@ const SelectMenu = ({
   selectMenuRef,
   setShowSelectMenu,
   setAnswerInfo,
-  reRenderQuestionList,
+  removeQuestionById,
 }) => {
   //const [refused, setRefused] = answer?.isRejected ? answer.isRejected : false;
   //답변 거절 보이기
@@ -22,16 +22,16 @@ const SelectMenu = ({
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
     await deleteQuestion(questionId);
-    deleteLocalStorageAnswer(questionId);
-    deleteLocalStorageReaction(questionId);
-    reRenderQuestionList(questionId);
+    deleteLocalStorageAnswer({ questionId });
+    deleteLocalStorageReaction({ questionId });
+    removeQuestionById(questionId);
   };
 
   // 답변 삭제
   const handleDeleteAnswer = async () => {
     setShowSelectMenu(false);
     await deleteAnswer({ answerId: answer.id });
-    deleteLocalStorageAnswer(questionId);
+    deleteLocalStorageAnswer({ questionId });
     setAnswerInfo(null);
   };
 

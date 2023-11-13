@@ -17,19 +17,18 @@ const Empty = () => {
   );
 };
 
-const QuestionItem = ({ item, subjectData, reRenderQuestionList }) => {
+const QuestionItem = ({ item, subjectData, removeQuestionById }) => {
   return (
     <FeedCard
       item={item}
       subjectData={subjectData}
-      reRenderQuestionList={reRenderQuestionList}
+      removeQuestionById={removeQuestionById}
     />
   );
 };
 
-const List = ({ questions, subjectData, reRenderQuestionList }) => {
+const List = ({ questions, subjectData, removeQuestionById }) => {
   const [isFeedPage, setIsFeedPage] = useState(false);
-  const { questionCount } = subjectData;
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const List = ({ questions, subjectData, reRenderQuestionList }) => {
       <S.Container>
         <S.Info>
           <img src={IMAGES.messages} alt="messages" />
-          <S.Text>{questionCount}개의 질문이 있습니다</S.Text>
+          <S.Text>{questions.length}개의 질문이 있습니다</S.Text>
         </S.Info>
         {questions.map((question) => (
           <QuestionItem
@@ -52,7 +51,7 @@ const List = ({ questions, subjectData, reRenderQuestionList }) => {
             item={question}
             subjectData={subjectData}
             isFeedPage={isFeedPage}
-            reRenderQuestionList={reRenderQuestionList}
+            removeQuestionById={removeQuestionById}
           />
         ))}
       </S.Container>
