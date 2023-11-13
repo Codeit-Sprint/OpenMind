@@ -1,44 +1,38 @@
 import styled from 'styled-components';
-import { BodyRegular3 } from '../../styles/typography';
+import { BodyRegular3, BodyBold3, CaptionBold1 } from '../../styles/typography';
+
 import IMAGES from '../../assets';
 import { device } from '../../styles/mediaQuery';
 
 const HomePageBox = styled.div`
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  background-image: url(${IMAGES.indexBackground});
   background-repeat: no-repeat;
-  /* background-size: contain; */
   background-position: center bottom;
   background-image: url(${IMAGES.indexBackground});
   background-color: ${(props) => props.theme['grayscale-20']};
-  @media ${device.tablet} {
-    background-size: contain;
-  }
-  @media ${device.mobile} {
-    background-size: contain;
-  }
+  background-size: contain;
 `;
 
 const HomePageLogoImage = styled.img`
-  display: flex;
-  width: 45.6rem;
+  width: 35.5rem;
   height: 18rem;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin-bottom: 2.4rem;
-  margin-top: -17rem;
+  @media ${device.pc} {
+  }
+
   @media ${device.mobile} {
     width: 24.8rem;
     height: 9.8rem;
-    margin-top: -10rem;
-    padding-right: 0px;
+    margin-top: 0rem;
   }
+  cursor: pointer;
 `;
 
 const HomePageOuterFrame = styled.div`
@@ -117,6 +111,21 @@ const HomePageQuestionButton = styled.button`
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme['brown-40']};
   background-color: ${(props) => props.theme['brown-10']};
+
+  p {
+    color: ${(props) => props.theme['brown-40']};
+    ${BodyBold3}
+  }
+
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  &:hover {
+    outline: 1px solid ${(props) => props.theme['brown-40']};
+  }
+
   @media ${device.pc} {
     top: 4.5rem;
     right: 12.5rem;
@@ -126,10 +135,15 @@ const HomePageQuestionButton = styled.button`
     right: 4.5rem;
   }
   @media ${device.mobile} {
-    /* top: 25.2rem; */
-    top: 35%;
+    padding: 0.8rem 1.2rem;
+    gap: 0.4rem;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    p {
+      ${CaptionBold1}
+    }
   }
 `;
 
