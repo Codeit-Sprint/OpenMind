@@ -1,6 +1,5 @@
 import deleteAnswer from '../../../apis/deleteAnswer';
 import deleteQuestion from '../../../apis/deleteQuestion';
-//import postAnswers from '../../../apis/postAnswers';
 import patchAnswer from '../../../apis/patchAnswer';
 import * as S from './SelectMenu.styles';
 let refused = false;
@@ -9,6 +8,8 @@ const SelectMenu = ({
   questionId,
   selectMenuRef,
   setShowSelectMenu,
+  setAnswerInfo,
+  reRenderQuestionList,
 }) => {
   //const [refused, setRefused] = answer?.isRejected ? answer.isRejected : false;
   //답변 거절 보이기
@@ -17,14 +18,18 @@ const SelectMenu = ({
   // 질문 삭제
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
-    const result = await deleteQuestion(questionId);
-    console.log('RESSS', result);
+    await deleteQuestion(questionId);
+    deleteLocalStorageAnswer(questionId);
+    deleteLocalStorageReaction(questionId);
+    reRenderQuestionList(questionId);
   };
 
   // 답변 삭제
   const handleDeleteAnswer = async () => {
     setShowSelectMenu(false);
     await deleteAnswer({ answerId: answer.id });
+    deleteLocalStorageAnswer(questionId);
+    setAnswerInfo(null);
   };
 
   // 답변 거절
@@ -37,6 +42,11 @@ const SelectMenu = ({
       isRejected: refused,
       content: answer.content,
     });
+    setLocalStorageAnswer({
+      questionId,
+      answerId: answer.id,
+      isRejected: true,
+    });
   };
   // 답변 거절 취소
   const handleCancelRefuseAnswer = async () => {
@@ -48,8 +58,13 @@ const SelectMenu = ({
       isRejected: refused,
       content: answer.content,
     });
+
+    setLocalStorageAnswer({
+      questionId,
+      answerId: answer.id,
+      isRejected: true,
+    });
   };
-  console.log('answer', answer);
 
   return (
     <S.SelectMenuBox ref={selectMenuRef}>
