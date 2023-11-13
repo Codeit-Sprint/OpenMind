@@ -18,8 +18,8 @@ const SelectMenu = ({
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
     await deleteQuestion(questionId);
-    deleteLocalStorageAnswer({ questionId });
-    deleteLocalStorageReaction({ questionId });
+    deleteLocalStorageAnswer(questionId);
+    deleteLocalStorageReaction(questionId);
     reRenderQuestionList(questionId);
   };
 
@@ -27,7 +27,7 @@ const SelectMenu = ({
   const handleDeleteAnswer = async () => {
     setShowSelectMenu(false);
     await deleteAnswer({ answerId: answer.id });
-    deleteLocalStorageAnswer({ questionId });
+    deleteLocalStorageAnswer(questionId);
     setAnswerInfo(null);
   };
 
