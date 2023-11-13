@@ -1,11 +1,11 @@
 import deleteAnswer from '../../../apis/deleteAnswer';
 import deleteQuestion from '../../../apis/deleteQuestion';
-import putAnswer from '../../../apis/putAnswer';
+import patchAnswer from '../../../apis/patchAnswer';
 import { deleteLocalStorageAnswer } from '../../../utils/deleteLocalStorageAnswer';
 import { deleteLocalStorageReaction } from '../../../utils/deleteLocalStorageReaction';
 import { setLocalStorageAnswer } from '../../../utils/setLocalStorageAnswer';
 import * as S from './SelectMenu.styles';
-
+let refused = false;
 const SelectMenu = ({
   answer,
   questionId,
@@ -14,6 +14,10 @@ const SelectMenu = ({
   setAnswerInfo,
   removeQuestionById,
 }) => {
+  //const [refused, setRefused] = answer?.isRejected ? answer.isRejected : false;
+  //답변 거절 보이기
+  //const setShowRefuse = () => setRefused(!refused);
+
   // 질문 삭제
   const handleDeleteQuestion = async () => {
     setShowSelectMenu(false);
@@ -33,12 +37,31 @@ const SelectMenu = ({
 
   // 답변 거절
   const handleRefuseAnswer = async () => {
+    //setRefused(true);
+    refused = false;
     setShowSelectMenu(false);
-    await putAnswer({
+    await patchAnswer({
       answerId: answer.id,
+      isRejected: refused,
       content: answer.content,
+    });
+    setLocalStorageAnswer({
+      questionId,
+      answerId: answer.id,
       isRejected: true,
     });
+  };
+  // 답변 거절 취소
+  const handleCancelRefuseAnswer = async () => {
+    setShowSelectMenu(false);
+    refused = true;
+    //setRefused(false);
+    await patchAnswer({
+      answerId: answer.id,
+      isRejected: refused,
+      content: answer.content,
+    });
+
     setLocalStorageAnswer({
       questionId,
       answerId: answer.id,
@@ -51,18 +74,23 @@ const SelectMenu = ({
       <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
         <p>질문 삭제</p>
       </S.SelectMenuInnerBox>
+      <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
+        <p>답변 삭제</p>
+      </S.SelectMenuInnerBox>
       {answer && (
         <>
-          <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
-            <p>답변 거절</p>
-          </S.SelectMenuInnerBox>
-          <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
-            <p>답변 삭제</p>
-          </S.SelectMenuInnerBox>
+          {answer?.isRejected ? (
+            <S.SelectMenuInnerBox onClick={handleRefuseAnswer}>
+              <p>답변 거절 취소</p>
+            </S.SelectMenuInnerBox>
+          ) : (
+            <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>
+              <p>답변 거절</p>
+            </S.SelectMenuInnerBox>
+          )}
         </>
       )}
     </S.SelectMenuBox>
   );
 };
-
 export default SelectMenu;

@@ -68,7 +68,7 @@ const Date = styled.span`
 const Post = styled.p`
   ${S.BodyRegular3};
   color: ${(props) =>
-    props.status === '답변거절'
+    props.text === '답변 거절'
       ? props.theme['red-50']
       : props.theme['grayscale-50']};
 `;

@@ -4,7 +4,7 @@ import * as S from './Answer.style';
 import { getElapsedTime } from '../../utils/getElapsedTime';
 
 function Answer({ item, subjectData }) {
-  const { createdAt, content } = item;
+  const { createdAt, content, isRejected } = item;
   const imageSource = subjectData?.imageSource;
   const name = subjectData?.name;
 
@@ -19,7 +19,9 @@ function Answer({ item, subjectData }) {
           <S.Date>{getElapsedTime(createdAt)}</S.Date>
         </S.ProfileSection>
 
-        <S.Post>{content}</S.Post>
+        <S.Post text={isRejected ? '답변 거절' : ''}>
+          {isRejected ? '답변 거절' : content}
+        </S.Post>
       </S.AnswerDiv>
     </S.MainSection>
   );
