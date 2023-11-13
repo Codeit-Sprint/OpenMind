@@ -64,38 +64,27 @@ const SelectMenu = ({
         isRejected: true,
       });
 
-      setAnswerInfo(() => ({
+      setAnswerInfo({
         content: result.content,
         createdAt: result.createdAt,
         id: result.id,
         isRejected: result.isRejected,
         questionId: result.questionId,
-      }));
+      });
     }
   };
   // 답변 거절 취소
   const handleCancelRefuseAnswer = async () => {
     setShowSelectMenu(false);
     refused = false;
-    const result = await patchAnswer({
-      answerId: answer?.id,
-      isRejected: refused,
-      content: answer?.content,
-    });
-
-    setLocalStorageAnswer({
-      questionId,
+    await deleteAnswer({
       answerId: answer.id,
-      isRejected: true,
     });
 
-    setAnswerInfo({
-      content: result.content,
-      createdAt: result.createdAt,
-      id: result.id,
-      isRejected: result.isRejected,
-      questionId: result.questionId,
+    deleteLocalStorageAnswer({
+      questionId,
     });
+    setAnswerInfo(null);
   };
 
   return (
