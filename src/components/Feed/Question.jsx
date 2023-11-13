@@ -32,6 +32,7 @@ const List = ({ questions, subjectData }) => {
   const handleAllDelete = async () => {
     if (window.confirm('정말 피드를 삭제하시겠습니까?')) {
       await deleteSubject({ subjectId });
+      localStorage.setItem('answerArray', JSON.stringify([]));
       navigate('/list');
     }
   };
