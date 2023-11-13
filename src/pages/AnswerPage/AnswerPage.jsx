@@ -11,6 +11,7 @@ import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollE
 import getSubjectById from '../../apis/getSubjectById';
 import { checkUser } from '../../utils/checkUser';
 import deleteSubject from '../../apis/deleteSubject';
+import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
 
 const AnswerPage = () => {
   const navigate = useNavigate();
@@ -55,25 +56,18 @@ const AnswerPage = () => {
     }
   };
 
-  // 케밥
-
-  // 함수 명 고치기
-
   const removeQuestionById = (deletingQuestionId) => {
     const result = questions.filter(
       (question) => question.id !== deletingQuestionId,
     );
     setQuestions(result);
-    // setState => 변경점 감지 기준 새로운 객체일때
-    // filter에 생성된 배열과 questions는 다른 값이다
-    // Closure -->
   };
 
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
+    if (!checkIsLoggedIn()) navigate('/list');
     if (!subjectData) getSubjectInfo();
-
     if (!isFetching) return; // 페이지 들어오는 중
     if (hasNext === null) return; // 다음 페이지가 없을 시
     fetchQuestions();
