@@ -1,4 +1,4 @@
-import { createPagination } from '../../utils/utils';
+import { createPagination } from '../../utils/createPagination';
 import * as S from './styles';
 
 const Pagination = ({ count, changeOffset, currentNum, limit, width }) => {
