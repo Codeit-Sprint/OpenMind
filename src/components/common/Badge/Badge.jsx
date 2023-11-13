@@ -4,14 +4,14 @@ import { CaptionMedium1 } from '../../../styles/typography';
 const Badge = ({ answer }) => {
   let comments = '';
 
-  if (answer?.content && answer?.isRejected) {
+  if (answer?.isRejected) {
     comments = '답변 거절';
   } else if (answer?.content || (answer?.content && answer?.isRejected)) {
     comments = '답변 완료';
   } else {
     comments = '미답변';
   }
-  return <StyledContainer props={answer?.content}>{comments}</StyledContainer>;
+  return <StyledContainer content={answer}>{comments}</StyledContainer>;
 };
 
 const StyledContainer = styled.div`
@@ -23,13 +23,13 @@ const StyledContainer = styled.div`
 
   border: 1px solid
     ${(props) =>
-      props ? props.theme['brown-40'] : props.theme['grayscale-40']};
+      props.content ? props.theme['brown-40'] : props.theme['grayscale-40']};
   border-radius: 8px;
   background: ${(props) => props.theme['grayscale-10']};
 
   ${CaptionMedium1};
   color: ${(props) =>
-    props ? props.theme['brown-40'] : props.theme['grayscale-40']};
+    props.content ? props.theme['brown-40'] : props.theme['grayscale-40']};
 `;
 
 export default Badge;

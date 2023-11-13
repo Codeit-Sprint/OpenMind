@@ -25,7 +25,7 @@ function AnswerInput({
     e.preventDefault();
 
     if (!content) {
-      alert('답변을 입력해주세요!');
+      alert('답변을 입력해주세요.');
       return;
     } else {
       if (!isCorrecting) {

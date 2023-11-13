@@ -42,4 +42,9 @@ const fetchDelete = async (url, headers = {}) => {
   return await commonFetchFunction(url, 'DELETE', headers);
 };
 
-export { fetchPost, fetchGet, fetchPut, fetchDelete };
+// PATCH
+const fetchPatch = async (url, body, headers = {}) => {
+  return await commonFetchFunction(url, 'PATCH', headers, body);
+};
+
+export { fetchPost, fetchGet, fetchPut, fetchDelete, fetchPatch };
