@@ -39,7 +39,7 @@ const Menu = styled.div`
   left: 50%;
 
   width: 79px;
-  padding: 4px 0px;
+  padding: 0px 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ const Menu = styled.div`
 
   visibility: hidden;
   transform: translate(-50%, -20px);
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 
   &:after {
     content: '';

@@ -7,7 +7,6 @@ const PaginationBox = styled.div`
 `;
 
 const PaginationNumberBox = styled.div`
-  cursor: pointer;
   display: flex;
   width: 4rem;
   height: 4rem;
@@ -15,8 +14,15 @@ const PaginationNumberBox = styled.div`
   justify-content: center;
   align-items: center;
   &:hover > p {
-    color: ${(props) => props.theme['brown-40']};
-    text-decoration: underline;
+    color: ${(props) =>
+      props.$num !== '...'
+        ? props.theme['brown-40']
+        : props.theme['grayscale-40']};
+    text-decoration: ${(props) =>
+      props.$num !== '...' ? 'underline' : 'none'};
+  }
+  &:hover {
+    cursor: ${(props) => (props.$num !== '...' ? 'pointer' : 'default')};
   }
 
   p {

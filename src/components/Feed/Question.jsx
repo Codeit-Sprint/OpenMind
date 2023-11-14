@@ -28,6 +28,8 @@ const QuestionItem = ({ item, subjectData, removeQuestionById }) => {
 };
 
 const List = ({ questions, subjectData, removeQuestionById }) => {
+  const { questionCount } = subjectData;
+  console.log(subjectData);
   const [isFeedPage, setIsFeedPage] = useState(false);
   const { pathname } = useLocation();
 
@@ -43,7 +45,7 @@ const List = ({ questions, subjectData, removeQuestionById }) => {
       <S.Container>
         <S.Info>
           <img src={IMAGES.messages} alt="messages" />
-          <S.Text>{questions.length}개의 질문이 있습니다</S.Text>
+          <S.Text>{questionCount}개의 질문이 있습니다</S.Text>
         </S.Info>
         {questions.map((question) => (
           <QuestionItem

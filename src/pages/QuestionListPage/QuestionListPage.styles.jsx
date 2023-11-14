@@ -29,6 +29,7 @@ const NavbarBox = styled.div`
 const LogoImage = styled.img`
   width: 14.6rem;
   height: 5.7rem;
+  cursor: pointer;
 `;
 
 const AnswerButton = styled.button`
