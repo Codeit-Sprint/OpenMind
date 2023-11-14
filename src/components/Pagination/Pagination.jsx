@@ -1,5 +1,5 @@
 import { createPagination } from '../../utils/createPagination';
-import * as S from './styles';
+import * as S from './Pagination.styles';
 
 const Pagination = ({ count, changeOffset, currentNum, limit, width }) => {
   const numbers = createPagination({ count, limit, currentNum, width });
@@ -16,6 +16,7 @@ const Pagination = ({ count, changeOffset, currentNum, limit, width }) => {
           key={index}
           onClick={() => checkIsNumberAndChangeOffset(num)}
           $currentnum={currentNum === num}
+          $num={num}
         >
           <p>{num}</p>
         </S.PaginationNumberBox>

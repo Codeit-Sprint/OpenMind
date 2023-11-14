@@ -13,7 +13,6 @@ const createPagination = ({ count, limit, currentNum, width }) => {
       if (5 <= currentNum && currentNum <= maxPageNumber - 4) {
         const midNumbers = totalNumbers.slice(currentNum - 4, currentNum + 3);
         numbers = [1, '...', ...midNumbers, '...', maxPageNumber];
-        return numbers;
       } else if (5 <= currentNum && currentNum > maxPageNumber - 4) {
         // 현재 page의 위치가 왼쪽에 ... 이 생겨야 하는 경우
         const midNumbers = totalNumbers.slice(
@@ -22,12 +21,10 @@ const createPagination = ({ count, limit, currentNum, width }) => {
         );
 
         numbers = [1, '...', ...midNumbers];
-        return numbers;
       } else if (5 > currentNum) {
         // 현재 page의 위치가 오른쪽에 ... 이 생겨야 하는 경우
         const midNumbers = totalNumbers.slice(0, 7);
         numbers = [...midNumbers, '...', maxPageNumber];
-        return numbers;
       }
     }
   } else {
@@ -38,7 +35,6 @@ const createPagination = ({ count, limit, currentNum, width }) => {
       if (4 <= currentNum && currentNum <= maxPageNumber - 3) {
         const midNumbers = totalNumbers.slice(currentNum - 3, currentNum + 2);
         numbers = [1, '...', ...midNumbers, '...', maxPageNumber];
-        return numbers;
       } else if (4 <= currentNum && currentNum > maxPageNumber - 3) {
         // 현재 page의 위치가 왼쪽에 ... 이 생겨야 하는 경우
         const midNumbers = totalNumbers.slice(
@@ -46,12 +42,10 @@ const createPagination = ({ count, limit, currentNum, width }) => {
           totalNumbers.length,
         );
         numbers = [1, '...', ...midNumbers];
-        return numbers;
       } else if (4 > currentNum) {
         // 현재 page의 위치가 오른쪽에 ... 이 생겨야 하는 경우
         const midNumbers = totalNumbers.slice(0, 5);
         numbers = [...midNumbers, '...', maxPageNumber];
-        return numbers;
       }
     }
   }
