@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import theme from '../../styles/theme';
 import * as S from '../../styles/typography';
 import { device } from '../../styles/mediaQuery';
+
 // 프로필과 텍스트를 담는 섹션
 const MainSection = styled.section`
   display: flex;
@@ -71,6 +72,8 @@ const Post = styled.p`
     props.text === '답변 거절'
       ? props.theme['red-50']
       : props.theme['grayscale-50']};
+
+  word-break: break-all;
 `;
 
 export {

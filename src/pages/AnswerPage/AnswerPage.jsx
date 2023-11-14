@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './AnswerPage.style';
 import { FeedWrapper } from '../../components/Feed/Feed';
 import { Empty, List } from '../../components/Feed/Question';
+// import { Empty, List } from '../../components/FeedCard/ContentList';
+// import ContentNavBar from '../../components/FeedCard/ContentNavBar';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
@@ -78,6 +80,7 @@ const AnswerPage = () => {
   if (!subjectData) return null;
   return (
     <>
+      {/* <ContentNavBar item={subjectData} copyLink={copyLink} /> */}
       <FeedWrapper item={subjectData} copyLink={copyLink} />
 
       {checkUser(subjectId) && (
