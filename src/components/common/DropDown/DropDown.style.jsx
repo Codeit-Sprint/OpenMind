@@ -39,7 +39,7 @@ const Menu = styled.div`
   left: 50%;
 
   width: 79px;
-  padding: 4px 0px;
+  padding: 0px 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
