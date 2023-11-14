@@ -61,12 +61,14 @@ const AnswerPage = () => {
       (question) => question.id !== deletingQuestionId,
     );
     setQuestions(result);
+    getSubjectInfo();
   };
 
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
 
   useEffect(() => {
-    if (!checkIsLoggedIn() || !checkUser(subjectId)) navigate('/list');
+    if (!checkIsLoggedIn()) navigate('/list');
+    if (!checkUser(subjectId)) navigate('/list');
     if (!subjectData) getSubjectInfo();
     if (!isFetching) return; // 페이지 들어오는 중
     if (hasNext === null) return; // 다음 페이지가 없을 시
