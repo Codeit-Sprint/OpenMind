@@ -68,13 +68,14 @@ const AnswerPage = () => {
 
   useEffect(() => {
     if (!checkIsLoggedIn()) navigate('/list');
-    if (!checkUser(subjectId)) navigate('/list');
+    if (!checkUser(subjectId)) navigate('/list'); // 로그인 한 유저가 아닐 경우
     if (!subjectData) getSubjectInfo();
     if (!isFetching) return; // 페이지 들어오는 중
     if (hasNext === null) return; // 다음 페이지가 없을 시
     fetchQuestions();
   }, [isFetching]);
 
+  if (!subjectData) return null;
   return (
     <>
       <FeedWrapper item={subjectData} copyLink={copyLink} />

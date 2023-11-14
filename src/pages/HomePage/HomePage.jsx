@@ -32,9 +32,9 @@ const HomePage = () => {
 
     try {
       const data = await refetch();
-      loginSetLocalStorage({ data }); // 로그인 세팅
+      loginSetLocalStorage({ data }); // 로그인할 때 localStorage 저장하는 함수
       setShowToast(false);
-      navigate(`/post/${data.id}/answer`);
+      navigate('/list');
     } catch (error) {
       setToastText('질문 받기에 실패하셨습니다.');
       setShowToast(true);

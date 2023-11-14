@@ -4,8 +4,6 @@ const DEFAULT_TEAM_PATH = '1-11';
 
 const LINK_BASE_URL = 'https://localhost:3000';
 
-const USER_ID = localStorage.getItem('userId');
-
 const second = 1000;
 const minute = second * 60;
 const hour = minute * 60;
@@ -62,6 +60,5 @@ export {
   DEFAULT_TEAM_PATH,
   TIME_IN_MILLISECONDS,
   LINK_BASE_URL,
-  USER_ID,
   KAKAO_SHARE_INFO,
 };
