@@ -1,4 +1,3 @@
-// import { FacebookShareButton } from 'react-share';
 import { Link } from 'react-router-dom';
 
 import { KAKAO_SHARE_INFO } from '../../constants/constant';
