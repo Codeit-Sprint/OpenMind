@@ -23,7 +23,7 @@ const Input = styled.textarea`
   resize: none;
 
   @media ${device.mobile} {
-    width: 24.7rem;
+    width: 20.3rem;
     height: 22rem;
     display: flex;
     padding: 1.6rem;

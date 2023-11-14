@@ -23,7 +23,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 22rem;
-  height: 40rem;
   margin: 0 auto;
 `;
 

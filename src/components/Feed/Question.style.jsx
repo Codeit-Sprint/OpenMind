@@ -18,8 +18,9 @@ const Container = styled.div`
   border-radius: 16px;
   border: 1px solid var(--brown-20, #e4d5c9);
   background: var(--brown-10, #f5f1ee);
+
   @media ${device.mobile} {
-    margin: 0 2.4rem;
+    margin: 0 auto;
     width: 32.7rem;
     /* width: 100%; */
   }

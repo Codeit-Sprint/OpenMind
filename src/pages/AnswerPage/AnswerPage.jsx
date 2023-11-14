@@ -81,9 +81,11 @@ const AnswerPage = () => {
       <FeedWrapper item={subjectData} copyLink={copyLink} />
 
       {checkUser(subjectId) && (
-        <S.FloatingDeleteButton onClick={handleAllDelete}>
-          <p>삭제하기</p>
-        </S.FloatingDeleteButton>
+        <S.ButtonWrapper>
+          <S.FloatingDeleteButton onClick={handleAllDelete}>
+            <p>삭제하기</p>
+          </S.FloatingDeleteButton>
+        </S.ButtonWrapper>
       )}
 
       {questions.length === 0 || !questions ? (

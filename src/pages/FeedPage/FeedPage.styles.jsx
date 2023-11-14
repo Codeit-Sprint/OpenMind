@@ -7,6 +7,7 @@ const FeedPageWrapper = styled.div`
   align-items: center;
 
   overflow: hidden;
+  gap: 5.4rem;
 `;
 
 const ButtonWrapper = styled.div`

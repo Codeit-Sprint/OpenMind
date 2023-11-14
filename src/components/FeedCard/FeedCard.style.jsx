@@ -74,12 +74,6 @@ const StyledProfile = styled.img`
 // 사용자 이름과 텍스트를 포함하는 섹션
 const ProfileSection = styled.section``;
 
-// 사용자 이름
-const UserName = styled.span`
-  ${S.BodyBold2};
-  color: ${theme['grayscale-60']};
-`;
-
 // 포스팅 날짜
 const Date = styled.span`
   ${S.CaptionMedium1};
@@ -135,7 +129,6 @@ export {
   MainSection,
   StyledProfile,
   ProfileSection,
-  UserName,
   Date,
   Post,
   Line,
