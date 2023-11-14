@@ -3,14 +3,16 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import * as S from './AnswerPage.style';
-import { FeedWrapper } from '../../components/Feed/Feed';
-import { Empty, List } from '../../components/Feed/Question';
+// import { FeedWrapper } from '../../components/Feed/Feed';
+// import { Empty, List } from '../../components/Feed/Question';
+import { Empty, List } from '../../components/FeedCard/ContentList';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 import { checkUser } from '../../utils/checkUser';
 import deleteSubject from '../../apis/deleteSubject';
+import ContentNavBar from '../../components/FeedCard/ContentNavBar';
 
 const AnswerPage = () => {
   const navigate = useNavigate();
@@ -55,18 +57,11 @@ const AnswerPage = () => {
     }
   };
 
-  // 케밥
-
-  // 함수 명 고치기
-
   const removeQuestionById = (deletingQuestionId) => {
     const result = questions.filter(
       (question) => question.id !== deletingQuestionId,
     );
     setQuestions(result);
-    // setState => 변경점 감지 기준 새로운 객체일때
-    // filter에 생성된 배열과 questions는 다른 값이다
-    // Closure -->
   };
 
   useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
@@ -81,7 +76,8 @@ const AnswerPage = () => {
 
   return (
     <>
-      <FeedWrapper item={subjectData} copyLink={copyLink} />
+      <ContentNavBar item={subjectData} copyLink={copyLink} />
+      {/* <FeedWrapper item={subjectData} copyLink={copyLink} /> */}
 
       {checkUser(subjectId) && (
         <S.ButtonWrapper>

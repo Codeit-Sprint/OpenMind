@@ -7,9 +7,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 684px;
   width: 100%;
-  width: min-content;
   height: min-content;
   gap: 32px;
 `;
@@ -17,10 +15,12 @@ const CardContainer = styled.div`
 // 프로필과 텍스트를 담는 섹션
 const MainSection = styled.section`
   display: flex;
-  width: min-content;
+  width: 100%;
   height: min-content;
   flex-direction: row;
   gap: 12px;
+
+  border: 1px solid blue;
 `;
 
 // 프로필 이미지
@@ -44,6 +44,7 @@ const UserName = styled.span`
 const AnswerDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 // 인풋 텍스트와 버튼을 담는 섹션
