@@ -36,15 +36,15 @@ const Profile = styled.img`
 `;
 
 // 사용자 이름
-const UserName = styled.span`
-  ${S.CaptionBold1};
-  color: ${theme['grayscale-60']};
-`;
-
 const AnswerDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const UserName = styled.span`
+  ${S.CaptionBold1};
+  color: ${theme['grayscale-60']};
 `;
 
 // 인풋 텍스트와 버튼을 담는 섹션
@@ -53,14 +53,6 @@ const InputSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const AnswerButton = styled.button`
-  width: 100%;
-  height: 46px;
-  border-radius: 8px;
-  background-color: ${theme['brown-30']};
-  color: ${theme['grayscale-10']};
 `;
 
 const Send = styled.div`
@@ -85,12 +77,11 @@ const Send = styled.div`
 `;
 
 export {
-  Profile,
-  UserName,
   CardContainer,
   MainSection,
+  Profile,
   AnswerDiv,
-  AnswerButton,
+  UserName,
   InputSection,
   Send,
 };

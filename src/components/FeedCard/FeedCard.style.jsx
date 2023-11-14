@@ -38,6 +38,7 @@ const CardContainer = styled.div`
     width: 295px;
   }
 `;
+
 // 답변완료 여부와 케밥 아이콘을 담는 섹션
 const Header = styled.section`
   position: relative;
@@ -53,26 +54,10 @@ const Icon = styled.img`
   cursor: pointer;
 `;
 
-// 프로필과 텍스트를 담는 섹션
-const MainSection = styled.section`
-  display: flex;
+//질문 컨테이너
+const QuestionContainer = styled.div`
   gap: 12px;
 `;
-// 프로필 이미지
-const StyledProfile = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
-
-  @media ${device.mobile} {
-    width: 32px;
-    height: 32px;
-    border-radius: 32px;
-  }
-`;
-
-// 사용자 이름과 텍스트를 포함하는 섹션
-const ProfileSection = styled.section``;
 
 // 포스팅 날짜
 const Date = styled.span`
@@ -80,13 +65,10 @@ const Date = styled.span`
   color: ${theme['grayscale-40']};
 `;
 
-// 포스트 텍스트
-const Post = styled.p`
+const QuestionDiv = styled.div`
   ${S.BodyRegular3};
-  color: ${(props) =>
-    props.status === '답변거절'
-      ? props.theme['red-50']
-      : props.theme['grayscale-50']};
+
+  word-break: break-all;
 `;
 
 // 구분 줄
@@ -97,19 +79,11 @@ const Line = styled.hr`
   border: 1px solid;
 `;
 
-//질문 컨테이너
-const QuestionContainer = styled.div`
-  gap: 12px;
+const LineUnderDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
-
-const QuestionDiv = styled.div`
-  ${S.BodyRegular3};
-
-  word-break: break-all;
-`;
-
-// 프로필과 텍스트를 구분하기 위한 텍스트 전용
-const AnswerDiv = styled.div``;
 
 // 리액션 버튼을 담기 위한 div
 const ReactionDiv = styled.div`
@@ -117,24 +91,14 @@ const ReactionDiv = styled.div`
   gap: 32px;
 `;
 
-const LineUnderDiv = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
 export {
   CardContainer,
   Header,
   Icon,
-  MainSection,
-  StyledProfile,
-  ProfileSection,
-  Date,
-  Post,
-  Line,
-  QuestionDiv,
-  AnswerDiv,
-  ReactionDiv,
   QuestionContainer,
+  Date,
+  QuestionDiv,
+  Line,
   LineUnderDiv,
+  ReactionDiv,
 };

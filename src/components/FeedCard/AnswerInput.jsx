@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-//import IMAGES from '../../assets';
 import InputTextArea from '../common/InputTextArea/InputTextArea';
 import * as S from './AnswerInput.style';
 import { useState } from 'react';
