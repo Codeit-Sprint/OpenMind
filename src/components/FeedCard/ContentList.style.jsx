@@ -44,4 +44,4 @@ const Text = styled.div`
   ${BodyBold1}
 `;
 
-export { Container, Text, Info };
+export { Container, Info, Text };
