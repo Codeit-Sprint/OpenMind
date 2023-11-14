@@ -3,16 +3,14 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import * as S from './AnswerPage.style';
-// import { FeedWrapper } from '../../components/Feed/Feed';
-// import { Empty, List } from '../../components/Feed/Question';
-import { Empty, List } from '../../components/FeedCard/ContentList';
+import { Empty, List } from '../../components/Content/ContentList';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 import { checkUser } from '../../utils/checkUser';
 import deleteSubject from '../../apis/deleteSubject';
-import ContentNavBar from '../../components/FeedCard/ContentNavBar';
+import ContentNavBar from '../../components/Content/ContentNavBar';
 
 const AnswerPage = () => {
   const navigate = useNavigate();
@@ -77,7 +75,6 @@ const AnswerPage = () => {
   return (
     <>
       <ContentNavBar item={subjectData} copyLink={copyLink} />
-      {/* <FeedWrapper item={subjectData} copyLink={copyLink} /> */}
 
       {checkUser(subjectId) && (
         <S.ButtonWrapper>

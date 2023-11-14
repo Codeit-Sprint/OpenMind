@@ -6,10 +6,10 @@ import IMAGES from '../../assets';
 import Badge from '../common/Badge/Badge';
 import { Like, Dislike } from '../common/Reaction/Reaction';
 import { getElapsedTime } from '../../utils/getElapsedTime';
-import Answer from './Answer';
+import Answer from '../Answer/Answer';
 import SelectMenu from '../common/SelectMenu/SelectMenu';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import AnswerInput from './AnswerInput';
+import AnswerInput from '../Answer/AnswerInput';
 import getQuestionById from '../../apis/getQuestionById';
 import CorrectionButton from '../common/Button/CorrectionButton';
 

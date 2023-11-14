@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-// import { FeedWrapper } from '../../components/Feed/Feed';
-// import { Empty, List } from '../../components/Feed/Question';
-import { Empty, List } from '../../components/FeedCard/ContentList';
+import { Empty, List } from '../../components/Content/ContentList';
 import FloatingButton from '../../components/common/Button/FloatingButton';
 import Modal from '../../components/Modal/Modal';
 import Toast from '../../components/common/Toast/Toast';
@@ -15,7 +13,7 @@ import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import { checkUser } from '../../utils/checkUser';
 
 import * as S from './FeedPage.styles';
-import ContentNavBar from '../../components/FeedCard/ContentNavBar';
+import ContentNavBar from '../../components/Content/ContentNavBar';
 
 const FeedPage = () => {
   const [active, setActive] = useState(false);
