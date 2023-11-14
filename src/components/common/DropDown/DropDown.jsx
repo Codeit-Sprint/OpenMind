@@ -6,8 +6,8 @@ import useDetectClose from './useDetectClose';
 const DropDown = ({ handleClick }) => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [selected, setSelected] = useState('최신순');
-  const [isNameActive, setIsNameActive] = useState(true);
-  const [isNewestActive, setIsNewestActive] = useState(false);
+  const [isNameActive, setIsNameActive] = useState(false);
+  const [isNewestActive, setIsNewestActive] = useState(true);
 
   const handleNameClick = () => {
     handleClick('name');
