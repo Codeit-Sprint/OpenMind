@@ -2,15 +2,25 @@ import styled from 'styled-components';
 import theme from '../../styles/theme';
 import { device } from '../../styles/mediaQuery';
 import * as S from '../../styles/typography';
+
 const CardContainer = styled.div`
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 684px;
+  width: 100%;
+  width: min-content;
   height: min-content;
-  padding: 32px;
   gap: 32px;
+`;
+
+// 프로필과 텍스트를 담는 섹션
+const MainSection = styled.section`
+  display: flex;
+  width: min-content;
+  height: min-content;
+  flex-direction: row;
+  gap: 12px;
 `;
 
 // 프로필 이미지
@@ -25,13 +35,10 @@ const Profile = styled.img`
   }
 `;
 
-// 프로필과 텍스트를 담는 섹션
-const MainSection = styled.section`
-  display: flex;
-  width: min-content;
-  height: min-content;
-  flex-direction: row;
-  gap: 12px;
+// 사용자 이름
+const UserName = styled.span`
+  ${S.CaptionBold1};
+  color: ${theme['grayscale-60']};
 `;
 
 const AnswerDiv = styled.div`
@@ -45,19 +52,6 @@ const InputSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const InputField = styled.input`
-  width: 560px;
-  height: 186px;
-  placeholder: '답변을 작성하세요.';
-  background-color: ${theme['grayscale-20']};
-  @media ${device.tablet} {
-    width: 548px;
-  }
-  @media ${device.mobile} {
-    width: 203px;
-  }
 `;
 
 const AnswerButton = styled.button`
@@ -91,7 +85,7 @@ const Send = styled.div`
 
 export {
   Profile,
-  InputField,
+  UserName,
   CardContainer,
   MainSection,
   AnswerDiv,

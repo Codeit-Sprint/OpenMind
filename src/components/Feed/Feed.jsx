@@ -10,7 +10,7 @@ import FacebookButton from '../common/Button/FacebookButton';
 const FeedWrapper = ({ copyLink, item }) => {
   const currentURL = window.location.href;
 
-  // 카카옹 공유하기
+  // 카카오 공유하기
   const kakaoShare = () => {
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
@@ -60,9 +60,7 @@ const FeedWrapper = ({ copyLink, item }) => {
           <S.NickName>{item.name}</S.NickName>
           <S.ButtonWrapper>
             <LinkButton onClick={copyLink} />
-
             <KakaoButton handleKakaoButton={kakaoShare} />
-
             <FacebookShareButton url={currentURL}>
               <FacebookButton />
             </FacebookShareButton>

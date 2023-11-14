@@ -2,7 +2,6 @@
 //import IMAGES from '../../assets';
 import InputTextArea from '../common/InputTextArea/InputTextArea';
 import * as S from './AnswerInput.style';
-import { UserName } from './FeedCard.style';
 import { useState } from 'react';
 import postAnswers from '../../apis/postAnswers';
 import putAnswer from '../../apis/putAnswer';
@@ -55,7 +54,7 @@ function AnswerInput({
           <S.MainSection>
             <S.Profile src={profileImg} />
             <S.AnswerDiv>
-              <UserName>{userName}</UserName>
+              <S.UserName>{userName}</S.UserName>
               <S.InputSection>
                 <InputTextArea
                   placeholder="답변을 입력해주세요"
