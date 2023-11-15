@@ -1,13 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 /* user agent stylesheet 초기화 */
-import Pretendard from '../fonts/PretendardVariable.woff2';
+import Pretendard from '../fonts/Pretendard-Regular.woff';
+import Actor from '../fonts/Actor-Regular.woff';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-      font-family: 'Pretendard';
-      src: local("Pretendard"), url(${Pretendard}) format('woff2');
-      font-weight: 400;
-      font-style: normal;
+    font-family: 'Pretendard';
+    src: url(${Pretendard}) format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Actor';
+    src: url(${Actor}) format('woff');
+    font-weight: 400;
+    font-style: normal;
   }
 
   * {

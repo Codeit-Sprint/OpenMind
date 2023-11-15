@@ -13,7 +13,7 @@ const Empty = () => {
         <img src={IMAGES.messages} alt="messages" />
         <S.Text>아직 질문이 없습니다</S.Text>
       </S.Info>
-      <img src={IMAGES.container} alt="container" />
+      <S.MsgImg src={IMAGES.container} alt="container" />
     </S.Container>
   );
 };

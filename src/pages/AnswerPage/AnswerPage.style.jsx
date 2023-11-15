@@ -5,20 +5,19 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 71.6rem;
-
-  margin: 2.3rem auto 0.6rem;
+  margin: 0 auto;
 
   @media ${device.mobile} {
     width: 32.7rem;
-    /* width: 100%; */
   }
 `;
 
 const FloatingDeleteButton = styled.div`
-  /* position: absolute;
-  top: 35.5rem;
-  right: 15%; */
   cursor: pointer;
+
+  margin: 0 auto;
+  position: absolute;
+  top: 35.4rem;
 
   display: flex;
   width: 100px;
@@ -43,6 +42,10 @@ const FloatingDeleteButton = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 25px; /* 166.667% */
+  }
+
+  @media ${device.mobile} {
+    top: 32.2rem;
   }
 `;
 

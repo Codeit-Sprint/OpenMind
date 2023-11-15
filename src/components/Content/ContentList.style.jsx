@@ -8,10 +8,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   min-height: 330px;
-  padding: 16px 24px;
+  padding: 1.6rem 2.4rem;
   gap: 8px;
   flex-shrink: 0;
   margin: 0 auto 14rem;
@@ -37,10 +38,12 @@ const Info = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: cente;
+  justify-content: center;
   gap: 8px;
+`;
 
-  margin-bottom: 70px;
+const MsgImg = styled.img`
+  margin-bottom: 6.5rem;
 `;
 
 const Text = styled.div`
@@ -49,4 +52,4 @@ const Text = styled.div`
   ${BodyBold1}
 `;
 
-export { Container, Info, Text };
+export { Container, Info, MsgImg, Text };
