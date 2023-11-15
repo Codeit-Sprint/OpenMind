@@ -13,16 +13,21 @@ const Container = styled.div`
   padding: 16px 24px;
   gap: 8px;
   flex-shrink: 0;
-  margin: 0 auto;
+  margin: 0 auto 14rem;
 
   border-radius: 16px;
   border: 1px solid var(--brown-20, #e4d5c9);
   background: var(--brown-10, #f5f1ee);
 
+  @media ${device.pc} {
+    width: 716px;
+  }
+  @media ${device.tablet} {
+    width: 70.4rem;
+  }
+
   @media ${device.mobile} {
-    margin: 0 auto;
     width: 32.7rem;
-    /* width: 100%; */
   }
 `;
 

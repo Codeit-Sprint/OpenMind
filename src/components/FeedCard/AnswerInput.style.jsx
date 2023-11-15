@@ -19,8 +19,6 @@ const MainSection = styled.section`
   height: min-content;
   flex-direction: row;
   gap: 12px;
-
-  border: 1px solid blue;
 `;
 
 // 프로필 이미지
