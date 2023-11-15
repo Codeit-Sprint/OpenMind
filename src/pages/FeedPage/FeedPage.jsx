@@ -79,7 +79,7 @@ const FeedPage = () => {
         )}
 
         {/* Subject를 작성한 것이 User인지 확인하는 함수: User일 시 질문 작성하기 버튼 안보이게 해야 함  */}
-        {!checkUser(subjectId) && (
+        {checkUser(subjectId) && (
           <S.ButtonWrapper>
             <FloatingButton setActive={setActive} />
           </S.ButtonWrapper>

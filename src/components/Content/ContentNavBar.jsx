@@ -7,7 +7,7 @@ import KakaoButton from '../common/Button/KakaoButton';
 import FacebookButton from '../common/Button/FacebookButton';
 import { KAKAO_SHARE_INFO } from '../../constants/constant';
 
-const FeedWrapper = ({ copyLink, item }) => {
+const ContentNavBar = ({ copyLink, item }) => {
   // 카카옹 공유하기
   const kakaoShare = () => {
     window.Kakao.Share.sendDefault(KAKAO_SHARE_INFO);
@@ -35,4 +35,4 @@ const FeedWrapper = ({ copyLink, item }) => {
   }
 };
 
-export { FeedWrapper };
+export default ContentNavBar;
