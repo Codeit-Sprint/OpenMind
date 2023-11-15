@@ -23,7 +23,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto 5.4rem;
+  margin: ${(props) =>
+    props.$isUser ? '0 auto 2.7rem auto' : '0 auto 5.4rem auto'};
 `;
 
 const LogoImage = styled.img`

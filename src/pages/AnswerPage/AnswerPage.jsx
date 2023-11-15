@@ -1,40 +1,45 @@
-import react from 'react';
-import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import * as S from './AnswerPage.style';
 import { Empty, List } from '../../components/Content/ContentList';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
-import getSubjectById from '../../apis/getSubjectById';
 import { checkUser } from '../../utils/checkUser';
 import deleteSubject from '../../apis/deleteSubject';
 import ContentNavBar from '../../components/Content/ContentNavBar';
 import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
+import getSubjectById from '../../apis/getSubjectById';
+import useAsync from '../../hooks/useAsync';
 
 const AnswerPage = () => {
   const navigate = useNavigate();
   const { subjectId } = useParams();
-  const [questions, setQuestions] = react.useState([]);
-  const [showToast, setShowToast] = react.useState(false);
-  const [toastText, setToastText] = react.useState('URL이 복사되었습니다.');
-  const [isFetching, setIsFetching] = react.useState(true);
-  const [hasNext, setHasNext] = react.useState(true);
-  const [subjectData, setSubjectData] = react.useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [showToast, setShowToast] = useState(false);
+  const [toastText, setToastText] = useState('URL이 복사되었습니다.');
+  const [isScrollFetching, setIsScrollFetching] = useState(true);
+  const [subjectData, setSubjectData] = useState(null);
+
+  const { refetch: refetchSubject } = useAsync(getSubjectById, [], true);
+  const { state, refetch: refetchQuestions } = useAsync(getQuestions, [], true);
+  const { data: questionData } = state;
 
   // Subject 정보 받기 함수
   const getSubjectInfo = async () => {
-    const result = await getSubjectById({ subjectId });
+    const result = await refetchSubject({ subjectId });
     setSubjectData(result);
   };
 
   // 전체 질문 받는 함수
   const fetchQuestions = async () => {
-    const result = await getQuestions({ subjectId, offset: questions.length });
-    setHasNext(result.next);
+    const result = await refetchQuestions({
+      subjectId,
+      offset: questions.length,
+    });
     setQuestions((prev) => [...prev, ...result.results]);
-    setIsFetching(false);
+    setIsScrollFetching(false);
   };
 
   // 링크 복사 클릭 시 발생하는 함수
@@ -64,16 +69,16 @@ const AnswerPage = () => {
     getSubjectInfo();
   };
 
-  useSetFetchingWhenScrollEnded(setIsFetching); // 무한 스크롤
+  useSetFetchingWhenScrollEnded({ setIsScrollFetching }); // 무한 스크롤
 
   useEffect(() => {
     if (!checkIsLoggedIn()) navigate('/list');
     if (!checkUser(subjectId)) navigate('/list'); // 로그인 한 유저가 아닐 경우
     if (!subjectData) getSubjectInfo();
-    if (!isFetching) return; // 페이지 들어오는 중
-    if (hasNext === null) return; // 다음 페이지가 없을 시
+    if (!isScrollFetching) return; // 페이지 들어오는 중
+    if (questionData && questionData.next === null) return; // 다음 페이지가 없을 시
     fetchQuestions();
-  }, [isFetching]);
+  }, [isScrollFetching]);
 
   if (!subjectData) return null;
   return (

@@ -55,6 +55,7 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
 
   // Kebab 클릭 함수
   const handleKebabClick = () => {
+    if (isCorrecting) return;
     setShowSelectMenu((prev) => !prev);
   };
 
@@ -114,6 +115,7 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
           subjectData={subjectData}
           isCorrecting={isCorrecting}
           setIsCorrecting={setIsCorrecting}
+          setAnswerInfo={setAnswerInfo}
         />
       )}
 
@@ -144,9 +146,13 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
         </S.ReactionDiv>
 
         {/* 수정하기 버튼 */}
-        {isAnswerPage && !isCorrecting && answer && foundAnswer && (
-          <CorrectionButton handleEditButton={handleEditButton} />
-        )}
+        {isAnswerPage &&
+          !isCorrecting &&
+          !answerInfo?.isRejected &&
+          answerInfo &&
+          foundAnswer && (
+            <CorrectionButton handleEditButton={handleEditButton} />
+          )}
       </S.LineUnderDiv>
       {showToast && (
         <Toast

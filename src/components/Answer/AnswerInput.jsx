@@ -10,9 +10,12 @@ function AnswerInput({
   handleAnswerInputClicked,
   answerItem,
   isCorrecting,
+  setAnswerInfo,
   setIsCorrecting,
+  subjectData,
 }) {
   const { id: questionId } = item;
+  const { imageSource } = subjectData;
   let createdAt = '';
 
   const [content, setContent] = useState(answerItem?.content);
@@ -34,7 +37,9 @@ function AnswerInput({
           isRejected: result.isRejected,
         });
       } else {
-        await putAnswer({ answerId: answerItem?.id, content });
+        const result = await putAnswer({ answerId: answerItem?.id, content });
+        setAnswerInfo(result);
+        console.log(result, setIsCorrecting);
         setIsCorrecting(false);
       }
 
@@ -43,14 +48,13 @@ function AnswerInput({
     }
   };
   const userName = localStorage.getItem('userName');
-  const profileImg = localStorage.getItem('imageSource');
 
   return (
     <>
       {!showAnswerInput && (
         <S.CardContainer>
           <S.MainSection>
-            <S.Profile src={profileImg} />
+            <S.Profile src={imageSource} />
             <S.AnswerDiv>
               <S.UserName>{userName}</S.UserName>
               <S.InputSection>

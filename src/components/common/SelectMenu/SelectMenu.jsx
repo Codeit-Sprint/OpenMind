@@ -54,7 +54,7 @@ const SelectMenu = ({
       let createdAt = new Date().toLocaleString();
       const result = await postAnswers(
         questionId,
-        '답변을 입력해주세요.',
+        'undefined',
         createdAt,
         true,
       );
@@ -77,14 +77,36 @@ const SelectMenu = ({
   const handleCancelRefuseAnswer = async () => {
     setShowSelectMenu(false);
     refused = false;
-    await deleteAnswer({
-      answerId: answer.id,
-    });
+    if (answer?.content !== 'undefined') {
+      const result = await patchAnswer({
+        answerId: answer?.id,
+        isRejected: refused,
+        content: answer?.content,
+      });
 
-    deleteLocalStorageAnswer({
-      questionId,
-    });
-    setAnswerInfo(null);
+      setLocalStorageAnswer({
+        questionId,
+        answerId: answer.id,
+        isRejected: true,
+      });
+
+      setAnswerInfo({
+        content: result.content,
+        createdAt: result.createdAt,
+        id: result.id,
+        isRejected: result.isRejected,
+        questionId: result.questionId,
+      });
+    } else {
+      await deleteAnswer({
+        answerId: answer.id,
+      });
+
+      deleteLocalStorageAnswer({
+        questionId,
+      });
+      setAnswerInfo(null);
+    }
   };
 
   return (
