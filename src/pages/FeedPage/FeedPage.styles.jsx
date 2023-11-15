@@ -7,13 +7,12 @@ const FeedPageWrapper = styled.div`
   align-items: center;
 
   overflow: hidden;
+  gap: 5.4rem;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 5.8rem;
-  margin-right: 2.4rem;
 `;
 
 export { FeedPageWrapper, ButtonWrapper };

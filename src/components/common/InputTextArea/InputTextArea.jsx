@@ -17,13 +17,12 @@ const InputTextArea = ({
 };
 
 const Input = styled.textarea`
-  width: 56rem;
+  width: 100%;
   height: 18.6rem;
   padding: 1.6rem;
   resize: none;
 
   @media ${device.mobile} {
-    width: 24.7rem;
     height: 22rem;
     display: flex;
     padding: 1.6rem;

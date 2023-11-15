@@ -19,6 +19,9 @@ const ButtonBox = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
 
   p {
+    position: absolute;
+    right: 1.6rem;
+
     color: var(--grayscale-50, #515151);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Pretendard;
@@ -33,7 +36,9 @@ const ButtonBox = styled.div`
   }
 
   img:nth-child(odd) {
-    position: relative;
+    position: absolute;
+    top: 1.12rem;
+    left: 1.52rem;
   }
   img:nth-child(even) {
     position: absolute;

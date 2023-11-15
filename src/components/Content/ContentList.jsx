@@ -1,9 +1,10 @@
+// 기존 Feed/Question.jsx 파일입니다.
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 import IMAGES from '../../assets';
 import FeedCard from '../FeedCard/FeedCard';
-import * as S from './Question.style';
+import * as S from './ContentList.style';
 
 const Empty = () => {
   return (

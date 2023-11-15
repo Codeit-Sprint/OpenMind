@@ -1,3 +1,4 @@
+// 기존의 Feed/Feed.style.jsx 파일입니다.
 import styled from 'styled-components';
 import IMAGES from '../../assets';
 import { H2, H3 } from '../../styles/typography';
@@ -22,8 +23,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 22rem;
-  height: 40rem;
   margin: 0 auto;
 `;
 
