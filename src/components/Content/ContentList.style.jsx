@@ -40,6 +40,7 @@ const Info = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 1.6rem;
 `;
 
 const MsgImg = styled.img`

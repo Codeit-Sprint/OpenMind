@@ -80,6 +80,9 @@ const HomePageInputBox = styled.div`
     flex: 1 0 0;
     color: ${(props) => props.theme['grayscale-40']};
     ${BodyRegular3}
+    &:focus {
+      color: ${(props) => props.theme['brown-40']};
+    }
   }
 `;
 
