@@ -17,13 +17,12 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<NotFoundPage />} />
           <Route path="/" exact={true} element={<HomePage />} />
           <Route path="list" element={<QuestionListPage />} />
-
           <Route path="post" element={<FeedPage />} />
-          <Route path="post:subjectId" element={<FeedPage />} />
-          <Route path="post:subjectId/answer" element={<AnswerPage />} />
+          <Route path="post/:subjectId" element={<FeedPage />} />
+          <Route path="post/:subjectId/answer" element={<AnswerPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
