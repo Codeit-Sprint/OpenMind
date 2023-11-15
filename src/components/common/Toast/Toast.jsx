@@ -12,6 +12,7 @@ const Toast = ({ text, bgColor = '#000', textColor = '#FFF' }) => {
 
 const Container = styled.div`
   position: fixed;
+  z-index: 10;
   display: inline-flex;
   bottom: 6rem;
   left: 50%;
