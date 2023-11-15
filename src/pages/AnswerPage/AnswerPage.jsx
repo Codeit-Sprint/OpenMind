@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import * as S from './AnswerPage.style';
-import { FeedWrapper } from '../../components/Feed/Feed';
-import { Empty, List } from '../../components/Feed/Question';
+import { Empty, List } from '../../components/Content/ContentList';
 import getQuestions from '../../apis/getQuestions';
 import Toast from '../../components/common/Toast/Toast';
 import useSetFetchingWhenScrollEnded from '../../hooks/useSetFetchingWhenScrollEnded';
 import getSubjectById from '../../apis/getSubjectById';
 import { checkUser } from '../../utils/checkUser';
 import deleteSubject from '../../apis/deleteSubject';
+import ContentNavBar from '../../components/Content/ContentNavBar';
 import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
 
 const AnswerPage = () => {
@@ -78,12 +78,14 @@ const AnswerPage = () => {
   if (!subjectData) return null;
   return (
     <>
-      <FeedWrapper item={subjectData} copyLink={copyLink} />
+      <ContentNavBar item={subjectData} copyLink={copyLink} />
 
       {checkUser(subjectId) && (
-        <S.FloatingDeleteButton onClick={handleAllDelete}>
-          <p>삭제하기</p>
-        </S.FloatingDeleteButton>
+        <S.ButtonWrapper>
+          <S.FloatingDeleteButton onClick={handleAllDelete}>
+            <p>삭제하기</p>
+          </S.FloatingDeleteButton>
+        </S.ButtonWrapper>
       )}
 
       {questions.length === 0 || !questions ? (

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { FeedWrapper } from '../../components/Feed/Feed';
-import { Empty, List } from '../../components/Feed/Question';
+import { Empty, List } from '../../components/Content/ContentList';
 import FloatingButton from '../../components/common/Button/FloatingButton';
 import Modal from '../../components/Modal/Modal';
 import Toast from '../../components/common/Toast/Toast';
@@ -14,6 +13,7 @@ import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import { checkUser } from '../../utils/checkUser';
 
 import * as S from './FeedPage.styles';
+import ContentNavBar from '../../components/Content/ContentNavBar';
 
 const FeedPage = () => {
   const [active, setActive] = useState(false);
@@ -69,7 +69,9 @@ const FeedPage = () => {
   if (subjectData) {
     return (
       <S.FeedPageWrapper>
-        <FeedWrapper item={subjectData} copyLink={copyLink} />
+        <ContentNavBar item={subjectData} copyLink={copyLink} />
+
+        {/* <FeedWrapper item={subjectData} copyLink={copyLink} /> */}
         {questions.length === 0 ? (
           <Empty />
         ) : (
@@ -77,7 +79,7 @@ const FeedPage = () => {
         )}
 
         {/* Subject를 작성한 것이 User인지 확인하는 함수: User일 시 질문 작성하기 버튼 안보이게 해야 함  */}
-        {!checkUser(subjectId) && (
+        {checkUser(subjectId) && (
           <S.ButtonWrapper>
             <FloatingButton setActive={setActive} />
           </S.ButtonWrapper>

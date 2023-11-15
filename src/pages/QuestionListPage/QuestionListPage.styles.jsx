@@ -14,15 +14,17 @@ const NavbarBox = styled.div`
   margin-top: 4rem;
   width: 100%;
   max-width: 95.5rem;
+
+  @media ${device.tablet} {
+    max-width: 95.5rem;
+    padding: 0 max(5rem);
+  }
+
   @media ${device.mobile} {
     display: grid;
     place-items: center;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr;
-  }
-  @media ${device.tablet} {
-    max-width: 95.5rem;
-    padding: 0 max(5rem);
   }
 `;
 
@@ -30,26 +32,6 @@ const LogoImage = styled.img`
   width: 14.6rem;
   height: 5.7rem;
   cursor: pointer;
-`;
-
-const AnswerButton = styled.button`
-  display: inline-flex;
-  padding: 1.2rem 2.4rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid ${(props) => props.theme['brown-40']};
-  background-color: ${(props) => props.theme['brown-10']};
-
-  @media ${device.pc} {
-  }
-
-  @media ${device.tablet} {
-  }
-
-  @media ${device.mobile} {
-  }
 `;
 
 const QuestionBarBox = styled.div`
@@ -65,6 +47,8 @@ const QuestionBarBox = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 2.4rem;
+    max-width: 630px;
+    margin: 5.2rem auto 1.6rem;
   }
 `;
 
@@ -101,6 +85,7 @@ const QuestionMainBox = styled.div`
     margin: 3rem 3.2rem 0;
   }
   @media ${device.mobile} {
+    margin: 0 2.4rem;
   }
 `;
 
@@ -123,7 +108,7 @@ const CardList = styled.div`
   @media ${device.mobile} {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
-    padding: 0 2.4rem;
+    /* padding: 0 2.4rem; */
   }
 `;
 
@@ -134,7 +119,6 @@ export {
   QuestionBarBox,
   QuestionMainBox,
   PaginationBox,
-  AnswerButton,
   CardList,
   QuestionBarHeader,
 };
