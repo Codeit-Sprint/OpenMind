@@ -43,8 +43,8 @@ const QuestionBarBox = styled.div`
 
   @media ${device.mobile} {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     padding: 0 2.4rem;
     max-width: 630px;
@@ -61,7 +61,6 @@ const QuestionBarHeader = styled.h2`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-bottom: 1.2rem;
 
   @media ${device.mobile} {
     font-size: 24px;

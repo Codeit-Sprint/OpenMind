@@ -49,7 +49,7 @@ const QuestionListPage = () => {
         sort,
         offset: (num - 1) * limit,
       });
-      setShowCards(result.results.slice(0, limit));
+      setShowCards(result?.results.slice(0, limit));
       setCurPageNum(num);
     } catch (err) {
       console.error(err);
@@ -62,7 +62,7 @@ const QuestionListPage = () => {
       const result = await refetch({ limit: 8, sort: item, offset: 0 });
       setSort(item);
       setCurPageNum(1);
-      setShowCards(result.results.slice(0, limit));
+      setShowCards(result?.results.slice(0, limit));
     } catch (err) {
       console.error(err);
     }
@@ -74,8 +74,8 @@ const QuestionListPage = () => {
       const result = await refetch({ limit: 8, sort, offset: 0 });
       let currentLimit = windowWidth >= 936 ? 8 : 6;
       setLimit(currentLimit);
-      setShowCards(result.results.slice(0, currentLimit));
-      setCount(result.count);
+      setShowCards(result?.results.slice(0, currentLimit));
+      setCount(result?.count);
     } catch (err) {
       console.error(err);
     }

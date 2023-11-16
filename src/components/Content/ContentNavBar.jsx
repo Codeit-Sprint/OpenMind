@@ -7,6 +7,7 @@ import KakaoButton from '../common/Button/KakaoButton';
 import FacebookButton from '../common/Button/FacebookButton';
 import { KAKAO_SHARE_INFO } from '../../constants/constant';
 import { checkUser } from '../../utils/checkUser';
+import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
 
 const ContentNavBar = ({ copyLink, item }) => {
   // 카카옹 공유하기
@@ -15,7 +16,7 @@ const ContentNavBar = ({ copyLink, item }) => {
   };
 
   let isUser;
-  if (checkUser()) isUser = true;
+  if (checkUser() || !checkIsLoggedIn()) isUser = true;
   else isUser = false;
 
   if (!item) return null;
