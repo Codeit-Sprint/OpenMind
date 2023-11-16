@@ -2,7 +2,7 @@ import IMAGES from '../assets';
 
 const DEFAULT_TEAM_PATH = '1-11';
 
-const LINK_BASE_URL = 'https://my-vercel-iota.vercel.app/';
+const LINK_BASE_URL = 'https://open-mind-eight.vercel.app/';
 
 const second = 1000;
 const minute = second * 60;
