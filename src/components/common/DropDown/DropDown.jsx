@@ -5,9 +5,9 @@ import useDetectClose from './useDetectClose';
 
 const DropDown = ({ handleClick }) => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
-  const [selected, setSelected] = useState('이름순');
-  const [isNameActive, setIsNameActive] = useState(true);
-  const [isNewestActive, setIsNewestActive] = useState(false);
+  const [selected, setSelected] = useState('최신순');
+  const [isNameActive, setIsNameActive] = useState(false);
+  const [isNewestActive, setIsNewestActive] = useState(true);
 
   const handleNameClick = () => {
     handleClick('name');
@@ -38,15 +38,11 @@ const DropDown = ({ handleClick }) => {
       </S.DropDownBtn>
       <S.Menu $isDropped={myPageIsOpen}>
         <S.Ul>
-          <S.Li $active={isNameActive}>
-            <p id="name" onClick={handleNameClick}>
-              이름순
-            </p>
+          <S.Li $active={isNameActive} onClick={handleNameClick}>
+            <p id="name">이름순</p>
           </S.Li>
-          <S.Li $active={isNewestActive}>
-            <p id="newest" onClick={handleNewestClick}>
-              최신순
-            </p>
+          <S.Li $active={isNewestActive} onClick={handleNewestClick}>
+            <p id="newest">최신순</p>
           </S.Li>
         </S.Ul>
       </S.Menu>

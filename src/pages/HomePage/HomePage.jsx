@@ -1,18 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import postSubjects from '../../apis/postSubjects';
 import checkIsLoggedIn from '../../utils/checkIsLoggedIn';
-
 import Toast from '../../components/common/Toast/Toast';
 import IMAGES from '../../assets';
 import * as S from './HomePage.styles';
+import loginSetLocalStorage from '../../utils/loginSetLocalStorage';
+import useAsync from '../../hooks/useAsync';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState(null);
+
+  // Toast
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState('이름을 입력해주세요!');
+
+  const [name, setName] = useState(null);
+  const { refetch } = useAsync(() => postSubjects(name), [name], true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,23 +29,20 @@ const HomePage = () => {
       }
       return;
     }
+
     try {
-      const data = await postSubjects(name);
-      localStorage.setItem('userName', data.name);
-      localStorage.setItem('imageSource', data.imageSource);
-      localStorage.setItem('userId', data.id);
-      localStorage.setItem('answerArray', JSON.stringify([]));
-      localStorage.setItem('reactionArray', JSON.stringify([]));
+      const data = await refetch();
+      loginSetLocalStorage({ data }); // 로그인할 때 localStorage 저장하는 함수
       setShowToast(false);
-      navigate(`/post/${data.id}/answer`);
-    } catch {
+      navigate('/list');
+    } catch (error) {
       setToastText('질문 받기에 실패하셨습니다.');
       setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500);
+      setTimeout(() => setShowToast(false), 3000);
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (checkIsLoggedIn()) navigate('/list');
   }, []);
 
@@ -63,6 +65,7 @@ const HomePage = () => {
               type="text"
               placeholder="이름을 입력하세요"
               onChange={(e) => setName(e.target.value)}
+              autoFocus
             />
           </S.HomePageInputBox>
           <S.HomePageButton onClick={handleSubmit}>

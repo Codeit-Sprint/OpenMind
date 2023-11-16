@@ -1,9 +1,13 @@
-import styled from 'styled-components';
-import IMAGES from '../../../assets';
-import { CaptionMedium1 } from '../../../styles/typography';
 import { useEffect, useState } from 'react';
+
+import styled from 'styled-components';
+import { CaptionMedium1 } from '../../../styles/typography';
 import { setLocalStorageReaction } from '../../../utils/setLocalStorageReaction';
 import postReaction from '../../../apis/postReaction';
+import checkIsLoggedIn from '../../../utils/checkIsLoggedIn';
+
+import { ReactComponent as LikeIcon } from '../../../assets/like.svg';
+import { ReactComponent as DislikeIcon } from '../../../assets/dislike.svg';
 
 const Like = ({
   like,
@@ -12,6 +16,8 @@ const Like = ({
   setReactionClicked,
   reactionClicked,
   likeChecked,
+  setShowToast,
+  showToast,
 }) => {
   const [clicked, setClicked] = useState(false);
   const [likeNum, setLikeNum] = useState(like);
@@ -23,6 +29,13 @@ const Like = ({
   };
 
   const handleClick = () => {
+    if (!checkIsLoggedIn()) {
+      if (!showToast) {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2500);
+      }
+      return;
+    }
     if (clicked || checkedReaction || reactionClicked) return;
 
     setLocalStorageReaction({ questionId, like: true, dislike: false }); // LocalStorage에 저장
@@ -39,7 +52,7 @@ const Like = ({
 
   return (
     <Container onClick={handleClick} $status={clicked} $react="like">
-      <img src={clicked ? IMAGES.like_clicked : IMAGES.like} alt="like" />
+      <LikeIcon fill={clicked ? '#1877F2' : '#818181'} />
       <p>좋아요</p>
       {likeNum === 0 ? '' : likeNum}
     </Container>
@@ -53,6 +66,8 @@ const Dislike = ({
   checkedReaction,
   setReactionClicked,
   reactionClicked,
+  setShowToast,
+  showToast,
 }) => {
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const [dislikeNum, setDislikeNum] = useState(dislike);
@@ -64,6 +79,14 @@ const Dislike = ({
   };
 
   const handleClick = () => {
+    if (!checkIsLoggedIn()) {
+      if (!showToast) {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2500);
+      }
+      return;
+    }
+
     if (dislikeClicked || checkedReaction || reactionClicked) return;
 
     setLocalStorageReaction({ questionId, like: false, dislike: true }); // LocalStorage에 저장
@@ -80,10 +103,7 @@ const Dislike = ({
 
   return (
     <Container onClick={handleClick} $status={dislikeClicked} $react="dislike">
-      <img
-        src={dislikeClicked ? IMAGES.dislike_clicked : IMAGES.dislike}
-        alt="dislike"
-      />
+      <DislikeIcon fill={dislikeClicked ? 'black' : '#818181'} />
       <p>싫어요</p>
       {dislikeNum === 0 ? '' : dislikeNum}
     </Container>

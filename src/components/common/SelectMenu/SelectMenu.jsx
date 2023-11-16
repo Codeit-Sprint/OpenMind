@@ -54,7 +54,7 @@ const SelectMenu = ({
       let createdAt = new Date().toLocaleString();
       const result = await postAnswers(
         questionId,
-        '답변을 입력해주세요.',
+        'undefined',
         createdAt,
         true,
       );
@@ -64,38 +64,49 @@ const SelectMenu = ({
         isRejected: true,
       });
 
-      setAnswerInfo(() => ({
+      setAnswerInfo({
         content: result.content,
         createdAt: result.createdAt,
         id: result.id,
         isRejected: result.isRejected,
         questionId: result.questionId,
-      }));
+      });
     }
   };
   // 답변 거절 취소
   const handleCancelRefuseAnswer = async () => {
     setShowSelectMenu(false);
     refused = false;
-    const result = await patchAnswer({
-      answerId: answer?.id,
-      isRejected: refused,
-      content: answer?.content,
-    });
+    if (answer?.content !== 'undefined') {
+      const result = await patchAnswer({
+        answerId: answer?.id,
+        isRejected: refused,
+        content: answer?.content,
+      });
 
-    setLocalStorageAnswer({
-      questionId,
-      answerId: answer.id,
-      isRejected: true,
-    });
+      setLocalStorageAnswer({
+        questionId,
+        answerId: answer.id,
+        isRejected: true,
+      });
 
-    setAnswerInfo({
-      content: result.content,
-      createdAt: result.createdAt,
-      id: result.id,
-      isRejected: result.isRejected,
-      questionId: result.questionId,
-    });
+      setAnswerInfo({
+        content: result.content,
+        createdAt: result.createdAt,
+        id: result.id,
+        isRejected: result.isRejected,
+        questionId: result.questionId,
+      });
+    } else {
+      await deleteAnswer({
+        answerId: answer.id,
+      });
+
+      deleteLocalStorageAnswer({
+        questionId,
+      });
+      setAnswerInfo(null);
+    }
   };
 
   return (

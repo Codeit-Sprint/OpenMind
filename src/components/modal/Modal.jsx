@@ -3,6 +3,8 @@ import * as S from './Modal.styles';
 import IMAGES from '../../assets';
 import InputTextArea from '../common/InputTextArea/InputTextArea';
 import postQuestions from '../../apis/postQuestions';
+import useAsync from '../../hooks/useAsync';
+// import useAsync from '../../hooks/useAsync';
 
 const Modal = ({
   setActive,
@@ -14,20 +16,23 @@ const Modal = ({
 }) => {
   const outside = useRef();
   const [content, setContent] = useState('');
+  const { refetch } = useAsync(postQuestions, [], true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (content !== '') {
-      setToastText('저장이 완료되었습니다.');
-      const data = await postQuestions(subjectData.id, content);
-      if (data) {
+    if (content === '') {
+      setToastText('질문을 입력해주세요.');
+    } else {
+      try {
+        const data = await refetch(subjectData.id, content);
+        setToastText('저장이 완료되었습니다.');
         getSubjectInfo();
         setActive(false);
         setQuestions((prev) => [data, ...prev]);
+      } catch (err) {
+        console.error(err);
+        setToastText('질문 보내기에 실패했습니다.');
       }
-    } else {
-      setToastText('질문을 입력해주세요.');
     }
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000);

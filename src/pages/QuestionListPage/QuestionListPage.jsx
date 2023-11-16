@@ -1,131 +1,115 @@
-import * as S from './styles';
-import getSubjects from '../../apis/getSubjects';
+import { useLayoutEffect, useState } from 'react';
 
-import { useEffect, useState } from 'react';
+import getSubjects from '../../apis/getSubjects';
+import useCheckWindowWidthSize from '../../hooks/useCheckWindowWidthSize';
 import Pagination from '../../components/Pagination/Pagination';
 import UserCard from '../../components/common/UserCard/UserCard';
 import DropDown from '../../components/common/DropDown/DropDown';
 import Navbar from './Navbar';
-import useCheckCardSize from '../../hooks/useCheckCardSize';
-
-const Card = ({ item }) => {
-  return <UserCard item={item} />;
-};
+import * as S from './QuestionListPage.styles';
+import useAsync from '../../hooks/useAsync';
 
 const CardList = ({ cards }) => {
   return (
-    <>{!!cards && cards.map((card) => <Card key={card.id} item={card} />)}</>
+    <>
+      {!!cards && cards.map((card) => <UserCard key={card.id} item={card} />)}
+    </>
   );
 };
 
 const QuestionListPage = () => {
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(0);
   const [sort, setSort] = useState('time');
   const [count, setCount] = useState(0);
-  const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [curPageNum, setCurPageNum] = useState(1);
+  const [showCards, setShowCards] = useState();
+  const { state, refetch } = useAsync(getSubjects, [], true);
+  const { data } = state;
 
-  let userId = localStorage.getItem('userId');
-
-  const width = useCheckCardSize(); // window resizing
+  const windowWidth = useCheckWindowWidthSize(); // window resizing
 
   // 카드의 너비가 186px 이하로 내려갈 경우 -> 카드 6개, 아닐 시 8개 보여주기
-  const checkCardWidth = async () => {
-    if (width < 936) {
-      if (limit === 6 || loading) return;
+  const checkCardWidth = () => {
+    let changedLimit = windowWidth >= 936 ? 8 : 6;
+    if (limit === changedLimit) return;
 
-      setLoading(true);
-      const data = await getSubjects({
-        limit: 6,
-        offset: (curPageNum - 1) * limit,
-        sort,
-      });
-      setLoading(false);
-      setCount(data.count);
-      setCards(() => data.results);
-      setCurPageNum(Math.round((curPageNum * 8) / 6));
-      setLimit(6);
-    } else {
-      if (limit === 8 || loading) return;
-
-      setLoading(true);
-      const data = await getSubjects({
-        limit: 8,
-        offset: (curPageNum - 1) * limit,
-        sort,
-      });
-      setLoading(false);
-      setCount(data.count);
-      setCards(() => data.results);
-      setCurPageNum(Math.round((curPageNum * 6) / 8));
-      setLimit(8);
-    }
+    setShowCards(data.results.slice(0, changedLimit));
+    setLimit(changedLimit);
+    if (changedLimit === 6) setCurPageNum(Math.ceil((curPageNum * 8) / 6));
+    else setCurPageNum(Math.floor((curPageNum * 6) / 8));
   };
 
   // Pagination 접근
   const changeOffset = async (num) => {
     if (num === curPageNum) return; // 현재 페이지 번호 똑같이 눌렀을때
 
-    const data = await getSubjects({ limit, offset: (num - 1) * limit, sort });
-    setCount(data.count);
-    setCards(() => data.results);
-    setCurPageNum(num);
+    try {
+      const result = await refetch({
+        limit: 8,
+        sort,
+        offset: (num - 1) * limit,
+      });
+      setShowCards(result.results.slice(0, limit));
+      setCurPageNum(num);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // DropDown 접근
   const handleFetchBy = async (item) => {
-    setSort(item);
-    setCurPageNum(1);
-    const data = await getSubjects({
-      limit,
-      sort: item,
-      offset: 0,
-    });
-    setCount(data.count);
-    setCards(() => data.results);
+    try {
+      const result = await refetch({ limit: 8, sort: item, offset: 0 });
+      setSort(item);
+      setCurPageNum(1);
+      setShowCards(result.results.slice(0, limit));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  // 처음 방문
+  // 처음 CardList Data 받아오기
   const firstFetch = async () => {
-    const data = await getSubjects({ limit, sort, offset: 0 });
-    setCount(data.count);
-    setCards(() => data.results);
+    try {
+      const result = await refetch({ limit: 8, sort, offset: 0 });
+      let currentLimit = windowWidth >= 936 ? 8 : 6;
+      setLimit(currentLimit);
+      setShowCards(result.results.slice(0, currentLimit));
+      setCount(result.count);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  useEffect(() => {
-    firstFetch();
-  }, []);
+  useLayoutEffect(() => {
+    if (!showCards) firstFetch();
+    if (showCards) checkCardWidth();
+  }, [windowWidth]);
 
-  useEffect(() => {
-    checkCardWidth();
-  }, [width]);
+  if (!showCards) return null;
+  return (
+    <>
+      <Navbar />
+      <S.QuestionBarBox>
+        <S.QuestionBarHeader>누구에게 질문할까요?</S.QuestionBarHeader>
+        <DropDown handleClick={handleFetchBy} />
+      </S.QuestionBarBox>
 
-  if (cards) {
-    return (
-      <>
-        <Navbar userId={userId} />
-        <S.QuestionBarBox>
-          <S.QuestionBarHeader>누구에게 질문할까요?</S.QuestionBarHeader>
-          <DropDown handleClick={handleFetchBy} />
-        </S.QuestionBarBox>
+      <S.QuestionMainBox>
+        <S.CardList $limit={limit} $width={windowWidth}>
+          <CardList cards={showCards} />
+        </S.CardList>
 
-        <S.QuestionMainBox>
-          <S.CardList $limit={limit} $width={width}>
-            <CardList cards={cards} />
-          </S.CardList>
-
-          <Pagination
-            count={Number(count)}
-            changeOffset={changeOffset}
-            currentNum={Number(curPageNum)}
-            limit={Number(limit)}
-            width={width}
-          />
-        </S.QuestionMainBox>
-      </>
-    );
-  }
+        <Pagination
+          count={Number(count)}
+          changeOffset={changeOffset}
+          currentNum={Number(curPageNum)}
+          limit={Number(limit)}
+          width={windowWidth}
+        />
+      </S.QuestionMainBox>
+    </>
+  );
 };
 
 export default QuestionListPage;
