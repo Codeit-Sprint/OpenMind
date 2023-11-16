@@ -33,7 +33,9 @@ const Navbar = () => {
           <Button type="answer" text="답변하러 가기" />
         </Link>
       </S.NavbarBox>
-      {showToast && <Toast text={'이미 로그인하셨습니다!'} bgColor="#B93333" />}
+      {showToast && (
+        <Toast text={'이미 피드를 생성하였습니다!'} bgColor="#B93333" />
+      )}
     </S.NavbarOuterBox>
   );
 };
