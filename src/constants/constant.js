@@ -2,7 +2,7 @@ import IMAGES from '../assets';
 
 const DEFAULT_TEAM_PATH = '1-11';
 
-const LINK_BASE_URL = 'https://localhost:3000';
+const LINK_BASE_URL = 'https://my-vercel-iota.vercel.app/';
 
 const second = 1000;
 const minute = second * 60;
@@ -29,31 +29,26 @@ const KAKAO_SHARE_INFO = {
     imageUrl: IMAGES.kakaoImg,
     link: {
       // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-      mobileWebUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
-      webUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
+      mobileWebUrl: LINK_BASE_URL,
+      webUrl: LINK_BASE_URL,
     },
   },
   buttons: [
     {
       title: '웹으로 보기',
       link: {
-        mobileWebUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
-        webUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
+        mobileWebUrl: LINK_BASE_URL,
+        webUrl: LINK_BASE_URL,
       },
     },
     {
       title: '앱으로 보기',
       link: {
-        mobileWebUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
-        webUrl: 'https://openmind-2uuiyqf3r-thisisthewa2.vercel.app/',
+        mobileWebUrl: LINK_BASE_URL,
+        webUrl: LINK_BASE_URL,
       },
     },
   ],
 };
 
-export {
-  DEFAULT_TEAM_PATH,
-  TIME_IN_MILLISECONDS,
-  LINK_BASE_URL,
-  KAKAO_SHARE_INFO,
-};
+export { DEFAULT_TEAM_PATH, TIME_IN_MILLISECONDS, KAKAO_SHARE_INFO };
