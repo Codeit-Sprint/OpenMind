@@ -114,9 +114,12 @@ const SelectMenu = ({
       <S.SelectMenuInnerBox onClick={handleDeleteQuestion}>
         <p>질문 삭제</p>
       </S.SelectMenuInnerBox>
-      <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
-        <p>답변 삭제</p>
-      </S.SelectMenuInnerBox>
+
+      {answer?.content && (
+        <S.SelectMenuInnerBox onClick={handleDeleteAnswer}>
+          <p>답변 삭제</p>
+        </S.SelectMenuInnerBox>
+      )}
 
       {answer?.isRejected ? (
         <S.SelectMenuInnerBox onClick={handleCancelRefuseAnswer}>

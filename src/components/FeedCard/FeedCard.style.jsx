@@ -89,6 +89,10 @@ const LineUnderDiv = styled.div`
 const ReactionDiv = styled.div`
   display: flex;
   gap: 32px;
+
+  @media ${device.mobile} {
+    gap: 0.8rem;
+  }
 `;
 
 export {

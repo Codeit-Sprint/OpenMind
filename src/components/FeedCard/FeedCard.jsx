@@ -43,11 +43,11 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
 
   // 사용자가 작성한 댓글인지 확인
   const isUserWrittenAnswer = () => {
-    if (!answer) return;
+    if (!answerInfo) return;
 
     const answerArr = JSON.parse(localStorage.getItem('answerArray')) ?? [];
     const result = answerArr.find((arr) => {
-      if (arr.questionId === questionId && arr.answerId === answer.id)
+      if (arr.questionId === questionId && arr.answerId === answerInfo.id)
         return true;
     });
     setFoundAnswer(result);
@@ -77,7 +77,7 @@ function FeedCard({ item, subjectData: subjectData, removeQuestionById }) {
 
   useEffect(() => {
     isUserWrittenAnswer();
-  }, [answer]);
+  }, [answer, isCorrecting, answerInfo]);
 
   return (
     <S.CardContainer>

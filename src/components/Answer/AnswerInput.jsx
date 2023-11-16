@@ -39,7 +39,6 @@ function AnswerInput({
       } else {
         const result = await putAnswer({ answerId: answerItem?.id, content });
         setAnswerInfo(result);
-        console.log(result, setIsCorrecting);
         setIsCorrecting(false);
       }
 

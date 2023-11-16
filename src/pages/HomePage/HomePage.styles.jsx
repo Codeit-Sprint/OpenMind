@@ -77,6 +77,7 @@ const HomePageInputBox = styled.div`
     flex-shrink: 0;
   }
   input {
+    width: 100%;
     flex: 1 0 0;
     color: ${(props) => props.theme['grayscale-40']};
     ${BodyRegular3}

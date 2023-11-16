@@ -19,10 +19,8 @@ const Container = styled.div`
   cursor: pointer;
   &:hover {
     transform: scale(1.05);
-    transition: 0.2s;
     border: 0.2rem solid ${(props) => props.theme['grayscale-60']};
   }
-  transition: 1.2s;
   background: ${(props) => props.theme['grayscale-10']};
 
   width: 100%;
