@@ -24,9 +24,29 @@ https://open-mind-eight.vercel.app/
 
 ---
 
-| 박종민 | 박세은 | 안윤진 |
-| --- | --- | --- |
-| https://github.com/qooktree1 | https://github.com/marchfirst01 | https://github.com/thisisthewa2 |
+<table width="600px">
+    <th style="text-align:center">
+      <a href = "https://github.com/qooktree1"> 박종민 </a> 
+    </th>
+    <th style="text-align:center">
+      <a href ="https://github.com/marchfirst01">박세은</a>
+    </th>
+    <th style="text-align:center">
+      <a href = "https://github.com/thisisthewa2">안윤진</a>
+    </th>
+    <tr>
+        <td width="200px">
+            <img src = "https://github.com/Codeit-Sprint/OpenMind/assets/119280160/fe01a886-6964-43cc-a190-e9bdbea1474c"/>
+        </td>
+        <td width="200px">
+            <img src = "https://github.com/Codeit-Sprint/OpenMind/assets/119280160/5387cba3-cb69-4a22-9081-00edddd9c307"/>
+        </td>
+        <td width="200px">
+           <img src = "https://github.com/Codeit-Sprint/OpenMind/assets/119280160/5cb1a22b-388f-4661-be03-4194356e4970"/>
+        </td>
+    </tr>
+    
+</table>
 
 ### Project Introduction
 
