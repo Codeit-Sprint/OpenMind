@@ -10,16 +10,15 @@
 
 ---
 
-> **Codeit FrontEnd Sprint 1
-개발기간:** 2023.11.03 ~ 2023.11.17
-> 
+Codeit FrontEnd Sprint 1
+
+개발기간: 2023.11.03 ~ 2023.11.17
 
 ### Deploy
 
 ---
 
-> https://open-mind-eight.vercel.app/
-> 
+https://open-mind-eight.vercel.app/
 
 ### Team
 
@@ -32,7 +31,7 @@
 ### Project Introduction
 
 ---
-> **질문과 답변을 통해 마음을 열고 대화 나누는 소통 플랫폼**
+**질문과 답변을 통해 마음을 열고 대화 나누는 소통 플랫폼**
 
 ## 🦮 Start Guide
 
@@ -79,20 +78,20 @@ npm run start
 ---
 
 - Github
-> 코드의 버전을 관리
-> 이슈 발행, 해결을 위한 토론
-> PR시, 팀원들이 코드 리뷰를 진행하고 Feedback 게시
+  - 코드의 버전을 관리
+  - 이슈 발행, 해결을 위한 토론
+  - PR시, 팀원들이 코드 리뷰를 진행하고 Feedback 게시
 
 - Gitbook, Notion
-> Convention 정리(PR, Commit, Naming)
-> Ground Rule 정리
-> Git branch 전략 정리(Git Flow 전략 사용)
-> Daily Scrum 기록
+  - Convention 정리(PR, Commit, Naming)
+  - Ground Rule 정리
+  - Git branch 전략 정리(Git Flow 전략 사용)
+  - Daily Scrum 기록
 
 - 회의
-> 10 a.m. - Daily Scrum
-> 2 p.m. - 팀 회의 및 PR 코드 리뷰 회의
-> PR이 올리면 Code Review하며 코멘트
+  - 10 a.m. - Daily Scrum
+  - 2 p.m. - 팀 회의 및 PR 코드 리뷰 회의
+  - PR이 올리면 Code Review하며 코멘트
 
 
 ## 🧰 주요 기능
