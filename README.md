@@ -26,7 +26,7 @@ https://open-mind-eight.vercel.app/
 
 | 박종민 | 박세은 | 안윤진 |
 | --- | --- | --- |
-| https://github.com/qooktree1 | https://github.com/marchfirst01 | https://github.com/thisisthewa2https://github.com/thisisthewa2 |
+| https://github.com/qooktree1 | https://github.com/marchfirst01 | https://github.com/thisisthewa2 |
 
 ### Project Introduction
 
