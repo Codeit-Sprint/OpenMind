@@ -78,20 +78,32 @@ npm run start
 ---
 
 ### Environment
-- Visual Studio Code IDE 1.84
-- Git
-- Github
+<p>
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
+<img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
+<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white">
+</p>
+
 ### Config
-- Npm 9.8.1
+<img src="https://img.shields.io/badge/Npm 9.8.1-CB3837?style=for-the-badge&logo=Npm&logoColor=white">
+
 ### Development
-- JavaScript
-- React 18.2.0
-- styled-components 6.1.0
+<p>
+    <img src="https://img.shields.io/badge/JS-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+    <img src="https://img.shields.io/badge/React 18.2.0-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+    <img src="https://img.shields.io/badge/styled-components 6.1.0-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+</p>
+
 ### Communication
-- Discord
-- Notion, GitBook
+<p>
+    <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white">
+    <img src="https://img.shields.io/badge/Notion 18.2.0-000000?style=for-the-badge&logo=Notion&logoColor=white">
+    <img src="https://img.shields.io/badge/GitBook 6.1.0-3884FF?style=for-the-badge&logo=GitBook&logoColor=white">
+</p>
+
 ### Deploy
-- Vercel
+ <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
+
 
 ## 🪧 협업 전략
 
