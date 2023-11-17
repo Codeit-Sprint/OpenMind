@@ -145,12 +145,21 @@ npm run start
 - Infinite Scroll(throttle 적용)
 
 ## 💻 Service Layout
+<table height="800px">
+    <th>메인 페이지</th>
+    <th>질문 목록 페이지</th>
+    <tr>
+    <td><img src = "https://github.com/Codeit-Sprint/OpenMind/assets/97735859/844a6f34-afc8-4ec6-952b-71f3b57b2817"/></td>
+    <td><img src = "https://github.com/Codeit-Sprint/OpenMind/assets/97735859/89916b09-0aa7-40c2-a9fa-c7c0aaf69835"/></td>
+    </tr>
+    <th>개인 피드</th>
+    <th>답변하기</th>
+    <tr>
+         <td><img src = "https://github.com/Codeit-Sprint/OpenMind/assets/97735859/c927aa30-35e0-486f-9eaf-494a76a3b14e"/></td>
+         <td><img src = "https://github.com/Codeit-Sprint/OpenMind/assets/97735859/844a6f34-afc8-4ec6-952b-71f3b57b2817](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/63dfe5ba-d415-4861-82cb-212a18e32988"/></td>
+    </tr>
+</table>
 
-|메인 페이지|질문 목록 페이지|
-|------|---|
-|![MainPageImage](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/844a6f34-afc8-4ec6-952b-71f3b57b2817)|![QuestionListPage](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/89916b09-0aa7-40c2-a9fa-c7c0aaf69835)|
-|개인 피드|답변하기|
-|![FeedPage](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/c927aa30-35e0-486f-9eaf-494a76a3b14e)|![AnswerPage](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/63dfe5ba-d415-4861-82cb-212a18e32988)|
 
 
 ## 🏗️ Structure
