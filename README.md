@@ -1,26 +1,22 @@
-# README
-
 # Codeit Frontend Sprint 1기 Project
 
----
 
 ![MainPageImage](https://github.com/Codeit-Sprint/OpenMind/assets/97735859/844a6f34-afc8-4ec6-952b-71f3b57b2817)
 
 ## OpenMind
 
----
 
 Codeit FrontEnd Sprint 1
 
 개발기간: 2023.11.03 ~ 2023.11.17
 
-### Deploy
+### 🌐 Deploy
 
 ---
 
 https://open-mind-eight.vercel.app/
 
-### Team
+### 👥 Team
 
 ---
 
@@ -48,7 +44,7 @@ https://open-mind-eight.vercel.app/
     
 </table>
 
-### Project Introduction
+### ℹ️ Project Introduction
 
 ---
 **질문과 답변을 통해 마음을 열고 대화 나누는 소통 플랫폼**
@@ -64,7 +60,7 @@ For building and running the application you need:
 > Node.js 18.18.2
 > Npm 9.8.1
 
-### Installation & Start
+### 🚀 Installation & Start
 
 ```bash
 $git clone https://github.com/Codeit-Sprint/OpenMind.git
@@ -74,8 +70,6 @@ npm run start
 ```
 
 ## ⚒️ Stacks
-
----
 
 ### Environment
 <p>
@@ -107,8 +101,6 @@ npm run start
 
 ## 🪧 협업 전략
 
----
-
 - Github
   - 코드의 버전을 관리
   - 이슈 발행, 해결을 위한 토론
@@ -128,7 +120,6 @@ npm run start
 
 ## 🧰 주요 기능
 
----
 
 ### 개인 피드
 
@@ -164,7 +155,6 @@ npm run start
 
 ## 🏗️ Structure
 
----
 
 ### FrontEnd
 
