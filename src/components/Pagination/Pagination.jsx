@@ -1,8 +1,8 @@
 import { createPagination } from '../../utils/createPagination';
 import * as S from './Pagination.styles';
 
-const Pagination = ({ count, changeOffset, currentNum, limit, width }) => {
-  const numbers = createPagination({ count, limit, currentNum, width });
+const Pagination = ({ count, changeOffset, currentNum, limit, deviceType }) => {
+  const numbers = createPagination({ count, limit, currentNum, deviceType });
 
   const checkIsNumberAndChangeOffset = (num) => {
     if (num === '...') return;

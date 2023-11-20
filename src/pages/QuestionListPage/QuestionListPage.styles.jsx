@@ -102,12 +102,12 @@ const CardList = styled.div`
   grid-template-columns: repeat(4, 1fr);
   transition: 1s;
 
-  ${(props) => props.$width < 936 && { gridTemplateColumns: 'repeat(3, 1fr);' }}
+  grid-template-columns: ${(props) =>
+    props.$deviceType === 'tablet' && 'repeat(3, 1fr)'};
 
   @media ${device.mobile} {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
-    /* padding: 0 2.4rem; */
   }
 `;
 

@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { throttle } from 'lodash';
 
 const useCheckWindowWidthSize = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -8,7 +7,7 @@ const useCheckWindowWidthSize = () => {
     setWidth(window.innerWidth);
   }, []);
   useEffect(() => {
-    window.addEventListener('resize', throttle(handleResize, 200));
+    window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize]);
   return width;
