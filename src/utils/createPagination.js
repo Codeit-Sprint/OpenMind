@@ -1,10 +1,10 @@
-const createPagination = ({ count, limit, currentNum, width }) => {
+const createPagination = ({ count, limit, currentNum, deviceType }) => {
   const maxPageNumber = Math.ceil(count / limit);
   const totalNumbers = [];
   for (let i = 1; i <= maxPageNumber; i++) totalNumbers.push(i);
   let numbers = [];
 
-  if (width >= 768) {
+  if (deviceType !== 'mobile') {
     // page가 7개 이하면 ... 이 등장하지 않는다.
     if (maxPageNumber <= 7) {
       return totalNumbers;
